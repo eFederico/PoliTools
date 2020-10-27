@@ -1,0 +1,174 @@
+body{
+   width: 300px;
+   height: 301px;
+   max-height: 800px;
+   background-color: #fefefe;
+}
+
+.contenuto {
+	height: 301px;
+	padding: 25px 15px 15px 15px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+
+#cb-nav {
+	clear: both;
+	text-align: right;
+	background-color: #f2f2f2;
+	border-bottom: 1px solid #222;
+}
+
+#cb-nav h3 {
+	color: #222;
+	font-size: 30px;
+	padding: 0;
+	padding-right: 20px;
+	
+}
+
+.row {
+	padding-bottom: 15px;
+	margin: 0px;
+}
+	
+.pt-btn {
+	float: left;
+	width: 50%;
+}
+
+.box-text,
+.box-image p {
+	color: #333;
+	text-align: center;
+	font-size: 18px;
+
+}
+
+.theme .box-image p {
+	margin-top: 30px;
+	color: #fff;
+    text-align: left;
+    font-size: 18px;
+    margin-left: 13px;
+    text-shadow: -3px 4px 4px black;
+}
+.theme .box-image {
+	width: 285px;
+	height: 90px;
+	background-size: cover;
+	border-radius: 10px;
+	box-shadow: -2px 2px 5px black;
+}
+
+.box-image {
+	width: 80px;
+	height: 80px;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+.box {
+	cursor: pointer;
+}
+
+.back-arrow {
+	margin-top: 25px;
+	margin-left: 20px;
+	cursor: pointer;
+	float: left; 
+}
+.col-xs-12,
+.col-xs-4,
+.col-xs-8 {
+	padding: 0px;
+}
+
+.border-bottom {
+	border-bottom: 1px #000 solid;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+/*Button is :CHECKED*/
+
+input[type="checkbox"]:checked ~ div {
+  background: rgba(73,168,68,1);
+  box-shadow: 0 0 2px rgba(73,168,68,1);
+}
+
+input[type="checkbox"]:checked ~ div label {
+  left: 110px;
+  transform: rotate(360deg);
+}
+
+label {
+  height: 80px;
+  width: 80px;
+  background: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+}
+
+label::before {
+  content: '';
+  height: 60px;
+  width: 5px;
+  position: absolute;
+  top: calc(50% - 30px);
+  left: calc(50% - 2.5px);
+  transform: rotate(45deg);
+}
+
+label::after {
+  content: '';
+  height: 5px;
+  width: 60px;
+  position: absolute;
+  top: calc(50% - 2.5px);
+  left: calc(50% - 30px);
+  transform: rotate(45deg);
+}
+
+label::before,
+label::after{
+  background: rgba(43,43,43,1);
+  border-radius: 5px;
+}
+
+/* pesduo class on toggle */
+
+input[type="checkbox"]:checked ~ div label::before{
+  height: 50px;
+  top: calc(55% - 25px);
+  left: calc(60% - 2.5px);
+  background: rgba(73,168,68,1);
+}
+input[type="checkbox"]:checked ~ div label::after{
+  width: 20px;
+  top: calc(95% - 25px);
+  left: calc(22.5% - 2.5px);
+  background: rgba(73,168,68,1);
+}
+
+@font-face {
+	font-family: 'Dos';
+	src: url('chrome-extension://__MSG_@@extension_id__/fonts/dos.woff') format('woff'), 
+	 url('chrome-extension://__MSG_@@extension_id__/fonts/dos.ttf') format('truetype');
+}  
+
+@font-face {
+	font-family: 'Natale';
+	src: url('chrome-extension://__MSG_@@extension_id__/fonts/natale.ttf') format('truetype');
+}  
+
+@font-face {
+	font-family: 'Comic Sans';
+	src: url('chrome-extension://__MSG_@@extension_id__/fonts/comicsans.ttf') format('truetype');
+}  

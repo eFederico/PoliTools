@@ -1,0 +1,14 @@
+.c_logoPoli2 {
+	background: url(chrome-extension://`+exID+`/immagini/header-white.png) no-repeat !important;
+}
+
+#imgOrari{
+	content:url("chrome-extension://`+exID+`/immagini/orologio-black.png");
+	width: 23px;
+	height: 23px;
+	margin: 0 10px;
+}
+
+.selected td span.text-warning {
+	color: white !important;
+}
