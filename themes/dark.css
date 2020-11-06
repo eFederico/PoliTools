@@ -15,7 +15,7 @@ body >table >tbody> tr> td> table> tbody >tr> td> div >img {
 
 #topnav,
 .c_logoPoli2 {
-	background: url(chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png) no-repeat !important;
+	background: url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png") no-repeat !important;
 }
 
 body {

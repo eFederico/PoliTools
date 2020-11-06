@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     $("body").addClass("casa"); 
 
-    var matr = $("#div_anagrafica .nav li strong u").html(); //recupero matricola
+    var matr = $("#div_anagrafica .nav li strong u").html(); // Recupero matricola
 
     var links =`<div id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx">
 					<div class="RegionBorderMao">
@@ -17,7 +17,7 @@ $(document).ready(function() {
 					</div>
 				</div>`;
 	
-    $(".sidebar").append(links); //append box links (medie)
+    $(".sidebar").append(links); // Append box links (medie)
     
     var psico =`<div id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx">
 					<div class="RegionBorderMao">
@@ -34,7 +34,7 @@ $(document).ready(function() {
 					</div>
 				</div>`;
 	
-	$(".sidebar").append(psico); //append box psicologo
+	$(".sidebar").append(psico); // Append box psicologo
 
 	$("#menu_pag_stud > li:last-child").attr("target","_self"); // Link posta sulla stessa tab
 

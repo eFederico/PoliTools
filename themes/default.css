@@ -1,8 +1,8 @@
 body >table >tbody> tr> td> table> tbody >tr> td> div >img {
-	content:url("chrome-extension://`+exID+`/immagini/header-white.png");
+	content:url("chrome-extension://__MSG_@@extension_id__/immagini/header-white.png");
 }
 
 #topnav,
 .c_logoPoli2 {
-	background: url(chrome-extension://`+exID+`/immagini/header-white.png) no-repeat #003576 !important;
+	background: url("chrome-extension://__MSG_@@extension_id__/immagini/header-white.png") no-repeat #003576 !important;
 }

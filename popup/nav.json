@@ -37,16 +37,6 @@
                             },
                             "img": "theme-dark.png",
                             "type": "theme"
-                        }, 
-                        {
-                            "id": 2,
-                            "file": "improved",
-                            "name": {
-                                "it": "Header<br>Migliorato",
-                                "en": "Header<br>Improved"
-                            },
-                            "img": "theme-default.png",
-                            "type": "theme"
                         }
                     ]
                 },

@@ -7,17 +7,13 @@ async function getTheme() {
         var cssFile;
 
         switch(result.theme) {
+
 			case 0:
             cssFile = "default"; 
-
 			break;
 
 			case 1: 
 			cssFile = "dark";
-			break;
-			
-			case 2:
-            cssFile = "improved";
 			
         }
         

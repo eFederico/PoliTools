@@ -13,21 +13,6 @@ chrome.runtime.onInstalled.addListener(function() {
     });
 });
 
-chrome.webRequest.onBeforeRequest.addListener(
-    function(details) {
-        if( details.url == "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.main_js" ){
-			return  {redirectUrl: chrome.extension.getURL("./test.js") };
-		}
-		else if(details.url == "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.filenavigator_js")
-		{
-			return {redirectUrl: chrome.extension.getURL("./sviluppo.filemgr.filenavigator_js") };
-		}
-		
-    },
-    {urls: ["*://*.polito.it/*.*"]},
-    ["blocking"]
-);
-
 chrome.runtime.onMessageExternal.addListener(
 	function(request, sender, sendResponse) 
 	{	
