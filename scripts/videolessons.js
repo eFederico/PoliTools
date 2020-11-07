@@ -83,7 +83,12 @@ function populateDownloadButton()
 	}
 }
 
-function startDownload(url, direct=0, type)
+function getLessonListDOM()
+{
+	return navbar.getElementsByClassName("h5");
+}
+
+function startDownload(url, type)
 {
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() 
@@ -91,7 +96,7 @@ function startDownload(url, direct=0, type)
 		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
 			switch (type) {
 				case 0: callback(xmlHttp.responseText, 0); break; // Callback per Prof + Slide
-				case 1: callbackSlide(xmlHttp.responseText, 1);   // Callback Slide Only
+				case 1: callback(xmlHttp.responseText, 1);   // Callback Slide Only
 			}
 	}
 	var preurl = "https://didattica.polito.it/portal/pls/portal/";
@@ -107,7 +112,7 @@ function callback(response, slideOnly)
 	var parser = new DOMParser();
 	var doc = parser.parseFromString(response, "text/html");
 
-	var url = doc.querySelector("div.container-fluid > div.row > div.col-md-8 > div.row:nth-child(5) ul > li:nth-child("+prof+") a").href;
+	var url = doc.querySelector("div.container-fluid > div.row > div.col-md-8 > div.row:nth-child(5) ul > li:nth-child("+slideOnly+") a").href;
 	
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() 
@@ -121,7 +126,7 @@ function callback(response, slideOnly)
 	xmlHttp.send(null);
 }
 
-var rangeSlider = function(){
+function rangeSlider(){
     var slider = $('.range-slider'),
     range = $('.range-slider__range'),
     value = $('.range-slider__value');
@@ -139,6 +144,32 @@ var rangeSlider = function(){
       });
     });
 };
+
+function insertSlider() {
+	
+	var slider = `<div><h3 style="font-size: 21px;" class="cb-title">Hotkeys</h3>
+						<p class="inline"><span class="keyboard-char">J</span> Slower</p>
+						<p class="inline"><span class="keyboard-char">K</span> Faster</p>
+						<p class="inline"><span class="keyboard-char">L</span> Reset</p>
+						<div class="range-slider"><input class="range-slider__range " type="range" value="1.0" min="0.1" max="2.5" step="0.1">
+						<span class="range-slider__value col-md-1">1</span>
+					</div>`
+	var macro = document.createElement('div');
+	
+	macro.innerHTML = slider;
+	var controls = document.querySelector(".col-md-12.col-lg-8");
+
+	controls.insertBefore(macro, controls.firstChild);
+	
+	document.querySelector(".range-slider__range").addEventListener("change", function(){
+
+		document.querySelector(".video-js").playbackRate = document.querySelector(".range-slider__value").innerHTML;
+	});
+	
+   	rangeSlider();
+}
+
+
 
 function manageHotkeys(){
 	document.addEventListener('keyup', function (e){
