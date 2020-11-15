@@ -410,3 +410,15 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 	z-index: 999;
     position: relative;
 }
+
+.vjs-menu-button-popup .vjs-menu .vjs-menu-content {
+	max-height: 10em;
+}
+
+.video-js .vjs-time-control {
+	display: block !important;
+}
+
+.video-js .vjs-remaining-time {
+	display: none !important;
+}

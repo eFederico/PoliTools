@@ -1,5 +1,7 @@
 $(document).ready(function() { 
 
+	newPlayer();
+
     navbar = document.getElementById("navbar_left_menu");
 
     var downAll = document.createElement("button");
@@ -31,10 +33,6 @@ $(document).ready(function() {
 	
     populateDownloadButton();
     	
-	insertSlider();
-
-	manageHotkeys();
-
 });
 
 function populateDownloadButton()
@@ -126,76 +124,6 @@ function callback(response, slideOnly)
 	xmlHttp.send(null);
 }
 
-function rangeSlider(){
-    var slider = $('.range-slider'),
-    range = $('.range-slider__range'),
-    value = $('.range-slider__value');
-    
- 	  slider.each(function(){
-
-      value.each(function(){
-        var value = $('.range-slider__range').attr('value');
-        $(this).html(value);
-      
-      });
-
-      range.on('input', function(){
-        $('.range-slider__value').html(this.value);
-      });
-    });
-};
-
-function insertSlider() {
-	
-	var slider = `<div><h3 style="font-size: 21px;" class="cb-title">Hotkeys</h3>
-						<p class="inline"><span class="keyboard-char">J</span> Slower</p>
-						<p class="inline"><span class="keyboard-char">K</span> Faster</p>
-						<p class="inline"><span class="keyboard-char">L</span> Reset</p>
-						<div class="range-slider"><input class="range-slider__range " type="range" value="1.0" min="0.1" max="2.5" step="0.1">
-						<span class="range-slider__value col-md-1">1</span>
-					</div>`
-	var macro = document.createElement('div');
-	
-	macro.innerHTML = slider;
-	var controls = document.querySelector(".col-md-12.col-lg-8");
-
-	controls.insertBefore(macro, controls.firstChild);
-	
-	document.querySelector(".range-slider__range").addEventListener("change", function(){
-
-		document.querySelector(".video-js").playbackRate = document.querySelector(".range-slider__value").innerHTML;
-	});
-	
-   	rangeSlider();
-}
-
-
-
-function manageHotkeys(){
-	document.addEventListener('keyup', function (e){
-  
-		if(e.defaultPrevented){
-			return;
-		}
-  
-		var key = e.key || e.keyCode;
-		var video = document.querySelector(".video-js");
-		
-		if(video.playbackRate < 2.5 && (key === 'K' || key === 'k' || key === 75)){ //Accelero
-	
-		  video.playbackRate += 0.1;
-		} else if(video.playbackRate > 0.1 && (key === 'J' || key === 'j' || key === 74)){ //Decellero
-		
-		  video.playbackRate -= 0.1;
-		} else if(key === 'L' || key === 'l' || key === 76){ //Reset
-		  
-		  video.playbackRate = 1.0;
-		}
-		document.querySelector(".range-slider__value").innerHTML = video.playbackRate.toFixed(1);
-		document.querySelector(".range-slider__range").value = video.playbackRate.toFixed(1);
-	});
-}
-
 function downloadFromURL(url)   // FIXME Da spostare in background.js
 {
 	chrome.runtime.sendMessage({
@@ -206,4 +134,29 @@ function downloadFromURL(url)   // FIXME Da spostare in background.js
 	}
 	});
 	
+}
+
+function newPlayer() {
+
+	var video = document.getElementsByTagName("video")[0];
+	var mp4Video = video.getElementsByTagName("source")[0].src;
+	var poster = $('.video-js').attr("poster");
+
+	video.outerHTML =	`<video id="videoMP4" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
+							controls preload="auto" width="768" height="432"
+							poster = ` + poster + `
+							data-setup='{"controls": true, "autoplay": false, "preload": "auto", "playbackRates": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2]}'>
+							<source src= ` + mp4Video + ` + type="video/mp4" />
+							<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+						</video>`;
+
+	videojs('videoMP4');
+	
+	videojs('videoMP4').ready(function(){
+		this.hotkeys({
+			volumeStep: 0.1,
+			seekStep: 10,
+			eneableModifiersForNumbers: false
+		});
+	});
 }

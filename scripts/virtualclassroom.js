@@ -2,6 +2,10 @@ var exID = chrome.runtime.id;
 
 $(document).ready(function() { 
 
+	if(isConverted(document)) {
+		newPlayer();
+	}
+
     $("body").addClass("virtual-classroom");
     var modal = `
 	<div id="modal-container">
@@ -38,13 +42,16 @@ $(document).ready(function() {
 		}
 	}, false);
 
-    navbar.insertBefore(downall, navbar.firstChild);
+    navbar.insertBefore(downAll, navbar.firstChild);
 
 	populateDownloadButton();
 
-    insertSlider();
-
 });
+
+function getLessonListDOM()
+{
+	return navbar.getElementsByClassName("h5");
+}
 
 function populateDownloadButton()
 {
@@ -53,7 +60,6 @@ function populateDownloadButton()
 	if (lessonList){
         for(var i = 0; i < lessonList.length; i++)
         {
-
 			var li = lessonList[i];
 			var a = li.getElementsByTagName("a")[0];
 
@@ -61,9 +67,6 @@ function populateDownloadButton()
 			btn.className="btn btn-primary dwlbtn";
 			btn.id="directdwn_"+i;
 			btn.innerHTML = '<span class="fa fa-download"></span> Download';
-
-			li.insertBefore(btn, li.firstChild);
-		
 			btn.ass = a;
 			btn.addEventListener("click", function(e) {
 
@@ -71,7 +74,7 @@ function populateDownloadButton()
 				xmlHttp.onreadystatechange = function() 
 				{ 
 					if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-					callback(xmlHttp.responseText, e);
+					callback(xmlHttp.responseText, e.target);
                 }
                 
 				var preurl = "https://didattica.polito.it/portal/pls/portal/";
@@ -80,28 +83,29 @@ function populateDownloadButton()
 				xmlHttp.send(null);   
 
 			}, false);
-            
+
+			li.insertBefore(btn, li.firstChild);
         }
 	}
 }
 
-function callback(response, e) {
+function callback(response, target) {
 
 	var parser = new DOMParser();
 	var doc = parser.parseFromString(response, "text/html");
 
-	if (doc.querySelector("video.video-js") != null) { // Controllo se convertita
+	if (isConverted(doc)) {
 
-		var url = e.target.ass.getAttribute("href");
-		var filename = e.target.ass.text;
+		var filename = target.ass.text;
 
 		filename = filename.replace(/\//g, "_");
 		filename = filename.replace(/ /g, "_");
 		filename = filename+".mp4";
 		
-		var index = e.target.id.substr(10);
-				
-		startDownload(index, url, 1, filename);
+		var url = video.querySelector("source").src;
+
+		download(url, filename);
+
 	} else { 
 		var buttonId = 'two';
  		$('#modal-container').removeAttr('class').addClass(buttonId); // Apro popup se è una BBB
@@ -109,57 +113,43 @@ function callback(response, e) {
 	}
 }
 
-function getLessonListDOM()
+function download(url, filename)
 {
-	return navbar.getElementsByClassName("h5");
-}
-
-function startDownload(index, url, direct=0, filename)
-{
-
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() 
-	{ 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-			callback1(index, xmlHttp.responseText, direct, filename); break;
-				
-	}
-	var preurl = "https://didattica.polito.it/portal/pls/portal/";
-	
-	xmlHttp.open("GET", preurl+url, true);
-	xmlHttp.send(null);
-}
-
-function callback1(index, response, direct=0, filename)
-{
-	var parser = new DOMParser();
-	var doc = parser.parseFromString(response, "text/html");
-
-	var a = doc.getElementsByTagName("script");
-	for(var i = 0; i<a.length; i++)
-	{
-		if(!a[i]) continue;
-		var str = a[i].textContent;
-		if(str.indexOf("flowplayer.commercial-latest.swf") != -1)
-		{
-			
-			var ind1 = str.indexOf(",{'url':'");
-			if(ind1 != -1)
-			{
-				var ind2 = str.indexOf("}", ind1+9);
-				if(ind2 != -1){
-					var fin = str.substring((ind1+9),(ind2-1));
-					//console.log("1: "+ind1+" 2: "+ind2+ " 3:"+(ind2-ind1));
-					map[index] = fin;
-					
-					//reloadTable();
-					console.log(fin);
-					if(direct == 1)
-						download(index, filename);
-					return;
-				}
-			}
+	chrome.runtime.sendMessage({
+		msg: "PLS_DOWNLOAD", 
+		data: {
+			subject: "URL",
+			content: url,
+			filename: filename
 		}
-		
-	}
+	});
+}
+
+function newPlayer() {
+
+	var video = document.getElementsByTagName("video")[0];
+	var mp4Video = video.getElementsByTagName("source")[0].src;
+
+	video.outerHTML =	`<video id="videoMP4" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
+							controls preload="auto" width="768" height="432"
+							data-setup='{"controls": true, "autoplay": false, "preload": "auto", "playbackRates": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2]}'>
+							<source src= ` + mp4Video + ` + type="video/mp4" />
+							<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+						</video>`;
+
+	videojs('videoMP4');
+	
+	videojs('videoMP4').ready(function(){
+		this.hotkeys({
+			volumeStep: 0.1,
+			seekStep: 10,
+			eneableModifiersForNumbers: false
+		});
+	});
+}
+
+function isConverted(doc) {
+
+	return doc.getElementById("videoPlayer") != null;
+
 }

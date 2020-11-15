@@ -10,31 +10,17 @@
     "content_scripts": [
         {
             "css": [
-                "style.css"
+                "style.css",
+                "lib/bootstrap.min.css"
             ],
             "js": [
-                "lib/jquery.js",
-                "scripts/themes.js"
-            ],
-            "matches": [
-                "*://idp.polito.it/*",
-                "*://mail.studenti.polito.it/*"
-            ],
-            "run_at": "document_start"
-        },
-        {
-            "css": [
-                "lib/bootstrap.min.css",
-                "style.css"
-            ],
-            "js": [
-                "lib/jquery.js",
+                "lib/jquery.min.js",
                 "lib/bootstrap.min.js",
                 "scripts/themes.js"
             ],
             "matches": [
-                "*://*.polito.it/pls/*",
-                "*://www.swas.polito.it/dotnet/orari_lezione_pub/StampaOrario.aspx"
+                "*://*.polito.it/*",
+                "*://mail.studenti.polito.it/*"
             ],
             "exclude_matches": [
                 "*://*.polito.it/mail/faq.html",
@@ -43,13 +29,7 @@
             "run_at": "document_start"
         },
         {
-            "css": [
-                "lib/bootstrap.min.css",
-                "style.css"
-            ],
             "js": [
-                "lib/jquery.js",
-                "lib/bootstrap.min.js",
                 "scripts/coursepage.js"
             ],
             "matches": [
@@ -57,16 +37,8 @@
             ]
         },
         {
-            "css": [
-                "lib/bootstrap.min.css",
-                "style.css"
-            ],
             "js": [
-                "lib/jquery.js",
-                "lib/bootstrap.min.js",
                 "scripts/home.js"
-                
-
             ],
             "matches": [
                 "*://*.polito.it/portal/page/portal/home/Studente*",
@@ -74,13 +46,7 @@
             ]
         },
         {
-            "css": [
-                "lib/bootstrap.min.css",
-                "style.css"
-            ],
             "js": [
-                "lib/jquery.js",
-                "lib/bootstrap.min.js",
                 "scripts/timetable.js"
             ],
             "matches": [
@@ -89,12 +55,12 @@
         },
         {
             "css": [
-                "lib/bootstrap.min.css",
-                "style.css"
+                "lib/video-js.min.css",
+                "lib/forest.css"
             ],
             "js": [
-                "lib/jquery.js",
-                "lib/bootstrap.min.js",
+                "lib/video.min.js",
+                "lib/videojs.hotkeys.min.js",
                 "scripts/videolessons.js"
             ],
             "matches": [
@@ -107,14 +73,13 @@
         },
         {
             "css": [
-                "lib/bootstrap.min.css",
-                "style.css"
+                "lib/video-js.min.css",
+                "lib/forest.css"
             ],
             "js": [
-                "lib/jquery.js",
-                "lib/bootstrap.min.js",
-                "scripts/virtualclassroom.js"
-                
+                "lib/video.min.js",
+                "lib/videojs.hotkeys.min.js",
+                "scripts/virtualclassroom.js"  
             ],
             "matches": [
                 "*://*.polito.it/dl/*",
