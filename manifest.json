@@ -24,7 +24,8 @@
             ],
             "exclude_matches": [
                 "*://*.polito.it/mail/faq.html",
-                "*://*.polito.it/"
+                "*://*.polito.it/",
+                "*://exercise.polito.it/*"
             ],
             "run_at": "document_start"
         },

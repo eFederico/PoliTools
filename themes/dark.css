@@ -18,7 +18,7 @@ body >table >tbody> tr> td> table> tbody >tr> td> div >img {
 	background: url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png") no-repeat !important;
 }
 
-body {
+html body {
 	background: #222 !important;
 }
 
@@ -95,6 +95,7 @@ body > .container-fluid  {
 .breadcrumb {
 	background-color: #1c1c1c !important;
 }
+
 #materialeDiv > div,
 #directorylist li.addressbook.selected a,
 #settings-sections span.listitem a,
@@ -114,25 +115,35 @@ body > .container-fluid  {
 .row,
 .container-fluid,
 .container-fluid > div > div,
+.container-fluid > div > div:nth-child(2),
 #note_accordion > div,
 .RegionHeaderColor {
 	background-color: #222;
 	color: white !important;
-} 
+}
 
+h4,
+h4 a,
+.sid_home_button,
+.paginate_button a,
+.form-control,
+.ui-accordion-header,
+.btn,
 #idSeaRes,
 .bg-info.polinota,
 .uibox .boxtitle,
 body > table > tbody > tr > td,
 .ui-tabs-panel,
 #topnav,
-.policorpo,
+.policorpo.bachecaStudHead,
 .c_titleBar,
 div.RegionBorderMao,
+.table,
 .table>tbody>tr, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th,
 table>tbody>tr, table>tbody>tr>td, table>tbody>tr>th, table>tfoot>tr>td, table>tfoot>tr>th, table>thead>tr>td, table>thead>tr>th {
 	background-color: #222 !important;
 	color: white !important;
+	border-color: #444 !important;
 }
 
 .bg-info,
@@ -167,6 +178,11 @@ p,
     background: #222 !important;
 }
 
+.RegionBorderMao > div > div,
+.RegionBorderMao > div:nth-child(1) > div:nth-child(4) {
+	color: #000;
+}
+
 #note_accordion p {
 	color: #000 !important;
 }
@@ -176,11 +192,11 @@ p,
 }
 
 .container-fluid > div:nth-child(4) {
-	background-color: #fff !important;
+	background-color: #444 !important;
 }
 
 div.RegionBorderMao {
-	border: 1px solid white !important;
+	border: 1px solid #444 !important;
 }
 .policorpolink {
 	color: #FF9800 !important;
@@ -196,14 +212,6 @@ div.RegionBorderMao {
 
 .table>tbody>tr>td {
 	padding: 5px !important;
-}
-
-.RegionBorderMao > div:nth-child(1) > div:nth-child(4) {
-	color: black;
-}
-
-.RegionBorderMao > div > div {
-	color: black;
 }
 
 #portlet_container>#container>div>.RegionBorderMao {
