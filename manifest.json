@@ -31,6 +31,9 @@
         },
         {
             "js": [
+                "lib/FileSaver.min.js",
+                "lib/jszip.min.js",
+                "lib/jszip-utils.min.js",
                 "scripts/coursepage.js"
             ],
             "matches": [
