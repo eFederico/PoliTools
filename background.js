@@ -13,6 +13,21 @@ chrome.runtime.onInstalled.addListener(function() {
     });
 });
 
+chrome.webRequest.onBeforeRequest.addListener(
+	function(details) {
+		if( details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.main_js" ){
+			return  {redirectUrl: chrome.extension.getURL("./lib/test.js") };
+		}
+		else if(details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.filenavigator_js")
+		{
+			return {redirectUrl: chrome.extension.getURL("./lib/sviluppo.filemgr.filenavigator_js") };
+		}
+
+	},
+	{urls: ["*://*.polito.it/*.*"]},
+	["blocking"]
+);
+
 chrome.runtime.onMessageExternal.addListener(
 	function(request, sender, sendResponse) 
 	{	
@@ -59,7 +74,7 @@ chrome.runtime.onMessageExternal.addListener(
 			   code: el.code},
 			   
 			   function(statusok) {
-				   if(statusok == "ok")
+				   if(statusok === "ok")
 				   {
 					   zipAndDownloadAll(tree);
 				   }
@@ -76,7 +91,7 @@ chrome.runtime.onMessageExternal.addListener(
 
 chrome.runtime.onConnectExternal.addListener(function(port) {
 	
-  if(port.name == "lalaland")
+  if(port.name === "lalaland")
   {
 	theport = port;
 	port.onDisconnect.addListener(	
@@ -140,6 +155,8 @@ chrome.runtime.onMessageExternal.addListener(
   }
 );
 
+
+
 function manageSession(testEl, callback)
 {
 	var size = testEl.size;
@@ -154,7 +171,7 @@ function manageSession(testEl, callback)
 	var mode = 0; //1 try to session
 
 	client.onreadystatechange = function() {
-		if(this.readyState == this.HEADERS_RECEIVED ) {
+		if(this.readyState === this.HEADERS_RECEIVED ) {
 		
 			var resurl = client.responseURL;
 			/*
@@ -170,7 +187,6 @@ function manageSession(testEl, callback)
 			}
 			else if(resurl.includes("://idp.polito.it/idp/profile")) //Sessione didattica Ok (?), Sessione File no
 			{
-				//continuo a leggere tutto
 				mode = 1;
 			}
 			else 
@@ -185,10 +201,8 @@ function manageSession(testEl, callback)
 			console.log("res url:",client.responseURL);
 		}
 		
-		if (mode == 1 && client.readyState === client.DONE && client.status === 200) {
-			
-			console.log(client.responseXML);
-			
+		if (mode === 1 && client.readyState === client.DONE && client.status === 200) {
+
 			var xxml = client.responseXML;
 			if(client.responseXML != null)
 			{
@@ -206,9 +220,9 @@ function manageSession(testEl, callback)
 					
 					for (let entry of hiddens) {
 						
-						if(entry.type == "hidden")
+						if(entry.type === "hidden")
 						{
-							if(i != 0)
+							if(i !== 0)
 								req+="&";
 							
 							req += entry.name+"="+encodeURIComponent(entry.value);
@@ -218,10 +232,7 @@ function manageSession(testEl, callback)
 						}
 						
 					}
-					
-					console.log("request:");
-					console.log(req);
-					
+
 					var http = new XMLHttpRequest();
 					var sessurl = lform.action;
 					
@@ -232,7 +243,7 @@ function manageSession(testEl, callback)
 					http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 					
 					http.onreadystatechange = function() {
-						if(http.readyState == http.HEADERS_RECEIVED) 
+						if(http.readyState === http.HEADERS_RECEIVED)
 						{
 							if(http.status === 200)
 							{
@@ -265,7 +276,7 @@ function findFirstFile(list)
 	for (var i = 0, len = list.length; i < len; i++) {
 		var el = list[i];
 		
-		if(el.type != "dir")
+		if(el.type !== "dir")
 		{
 			return el;
 		}
@@ -307,27 +318,23 @@ function zipAndDownloadAll(tree)
 	thetotal = countFileList(tree).count;
 	
 	var callb = function(){
-		//$scope.download_status = 3;
+
 		updateDownloadStatus(3);
 		
 		zip.generateAsync({type:'blob',compression: "STORE"}, function updateCallback(metadata) {
-		
+
 			updateProgressBar(metadata.percent.toFixed(2),"Zipping files... "+metadata.percent.toFixed(2)+"%",3);
-		})				
-		.then(function(content) {
+		}).then(function(content) {
 			
 			var url = URL.createObjectURL(content);
-			
-			//$scope.download_status = 4;
+
 			updateDownloadStatus(4);
 			updateProgressBar(100,"Done",1);
-			
-			var date = new Date();
-			var name = "PoliTools-"+date.getFullYear+date.getMonth()+date.getDate()+"-"+date.getHours()+":"+date.getMinutes()+".zip";
+
 
 			chrome.downloads.download({
 				url: url,
-				filename: name
+				filename: "PoliTools.zip"
 			});
 			
 		});
@@ -343,7 +350,7 @@ function countFileList(list)
 	var count = 0;
 	var size = 0;
 	list.forEach(function(el){
-		if(el.type != "dir")
+		if(el.type !== "dir")
 		{
 			count++;
 			size += el.size;
@@ -361,7 +368,7 @@ function countFileList(list)
 
 function recursive_download(dirzip, elem, callback)
 {
-	if(elem.type != 'dir')
+	if(elem.type !== 'dir')
 	{
 		var url = "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.handler?action=download&code="+elem.code;
 		//var url = "https://file.didattica.polito.it/download/MATDID/"+elem.code;
@@ -378,7 +385,7 @@ function recursive_download(dirzip, elem, callback)
 
 			var perc = (theended/thetotal)*100;
 			
-			if(thetotal == theended)
+			if(thetotal === theended)
 			{
 				callback();
 				//updateProgressBar(101,"Wait for Zipping...");

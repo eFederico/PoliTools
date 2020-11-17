@@ -20,7 +20,7 @@ $(document).ready(function() {
 	var index = 1;
 	exams.forEach(function(exam) {
 
-		if (index == 4) {
+		if (index === 4) {
 			var examstr = document.createElement('tr');
 			examstr.classList.add("test");
 			$(".check-tbody").prepend(examstr);
@@ -40,7 +40,7 @@ $(document).ready(function() {
 	exams.forEach(function(exam) { 
 		$(".calendar_poli_event").each(function() {
 			
-			if ($(this).children(":first").children(":first").html() == exam) {
+			if ($(this).children(":first").children(":first").html() === exam) {
 				$(this).children().eq(1).children(":first").css("background-color", colors[index]);
 			}
 		});
@@ -51,7 +51,7 @@ $(document).ready(function() {
 		var check = $(this);
 		$(".calendar_poli_event").each(function() {
 			
-			if ($(this).children(":first").children(":first").html() == check.attr("name")) {
+			if ($(this).children(":first").children(":first").html() === check.attr("name")) {
 				if (check.is(":checked")) {
 					$(this).show();
 				} else {
