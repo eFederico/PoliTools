@@ -1,7 +1,15 @@
 chrome.runtime.onInstalled.addListener(function() {
 
+	chrome.storage.local.get(['theme'], function(result) {
+		if (result.theme === null) {
+			chrome.storage.local.set({'theme': 0}, function() {
+				console.log("New selected theme: " + 0);
+			});
+		}
+	});
+
 	//aggiungo listener per controllare cambiamenti su didattica.polito.it
-  
+
 	chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
       chrome.declarativeContent.onPageChanged.addRules([{
         conditions: [new chrome.declarativeContent.PageStateMatcher({
@@ -29,11 +37,12 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 chrome.runtime.onMessageExternal.addListener(
-	function(request, sender, sendResponse) 
+	function(request)
 	{	
 	  if (request.msg === "download_single_file") {
 			var url = request.data;
 		  	var name = request.name;
+
 		  	chrome.downloads.download({
 				url: url,
 				filename: name
@@ -43,7 +52,7 @@ chrome.runtime.onMessageExternal.addListener(
 );
 
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+    function(request) {
         if (request.msg === "PLS_DOWNLOAD") {
 			var url = request.data.content;
 			var filename = request.data.filename;
@@ -54,6 +63,62 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
+
+chrome.runtime.onMessage.addListener(
+    function(request) {
+        if (request.msg === "REDIRECT_AND_DOWNLOAD") {
+
+			var url = request.data.content;
+			var filename = request.data.filename;
+
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.onreadystatechange = function()
+			{
+
+				if (xmlHttp.readyState === 3) { // Attendo pagina pronta
+					chrome.downloads.download({
+						url: xmlHttp.responseURL,
+						filename: filename
+					});
+					xmlHttp.abort(); // Download partito, chiudo pagina (PORCODIO)
+				}
+			}
+
+			xmlHttp.open("GET", url, true);
+			xmlHttp.send(null);
+
+        }
+    }
+);
+
+function forceDownload(blob, filename) {
+
+	var a = document.createElement('a');
+	a.download = filename;
+	a.href = blob;
+	document.body.appendChild(a);
+	a.click();
+	a.remove();
+
+	console.log("Downloading: " + filename);
+}
+
+function downloadResource(url, filename) {
+	if (!filename) filename = url.split('\\').pop().split('/').pop();
+
+	fetch(url, {
+		headers: new Headers({
+			'Origin': location.origin
+		}),
+		mode: 'cors'
+	})
+		.then(response => response.blob())
+		.then(blob => {
+			let blobUrl = window.URL.createObjectURL(blob);
+			forceDownload(blobUrl, filename);
+		})
+		.catch(e => console.error(e));
+}
 
 chrome.runtime.onMessageExternal.addListener(
 	function(request, sender, sendResponse) 
@@ -326,11 +391,10 @@ function zipAndDownloadAll(tree)
 			updateProgressBar(metadata.percent.toFixed(2),"Zipping files... "+metadata.percent.toFixed(2)+"%",3);
 		}).then(function(content) {
 			
-			var url = URL.createObjectURL(content);
+			const url = URL.createObjectURL(content);
 
 			updateDownloadStatus(4);
 			updateProgressBar(100,"Done",1);
-
 
 			chrome.downloads.download({
 				url: url,

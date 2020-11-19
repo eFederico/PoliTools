@@ -19,13 +19,24 @@
                 "scripts/themes.js"
             ],
             "matches": [
-                "*://*.polito.it/*",
-                "*://mail.studenti.polito.it/*"
+                "*://*.polito.it/*"
             ],
             "exclude_matches": [
+                "*://mail.studenti.polito.it/*",
                 "*://*.polito.it/mail/faq.html",
                 "*://*.polito.it/",
                 "*://exercise.polito.it/*"
+            ],
+            "run_at": "document_start"
+        },
+        {
+            "js": [
+                "lib/jquery.min.js",
+                "lib/bootstrap.min.js",
+                "scripts/themes.js"
+            ],
+            "matches": [
+                "*://mail.studenti.polito.it/*"
             ],
             "run_at": "document_start"
         },
@@ -68,7 +79,6 @@
                 "scripts/videolessons.js"
             ],
             "matches": [
-                "*://*.polito.it/dl/*",
                 "*://*.polito.it/portal/pls/portal/sviluppo.videolezioni.vis*",
                 "*://*.polito.it/pls/portal30/sviluppo.videolezioni.vis*",
                 "*://elearning.polito.it/gadgets/video/template_video.php*",
@@ -86,7 +96,6 @@
                 "scripts/virtualclassroom.js"  
             ],
             "matches": [
-                "*://*.polito.it/dl/*",
                 "*://*.polito.it/playback/*",
                 "*://*.polito.it/portal/pls/portal/sviluppo.virtual_classroom*",
                 "*://*.polito.it/portal/pls/portal/sviluppo.pagina_corso.main*p_sottopagina=VC*"
@@ -115,9 +124,10 @@
         "storage",
         "webRequest",
         "webRequestBlocking",
-        "*://*.polito.it/*"
+        "https://*.polito.it/",
+        "http://*.polito.it/"
     ],
-    "version": "0.4.0",
+    "version": "0.9.0",
     "web_accessible_resources": [
         "immagini/*",
         "lib/*",

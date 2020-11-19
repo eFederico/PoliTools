@@ -1,6 +1,4 @@
-var exID = chrome.runtime.id;
-
-$(document).ready(function() { 
+$(document).ready(function() {
 
 	if(isConverted(document)) {
 		newPlayer();
@@ -34,11 +32,12 @@ $(document).ready(function() {
 	downAll.className="btn btn-primary download-all";
 	downAll.innerHTML = "Download ALL";
 
-    downAll.addEventListener("click", function() {
-		var lessonList = getLessonListDOM();
-		for(var i = 0; i < lessonList.length; i++)
-		{
-			document.getElementById("directdwn_"+i).click();
+	downAll.addEventListener("click", function () {
+		if(confirm("Sei sicuro di voler scaricare tutte le virtual classroom già convertite?\nL'operazione può richiedere tempo e non può essere annullata.")) {
+			var lessonList = getLessonListDOM();
+			for (var i = 0; i < lessonList.length; i++) {
+				document.getElementById("directdwn_" + i).click();
+			}
 		}
 	}, false);
 
@@ -73,7 +72,7 @@ function populateDownloadButton()
 				var xmlHttp = new XMLHttpRequest();
 				xmlHttp.onreadystatechange = function() 
 				{ 
-					if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+					if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
 					callback(xmlHttp.responseText, e.target);
                 }
                 
@@ -101,34 +100,29 @@ function callback(response, target) {
 		filename = filename.replace(/\//g, "_");
 		filename = filename.replace(/ /g, "_");
 		filename = filename+".mp4";
-		
-		var url = video.querySelector("source").src;
 
-		download(url, filename);
+		var url = $("source")[0].src;
+
+		chrome.runtime.sendMessage({
+			msg: "PLS_DOWNLOAD",
+			data: {
+				subject: "URL",
+				content: url,
+				filename: filename
+			}
+		});
 
 	} else { 
 		var buttonId = 'two';
  		$('#modal-container').removeAttr('class').addClass(buttonId); // Apro popup se è una BBB
- 		$('body').addClass('modal-active'); z
+ 		$('body').addClass('modal-active');
 	}
-}
-
-function download(url, filename)
-{
-	chrome.runtime.sendMessage({
-		msg: "PLS_DOWNLOAD", 
-		data: {
-			subject: "URL",
-			content: url,
-			filename: filename
-		}
-	});
 }
 
 function newPlayer() {
 
-	var video = document.getElementsByTagName("video")[0];
-	var mp4Video = video.getElementsByTagName("source")[0].src;
+	var video = $("video")[0];
+	var mp4Video = video.querySelector("source").src;
 
 	video.outerHTML =	`<video id="videoMP4" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
 							controls preload="auto" width="768" height="432"
@@ -151,5 +145,4 @@ function newPlayer() {
 function isConverted(doc) {
 
 	return doc.getElementById("videoPlayer") != null;
-
 }

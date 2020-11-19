@@ -34,7 +34,7 @@ async function getFont() {
 		var font = result.font;
 		if (font != "Default" && font != null) {
 	   		console.log("Font:" + font);
-		   $("html").append(fonts.replace("%font%", font)); 
+		   $("html").append(fonts.replace("%font%", font));
 		}
 	});
 }

@@ -64,7 +64,6 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
  box-shadow: 0px 9px 17px 2px black;
 }
 
-
 .btn_t1 {
 	-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
 	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
@@ -379,3 +378,12 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 .vjs-time-tooltip {
 	font-size: 1em !important;
 }
+
+.sorting:after,
+.sorting_asc:after,
+.sorting_desc:after,
+.sorting_asc_disabled:after,
+.sorting_desc_disabled:after {
+	bottom: 1px !important;
+}
+

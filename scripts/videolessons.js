@@ -1,46 +1,52 @@
-$(document).ready(function() { 
+var navbar;
+var lessonlist;
+
+$(document).ready(function() {
+
+	navbar = document.getElementById("navbar_left_menu");
+	lessonlist = navbar.getElementsByClassName("h5");
 
 	newPlayer();
-
-    navbar = document.getElementById("navbar_left_menu");
-
-    var downAll = document.createElement("button");
-	downAll.className="btn btn-primary download-all";
-	downAll.innerHTML = "Download ALL (Prof & Slide)";
-	
-	var downAllSlide = document.createElement("button");
-	downAllSlide.className="btn btn-primary download-all";
-	downAllSlide.innerHTML = "Download ALL (Slide Only)";
-
-	var lessonList = getLessonListDOM();
-
-	downAll.addEventListener("click", function() {
-		for(var i = 0; i < lessonList.length; i++)
-		{
-			document.getElementById("directdwn_"+i).click();
-		}
-	}, false);
-	
-	downAllSlide.addEventListener("click", function() {
-		for(var i = 0; i < lessonList.length; i++)
-		{
-			document.getElementById("directdwnslide_"+i).click();
-		}
-	}, false);
-	
-	navbar.insertBefore(downAll, navbar.firstChild);
-	navbar.insertBefore(downAllSlide, navbar.firstChild);
-	
+	downloadAllButtons();
     populateDownloadButton();
     	
 });
 
+function downloadAllButtons() {
+
+	var downAll = document.createElement("button");
+	downAll.className="btn btn-primary download-all";
+	downAll.innerHTML = "Download ALL (Prof & Slide)";
+
+	var downAllSlide = document.createElement("button");
+	downAllSlide.className="btn btn-primary download-all";
+	downAllSlide.innerHTML = "Download ALL (Slide Only)";
+
+	downAll.addEventListener("click", function () {
+		if(confirm("Sei sicuro di voler scaricare tutte le videolezioni (Prof & Slide)?\nL'operazione può richiedere tempo e non può essere annullata.")) {
+			for (var i = 0; i < lessonlist.length; i++) {
+				document.getElementById("directdwn_" + i).click();
+			}
+		}
+	}, false);
+
+
+	downAllSlide.addEventListener("click", function () {
+		if(confirm("Sei sicuro di voler scaricare tutte le videolezioni (Slide Only)?\nL'operazione può richiedere tempo e non può essere annullata.")) {
+			for (var i = 0; i < lessonlist.length; i++) {
+				document.getElementById("directdwnslide_" + i).click();
+			}
+		}
+	}, false);
+
+	navbar.insertBefore(downAll, navbar.firstChild);
+	navbar.insertBefore(downAllSlide, navbar.firstChild);
+}
+
 function populateDownloadButton()
 {
-	var lessonList = getLessonListDOM();
-		
-	if (lessonList) {
-        for (var i = 0; i < lessonList.length; i++) { //Per ogni lezione...
+	if (lessonlist) {
+        for (var i = 0; i < lessonlist.length; i++) { //Per ogni lezione...
             
             var btn = document.createElement("button");
             btn.className="btn btn-primary dwlbtn";
@@ -52,49 +58,48 @@ function populateDownloadButton()
             btnSlide.id="directdwnslide_"+i;
             btnSlide.innerHTML = '<span class="fa fa-download"></span> Slide Only'; //aggiungo tasto Slide Only
             
-            var firstChild = lessonList[i].firstChild;
+            var firstChild = lessonlist[i].firstChild;
 
-            lessonList[i].insertBefore(btn, firstChild); //Inserisco bottoni in testa all'elenco
-            lessonList[i].insertBefore(btnSlide, firstChild);
-            
-            var a = lessonList[i].getElementsByTagName("a")[0];
-            
+            lessonlist[i].insertBefore(btn, firstChild); //Inserisco bottoni in testa all'elenco
+            lessonlist[i].insertBefore(btnSlide, firstChild);
+
+            var a = lessonlist[i].getElementsByTagName("a")[0];
+
             var hr = document.createElement("hr");
-            lessonList[i].insertBefore(hr, firstChild);
+            lessonlist[i].insertBefore(hr, firstChild);
     
             btn.ass = a;
-            btn.addEventListener("click", function(e) { //Associo listner al bottone Prof + Slide
-                var url = e.target.ass.getAttribute("href");
-              
-                startDownload(url, 1, 0);
+            btn.addEventListener("click", function(e) { //Associo listener al bottone Prof + Slide
+
+                startDownload(e.target,0);
                     
             }, false);
             
             btnSlide.ass = a;
-            btnSlide.addEventListener("click", function(e) { //Associo listner al bottone Slide Only
-                var url = e.target.ass.getAttribute("href");
-               
-                startDownload(url, 1, 1);
+            btnSlide.addEventListener("click", function(e) { //Associo listener al bottone Slide Only
+
+                startDownload(e.target,1);
                     
             }, false);
         }
 	}
 }
 
-function getLessonListDOM()
+function startDownload(target, type)
 {
-	return navbar.getElementsByClassName("h5");
-}
+	var url = target.ass.getAttribute("href");
+	var filename = target.ass.text;
 
-function startDownload(url, type)
-{
+	filename = filename.replace(/\//g, "_");
+	filename = filename.replace(/ /g, "_");
+
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() 
 	{ 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+		if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
 			switch (type) {
-				case 0: callback(xmlHttp.responseText, 0); break; // Callback per Prof + Slide
-				case 1: callback(xmlHttp.responseText, 1);   // Callback Slide Only
+				case 0: callback(xmlHttp.responseText, 0, filename); break; // Callback per Prof + Slide
+				case 1: callback(xmlHttp.responseText, 1, filename);   // Callback Slide Only
 			}
 	}
 	var preurl = "https://didattica.polito.it/portal/pls/portal/";
@@ -103,43 +108,37 @@ function startDownload(url, type)
 	xmlHttp.send(null);
 }
 
-function callback(response, slideOnly)
-{   
+function callback(response, slideOnly, filename)
+{
+	if (slideOnly) {
+		filename = filename + "_SlideOnly";
+	} else {
+		filename = filename + "_Prof&Slide";
+	}
+
+	filename = filename+".mp4";
+
     slideOnly++; // 0 -> 1 => primo link P+S    -    1 -> 2 => secondo link SO
 
 	var parser = new DOMParser();
 	var doc = parser.parseFromString(response, "text/html");
 
 	var url = doc.querySelector("div.container-fluid > div.row > div.col-md-8 > div.row:nth-child(5) ul > li:nth-child("+slideOnly+") a").href;
-	
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() 
-	{ 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-				downloadFromURL(xmlHttp.responseURL);
-		}
-	}
-	
-	xmlHttp.open("GET", url, true);
-	xmlHttp.send(null);
-}
 
-function downloadFromURL(url)   // FIXME Da spostare in background.js
-{
 	chrome.runtime.sendMessage({
-	msg: "PLS_DOWNLOAD", 
-	data: {
-		subject: "URL",
-		content: url,
-	}
+		msg: "REDIRECT_AND_DOWNLOAD",
+		data: {
+			subject: "URL",
+			content: url,
+			filename: filename
+		}
 	});
-	
 }
 
 function newPlayer() {
 
-	var video = document.getElementsByTagName("video")[0];
-	var mp4Video = video.getElementsByTagName("source")[0].src;
+	var video = $("video")[0];
+	var mp4Video = video.querySelector("source").src;
 	var poster = $('.video-js').attr("poster");
 
 	video.outerHTML =	`<video id="videoMP4" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
