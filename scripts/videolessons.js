@@ -46,8 +46,13 @@ function downloadAllButtons() {
 function populateDownloadButton()
 {
 	if (lessonlist) {
-        for (var i = 0; i < lessonlist.length; i++) { //Per ogni lezione...
-            
+        for (var i = 0; i < lessonlist.length; i++) { // Per ogni lezione...
+
+			var firstChild = lessonlist[i].firstChild;
+
+			var hr = document.createElement("hr");
+			lessonlist[i].insertBefore(hr, firstChild);
+
             var btn = document.createElement("button");
             btn.className="btn btn-primary dwlbtn";
             btn.id="directdwn_"+i;
@@ -57,17 +62,12 @@ function populateDownloadButton()
             btnSlide.className="btn btn-primary dwlbtnslide";
             btnSlide.id="directdwnslide_"+i;
             btnSlide.innerHTML = '<span class="fa fa-download"></span> Slide Only'; //aggiungo tasto Slide Only
-            
-            var firstChild = lessonlist[i].firstChild;
 
             lessonlist[i].insertBefore(btn, firstChild); //Inserisco bottoni in testa all'elenco
             lessonlist[i].insertBefore(btnSlide, firstChild);
 
             var a = lessonlist[i].getElementsByTagName("a")[0];
 
-            var hr = document.createElement("hr");
-            lessonlist[i].insertBefore(hr, firstChild);
-    
             btn.ass = a;
             btn.addEventListener("click", function(e) { //Associo listener al bottone Prof + Slide
 

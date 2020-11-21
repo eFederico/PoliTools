@@ -127,7 +127,7 @@
         "https://*.polito.it/",
         "http://*.polito.it/"
     ],
-    "version": "0.9.0",
+    "version": "0.9.1",
     "web_accessible_resources": [
         "immagini/*",
         "lib/*",
