@@ -139,7 +139,7 @@
         "https://*.polito.it/",
         "http://*.polito.it/"
     ],
-    "version": "0.9.5",
+    "version": "0.9.6",
     "web_accessible_resources": [
         "immagini/*",
         "lib/*",
