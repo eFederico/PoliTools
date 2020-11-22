@@ -100,6 +100,18 @@
                 "*://*.polito.it/portal/pls/portal/sviluppo.virtual_classroom*",
                 "*://*.polito.it/portal/pls/portal/sviluppo.pagina_corso.main*p_sottopagina=VC*"
             ]
+        },
+        {
+            "js": [
+                "lib/jquery.min.js",
+                "scripts/bigbluebutton.js"
+            ],
+            "matches": [
+                "*://*.polito.it/playback/*",
+                "*://*.polito.it/portal/pls/portal/sviluppo.virtual_classroom*",
+                "*://*.polito.it/portal/pls/portal/sviluppo.pagina_corso.main*p_sottopagina=VC*"
+            ],
+            "all_frames": true
         }
     ],
     "description": "Improve your everyday life with this Chrome extension for the teaching portal.",

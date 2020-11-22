@@ -11,13 +11,13 @@ hr {
 }
 
 body.virtual-classroom #portlet_corso_container .container-fluid {
-	margin: 0px;
+	margin: 0;
 	padding-left: 15px;
 	padding-right: 15px;
 }
 
 body.virtual-classroom #portlet_corso_container .row .cols-xs-12.col-md-4 {
-	width: 40%;
+	width: 30% !important;
 }
 
 body.virtual-classroom #portlet_corso_container .row .col-md-8 {
@@ -33,7 +33,7 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 }
 
 #lblInfo,
-#lblTitle, 
+#lblTitle,
 .ludricrousSpeed {
 	display: none !important;
 }
@@ -45,8 +45,7 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 
 .cb-title {
 	color: #fff;
-	margin: 0px;
-	margin-bottom: 10px;
+	margin: 0 0 10px;
 }
 
 .RegionBorderMao {
@@ -56,18 +55,18 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 #mail {
  height: 600px;
  width: 800px;
- position: absolute; 
+ position: absolute;
  background-color: white;
  z-index: 999;
  top: 168px;
  left: 400px;
- box-shadow: 0px 9px 17px 2px black;
+ box-shadow: 0 9px 17px 2px black;
 }
 
 .btn_t1 {
-	-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	-moz-box-shadow:inset 0 1px 3px 0 #91b8b3;
+	-webkit-box-shadow:inset 0 1px 3px 0 #91b8b3;
+	box-shadow:inset 0 1px 3px 0 #91b8b3;
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #768d87), color-stop(1, #6c7c7c));
 	background:-moz-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
 	background:-webkit-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
@@ -83,12 +82,12 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
+	font-family: Arial;
 	font-size:13px;
 	font-weight:bold;
 	padding:7px 23px;
 	text-decoration:none;
-	text-shadow:0px -1px 0px #2b665e;
+	text-shadow:0px -1px 0 #2b665e;
 }
 .btn_t1:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #768d87));
@@ -118,7 +117,7 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 }
 
 .table-hover tbody tr{
-	height:30px;  
+	height:30px;
 }
 
 .table-hover tbody tr td{
@@ -132,7 +131,7 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 
 .dwlbtnslide,
 .dwlbtn {
-	
+
     margin-left: 5px !important;
 	margin-bottom: 5px !important;
 }
@@ -172,7 +171,7 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 
 #leftZone{
 	background-color: #f5f5f5 !important;
-	
+
 	border-radius: 4px  !important;
 	-webkit-border-radius: 6px !important;
 	width: auto !important;
@@ -334,19 +333,19 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 
 @font-face {
 	font-family: 'Dos';
-	src: url('chrome-extension://__MSG_@@extension_id__/fonts/dos.woff') format('woff'), 
+	src: url('chrome-extension://__MSG_@@extension_id__/fonts/dos.woff') format('woff'),
 	 url('chrome-extension://__MSG_@@extension_id__/fonts/dos.ttf') format('truetype');
-}  
+}
 
 @font-face {
 	font-family: 'Comic Sans';
 	src: url('chrome-extension://__MSG_@@extension_id__/fonts/comicsans.ttf') format('truetype');
-}  
+}
 
 @font-face {
 	font-family: 'Keyboard';
 	src: url('chrome-extension://__MSG_@@extension_id__/fonts/keyboard.ttf') format('truetype');
-} 
+}
 
 .inline {
 	display: inline;
@@ -360,7 +359,7 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 
 .video-js-box {
 	z-index: 999;
-    position: relative;
+	position: relative;
 }
 
 .vjs-menu-button-popup .vjs-menu .vjs-menu-content {
@@ -387,3 +386,6 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 	bottom: 1px !important;
 }
 
+ul {
+	padding: 0;
+}
