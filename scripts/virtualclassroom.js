@@ -130,7 +130,7 @@ function newPlayer() {
 
 	video.outerHTML =	`<video id="videoMP4" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
 							controls preload="auto" width="768" height="432"
-							data-setup='{"controls": true, "autoplay": false, "preload": "auto", "playbackRates": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5]}'>
+							data-setup='{"controls": true, "autoplay": false, "preload": "auto", "playbackRates": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3]}'>
 							<source src= ` + mp4Video + ` + type="video/mp4" />
 							<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
 						</video>`
@@ -159,7 +159,7 @@ function newPlayer() {
 					},
 					handler: function(player, options, event) {
 						let curr = myVideo.playbackRate();
-						if(curr < 2.5)
+						if(curr < 3)
 							myVideo.playbackRate((curr + 0.1).toFixed(1));
 					}
 				},
