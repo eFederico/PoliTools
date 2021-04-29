@@ -2,17 +2,17 @@ navigate("home");
 
 function navigate (path) {
 	
-	if (path == "home") {
+	if (path === "home") {
 		$(".back-arrow").hide();
 	} else {
 		$(".back-arrow").show();
 	}
 
-	var xmlhttp = new XMLHttpRequest();
+	let xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
+		if (this.readyState === 4 && this.status === 200) {
 			
-			var data = JSON.parse(this.responseText);
+			let data = JSON.parse(this.responseText);
 			callback(data, path);
 		}
 	};
@@ -20,21 +20,21 @@ function navigate (path) {
 	xmlhttp.send();
 
 	function callback(data, path) {
-		var contenuto = $(".contenuto");
+		let contenuto = $(".contenuto");
 		contenuto.attr("data", path);
 
 		contenuto.empty();
 
 		data = data["home"];
 		
-		var pagename = "PoliTools";
+		let pagename = "PoliTools";
 
-		if (path != "home") {
-			var splitted = path.split("_");
-			var j = 0;
+		if (path !== "home") {
+			let splitted = path.split("_");
+			let j = 0;
 			splitted.forEach(function(dir) {
-				if (j != 0) {
-					var a = parseInt(dir);
+				if (j !== 0) {
+					let a = parseInt(dir);
 					data = data[a];
 					pagename = data.name.it;
 					data = data.contents
@@ -48,18 +48,22 @@ function navigate (path) {
 		$('#cb-nav h3').html(pagename); 
 
 		$.each(data, function(i, obj) {
-			
+
+
+			//TODO diversificare nome variabili row?
 			switch(obj.type) {
 
 				case "dir": 
 				var row = `<div id="`+obj.file+`" class="row pt-btn">
 								<div class="box" data="`+path+`_`+i+`">
-									<div class="box-image"><img src="/immagini/`+obj.img+`" width="100%"></div>
+									<div class="box-image"><img src="/immagini/`+obj.img+`" width="100%" alt="obj_img"></div>
 									<div class="box-text"><p>`+obj.name.it+`</p></div>
 								</div>
 							</div>`;
+
 				contenuto.append(row);
-				$("#"+obj.file+" > .box").click(function() {
+
+				$("#"+obj.file+" > .box").on("click", function() {
 					navigate($(this).attr("data"));
 				});
 				break;
@@ -70,8 +74,10 @@ function navigate (path) {
 										<div class="box-image col-xs-12" style="background-image: url('/immagini/`+obj.img+`');"><p>`+obj.name.it+`</p></div>
 									</div>
 								</div>`;
+
 					contenuto.append(row);
-					$("#"+obj.file+" > .box").click(function() {
+
+					$("#"+obj.file+" > .box").on("click", function() {
 						setTheme(obj.id);
 					});
 				break;
@@ -164,15 +170,15 @@ function navigate (path) {
 }
 
 
-$(".back-arrow").click(function() {
-	var currentpath = $(".contenuto").attr("data");
-	var splitted = currentpath.split("_");
+$(".back-arrow").on("click", function() {
+	let currentpath = $(".contenuto").attr("data");
+	let splitted = currentpath.split("_");
 
-	var path = "";
-	var i = 0;
+	let path = "";
+	let i = 0;
 	splitted.forEach(function(dir) {
 		if (i < splitted.length - 1) {
-			if (i == 0) 
+			if (i === 0)
 				path = dir;
 			else
 				path = path+"_"+dir;

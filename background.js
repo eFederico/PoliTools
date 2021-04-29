@@ -40,8 +40,8 @@ chrome.runtime.onMessageExternal.addListener(
 	function(request)
 	{	
 	  if (request.msg === "download_single_file") {
-			var url = request.data;
-		  	var name = request.name;
+			let url = request.data;
+		  	let name = request.name;
 
 		  	chrome.downloads.download({
 				url: url,
@@ -54,8 +54,8 @@ chrome.runtime.onMessageExternal.addListener(
 chrome.runtime.onMessage.addListener(
     function(request) {
         if (request.msg === "PLS_DOWNLOAD") {
-			var url = request.data.content;
-			var filename = request.data.filename;
+			let url = request.data.content;
+			let filename = request.data.filename;
 			chrome.downloads.download({
 			  url: url,
 			  filename: filename
@@ -68,10 +68,10 @@ chrome.runtime.onMessage.addListener(
     function(request) {
         if (request.msg === "REDIRECT_AND_DOWNLOAD") {
 
-			var url = request.data.content;
-			var filename = request.data.filename;
+			let url = request.data.content;
+			let filename = request.data.filename;
 
-			var xmlHttp = new XMLHttpRequest();
+			let xmlHttp = new XMLHttpRequest();
 			xmlHttp.onreadystatechange = function()
 			{
 
@@ -93,7 +93,7 @@ chrome.runtime.onMessage.addListener(
 
 function forceDownload(blob, filename) {
 
-	var a = document.createElement('a');
+	let a = document.createElement('a');
 	a.download = filename;
 	a.href = blob;
 	document.body.appendChild(a);
@@ -125,8 +125,8 @@ chrome.runtime.onMessageExternal.addListener(
 	 {
 	   if (request.msg === "zipAndDownloadAll") {
 
-		   var tree = request.tree;
-		   var el = findFirstFile(tree);
+		   let tree = request.tree;
+		   let el = findFirstFile(tree);
 	   
 		   if(el == null)
 		   {
@@ -146,7 +146,6 @@ chrome.runtime.onMessageExternal.addListener(
 				   else
 				   {
 					   updateDownloadStatus(0);
-					   return;
 				   }
 			   }
 		   );
@@ -171,10 +170,10 @@ chrome.runtime.onMessageExternal.addListener(
   function(request, sender, sendResponse) 
   {
 	if (request.msg === "getBinaryContent") {
-		var url = request.url;
+		let url = request.url;
 		
-		var blob = null;
-		var xhr = new XMLHttpRequest();
+		let blob = null;
+		let xhr = new XMLHttpRequest();
 		xhr.open("GET", url);
 		xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
 		xhr.onload = function()
@@ -182,16 +181,16 @@ chrome.runtime.onMessageExternal.addListener(
 			blob = xhr.response;
 			console.log(blob);
 			
-			var reader = new FileReader();
+			let reader = new FileReader();
 			reader.readAsDataURL(blob);
 			reader.onload =  function(e){
 					console.log('DataURL:', e.target.result);
 			};
 			
-			var bloburl =  (window.URL ? URL : webkitURL).createObjectURL(blob);
+			let bloburl =  (window.URL ? URL : webkitURL).createObjectURL(blob);
 			console.log(bloburl);
 			
-			var response = {err: false, data:bloburl};
+			let response = {err: false, data:bloburl};
 			console.log(response);
 			sendResponse(response);
 		}
@@ -224,21 +223,21 @@ chrome.runtime.onMessageExternal.addListener(
 
 function manageSession(testEl, callback)
 {
-	var size = testEl.size;
-	var url = "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.handler?action=download&code="+testEl.code;
+	let size = testEl.size;
+	let url = "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.handler?action=download&code="+testEl.code;
 	
-	var client = new XMLHttpRequest();
+	let client = new XMLHttpRequest();
 	client.overrideMimeType('application/xml');
 	client.open("GET", url, true);
 	
 	client.send();
 	
-	var mode = 0; //1 try to session
+	let mode = 0; //1 try to session
 
 	client.onreadystatechange = function() {
 		if(this.readyState === this.HEADERS_RECEIVED ) {
 		
-			var resurl = client.responseURL;
+			let resurl = client.responseURL;
 			/*
 			https://file.didattica.polito.it/download/MATDID/32837182
 			https://idp.polito.it/idp/profile/SAML2/Redirect/SSO
@@ -268,19 +267,19 @@ function manageSession(testEl, callback)
 		
 		if (mode === 1 && client.readyState === client.DONE && client.status === 200) {
 
-			var xxml = client.responseXML;
+			let xxml = client.responseXML;
 			if(client.responseXML != null)
 			{
-				var lform = xxml.getElementsByTagName("form")[0]; //action page method post/get
+				let lform = xxml.getElementsByTagName("form")[0]; //action page method post/get
 				if(lform)
 				{
-					var hiddens = lform.getElementsByTagName("input");
-					var req = "";
+					let hiddens = lform.getElementsByTagName("input");
+					let req = "";
 					console.log(hiddens);
 					
-					var i = 0;
+					let i = 0;
 					
-					var datapost = new FormData();
+					let datapost = new FormData();
 					
 					
 					for (let entry of hiddens) {
@@ -298,10 +297,10 @@ function manageSession(testEl, callback)
 						
 					}
 
-					var http = new XMLHttpRequest();
-					var sessurl = lform.action;
+					let http = new XMLHttpRequest();
+					let sessurl = lform.action;
 					
-					var params = req;
+					let params = req;
 					http.open('POST', sessurl, true);
 
 					//Send the proper header information along with the request
@@ -321,7 +320,7 @@ function manageSession(testEl, callback)
 							}
 							
 							http.abort();
-							return;
+
 						}
 					}
 					http.send(req);
@@ -338,8 +337,8 @@ function manageSession(testEl, callback)
 
 function findFirstFile(list)
 {	
-	for (var i = 0, len = list.length; i < len; i++) {
-		var el = list[i];
+	for (let i = 0, len = list.length; i < len; i++) {
+		let el = list[i];
 		
 		if(el.type !== "dir")
 		{
@@ -347,7 +346,7 @@ function findFirstFile(list)
 		}
 		else
 		{
-			var ret = findFirstFile(el.list);
+			let ret = findFirstFile(el.list);
 			
 			if(ret !== null)
 				return ret;
@@ -357,32 +356,32 @@ function findFirstFile(list)
 	return null;
 }
 
-var theport = null;
-var thetotal = 0;
-var theended = 0;
+let theport = null;
+let thetotal = 0;
+let theended = 0;
 
 function updateDownloadStatus(ds)
 {
-	var msg = {type: "downloadstatus", val: ds};
+	let msg = {type: "downloadstatus", val: ds};
 	theport.postMessage(msg);
 }
 
 function updateProgressBar(current_progress, string, type = 0)
 {
-	var msg = {type: "updateProgressBar", cs: current_progress, string: string, tt: type};
+	let msg = {type: "updateProgressBar", cs: current_progress, string: string, tt: type};
 	theport.postMessage(msg);
 }
 
 function zipAndDownloadAll(tree)
 {
 
-	var zip = new JSZip();
+	let zip = new JSZip();
 	thetotal = 0;
 	theended = 0;
 	
 	thetotal = countFileList(tree).count;
 	
-	var callb = function(){
+	let callb = function(){
 
 		updateDownloadStatus(3);
 		
@@ -411,8 +410,8 @@ function zipAndDownloadAll(tree)
 		
 function countFileList(list)
 {
-	var count = 0;
-	var size = 0;
+	let count = 0;
+	let size = 0;
 	list.forEach(function(el){
 		if(el.type !== "dir")
 		{
@@ -434,20 +433,20 @@ function recursive_download(dirzip, elem, callback)
 {
 	if(elem.type !== 'dir')
 	{
-		var url = "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.handler?action=download&code="+elem.code;
+		let url = "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.handler?action=download&code="+elem.code;
 		//var url = "https://file.didattica.polito.it/download/MATDID/"+elem.code;
 		
 		JSZipUtils.getBinaryContent(url, function (err, data) {
 			
-			var name = elem.name;
+			let name = elem.name;
 			
-			if (typeof elem.nomefile !== 'undefined')
+			if (typeof elem.nomefile !== 'undefined') //TODO dov'è questa variabile?
 				name = elem.nomefile;
 			
 			dirzip.file(name, data, {binary:true});
 			theended++;
 
-			var perc = (theended/thetotal)*100;
+			let perc = (theended/thetotal)*100;
 			
 			if(thetotal === theended)
 			{
@@ -464,7 +463,7 @@ function recursive_download(dirzip, elem, callback)
 		return;
 	}
 
-	var thiszipdir = dirzip.folder(elem.name);
+	let thiszipdir = dirzip.folder(elem.name);
 	
 	elem.list.forEach(function(el){
 		recursive_download(thiszipdir,el,callback);

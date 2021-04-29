@@ -1,7 +1,7 @@
-var navbar;
-var lessonlist;
+let navbar;
+let lessonlist;
 
-$(document).ready(function() {
+$(function() {
 
 	navbar = document.getElementById("navbar_left_menu");
 	lessonlist = navbar.getElementsByClassName("h5");
@@ -15,17 +15,17 @@ $(document).ready(function() {
 
 function downloadAllButtons() {
 
-	var downAll = document.createElement("button");
+	let downAll = document.createElement("button");
 	downAll.className="btn btn-primary download-all";
 	downAll.innerHTML = "Download ALL (Prof & Slide)";
 
-	var downAllSlide = document.createElement("button");
+	let downAllSlide = document.createElement("button");
 	downAllSlide.className="btn btn-primary download-all";
 	downAllSlide.innerHTML = "Download ALL (Slide Only)";
 
 	downAll.addEventListener("click", function () {
 		if(confirm("Sei sicuro di voler scaricare tutte le videolezioni (Prof & Slide)?\nL'operazione può richiedere tempo e non può essere annullata.")) {
-			for (var i = 0; i < lessonlist.length; i++) {
+			for (let i = 0; i < lessonlist.length; i++) {
 				document.getElementById("directdwn_" + i).click();
 			}
 		}
@@ -34,7 +34,7 @@ function downloadAllButtons() {
 
 	downAllSlide.addEventListener("click", function () {
 		if(confirm("Sei sicuro di voler scaricare tutte le videolezioni (Slide Only)?\nL'operazione può richiedere tempo e non può essere annullata.")) {
-			for (var i = 0; i < lessonlist.length; i++) {
+			for (let i = 0; i < lessonlist.length; i++) {
 				document.getElementById("directdwnslide_" + i).click();
 			}
 		}
@@ -47,19 +47,19 @@ function downloadAllButtons() {
 function populateDownloadButton()
 {
 	if (lessonlist) {
-        for (var i = 0; i < lessonlist.length; i++) { // Per ogni lezione...
+        for (let i = 0; i < lessonlist.length; i++) { // Per ogni lezione...
 
-			var firstChild = lessonlist[i].firstChild;
+			let firstChild = lessonlist[i].firstChild;
 
-			var hr = document.createElement("hr");
+			let hr = document.createElement("hr");
 			lessonlist[i].insertBefore(hr, firstChild);
 
-            var btn = document.createElement("button");
+            let btn = document.createElement("button");
             btn.className="btn btn-primary dwlbtn";
             btn.id="directdwn_"+i;
             btn.innerHTML = '<span class="fa fa-download"></span>  Prof & Slide'; //aggiungo tasto Prof + Slide
             
-            var btnSlide = document.createElement("button");
+            let btnSlide = document.createElement("button");
             btnSlide.className="btn btn-primary dwlbtnslide";
             btnSlide.id="directdwnslide_"+i;
             btnSlide.innerHTML = '<span class="fa fa-download"></span> Slide Only'; //aggiungo tasto Slide Only
@@ -67,7 +67,7 @@ function populateDownloadButton()
             lessonlist[i].insertBefore(btn, firstChild); //Inserisco bottoni in testa all'elenco
             lessonlist[i].insertBefore(btnSlide, firstChild);
 
-            var a = lessonlist[i].getElementsByTagName("a")[0];
+            let a = lessonlist[i].getElementsByTagName("a")[0];
 
             btn.ass = a;
             btn.addEventListener("click", function(e) { //Associo listener al bottone Prof + Slide
@@ -88,13 +88,13 @@ function populateDownloadButton()
 
 function startDownload(target, type)
 {
-	var url = target.ass.getAttribute("href");
-	var filename = target.ass.text;
+	let url = target.ass.getAttribute("href");
+	let filename = target.ass.text;
 
 	filename = filename.replace(/\//g, "_");
 	filename = filename.replace(/ /g, "_");
 
-	var xmlHttp = new XMLHttpRequest();
+	let xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() 
 	{ 
 		if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
@@ -103,7 +103,7 @@ function startDownload(target, type)
 				case 1: callback(xmlHttp.responseText, 1, filename);   // Callback Slide Only
 			}
 	}
-	var preurl = "https://didattica.polito.it/portal/pls/portal/";
+	let preurl = "https://didattica.polito.it/portal/pls/portal/";
 		
 	xmlHttp.open("GET", preurl+url, true);
 	xmlHttp.send(null);
@@ -121,10 +121,10 @@ function callback(response, slideOnly, filename)
 
     slideOnly++; // 0 -> 1 => primo link P+S    -    1 -> 2 => secondo link SO
 
-	var parser = new DOMParser();
-	var doc = parser.parseFromString(response, "text/html");
+	let parser = new DOMParser();
+	let doc = parser.parseFromString(response, "text/html");
 
-	var url = doc.querySelector("div.container-fluid > div.row > div.col-md-8 > div.row:nth-child(5) ul > li:nth-child("+slideOnly+") a").href;
+	let url = doc.querySelector("div.container-fluid > div.row > div.col-md-8 > div.row:nth-child(5) ul > li:nth-child("+slideOnly+") a").href;
 
 	chrome.runtime.sendMessage({
 		msg: "REDIRECT_AND_DOWNLOAD",
@@ -138,16 +138,16 @@ function callback(response, slideOnly, filename)
 
 function newPlayer() {
 
-	var video = $("video")[0];
+	let video = $("video")[0];
 
-	// TODO
+	// TODO Rimuovere flowplayer
 	/*
 		var test = flowplayer(video);
 		test.shutdown();
 	*/
 
-	var mp4Video = video.querySelector("source").src;
-	var poster = $('.video-js').attr("poster");
+	let mp4Video = video.querySelector("source").src;
+	let poster = $('.video-js').attr("poster");
 
 	video.outerHTML =	`<video id="videoMP4" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
 							controls preload="auto" width="768" height="432"
@@ -157,9 +157,9 @@ function newPlayer() {
 							<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
 						</video>`;
 
-	var myVideo = videojs('videoMP4');
+	let myVideo = videojs('videoMP4');
 
-	myVideo.ready(function(){
+	myVideo.ready(function(){ //TODO separare in JS a parte?
 		this.hotkeys({
 			volumeStep: 0.1,
 			seekStep: 10,
@@ -203,7 +203,8 @@ function newPlayer() {
 
 function hotkeysLabels() {
 
-	var labels = `<div><h3 style="font-size: 21px; margin-top: 21px;" class="cb-title">Hotkeys</h3>
+	let labels = `<div>
+					<h3 style="font-size: 21px; margin-top: 21px;" class="cb-title">Hotkeys</h3>
 					<p class="inline"><span class="keyboard-char">J</span> Slower</p>
 					<p class="inline"><span class="keyboard-char">K</span> Faster</p>
 					<p class="inline"><span class="keyboard-char">L</span> Reset</p>

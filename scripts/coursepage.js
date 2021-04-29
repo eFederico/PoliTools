@@ -1,8 +1,8 @@
-$(document).ready(function() { 
+$(function() {
 
     if (isMaterial()) {
 
-        
+        //TODO
 
     }
 

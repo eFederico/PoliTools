@@ -1,6 +1,6 @@
 const wait = t => new Promise(resolve => setTimeout(resolve, t));
 
-$(document).ready(function() {
+$(function() {
 
     if (!isConverted(document)) {
         fullScreen();

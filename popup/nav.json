@@ -37,6 +37,12 @@
                             },
                             "img": "theme-dark.png",
                             "type": "theme"
+                        },
+                        {
+                            "id": 2,
+                            "file": "disclaimer",
+                            "text": "Temi diversi da quello di default potrebbero causare problemi di visualizzazione del portale.",
+                            "type": "text"
                         }
                     ]
                 },

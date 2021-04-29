@@ -82,12 +82,12 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family: Arial;
+	font-family: Arial, serif;
 	font-size:13px;
 	font-weight:bold;
 	padding:7px 23px;
 	text-decoration:none;
-	text-shadow:0px -1px 0 #2b665e;
+	text-shadow: 0 -1px 0 #2b665e;
 }
 .btn_t1:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #768d87));

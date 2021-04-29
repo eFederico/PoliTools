@@ -1,16 +1,20 @@
-$(document).ready(function() {
+$(function() {
 
 	if(isConverted(document)) {
 		newPlayer();
 		hotkeysLabels();
 	}
 
-    $("body").addClass("virtual-classroom");
-    var modal = `
+	let HTMLbody = $("body");
+
+    HTMLbody.addClass("virtual-classroom");
+
+    //TODO Modal ancora utile?
+    let modal = `
 	<div id="modal-container">
 		<div class="modal-background">
 			<div class="modal">
-				<img style="width: 60px; height: 60px;" src="chrome-extension://`+exID+`/immagini/triangolo.png">
+				<img style="width: 60px; height: 60px;" src="chrome-extension://`+exID+`/immagini/triangolo.png" alt="triangolo">
 				<br><br><br>
 				<p>Questa virtual classroom è in fase di conversione e non può essere scaricata.</p>
 				<svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
@@ -20,16 +24,16 @@ $(document).ready(function() {
 		</div>
     </div>`;
     
-    $("body").append(modal);
+    HTMLbody.append(modal);
     
-    $('#modal-container').click(function(){
+    $('#modal-container').on("click", function(){
 		$(this).addClass('out');
 		$('body').removeClass('modal-active');
 	});
 
     navbar = document.getElementById("navbar_left_menu");
 
-    var downAll = document.createElement("button");
+    let downAll = document.createElement("button");
 	downAll.className="btn btn-primary download-all";
 	downAll.innerHTML = "Download ALL";
 
@@ -55,22 +59,22 @@ function getLessonListDOM()
 
 function populateDownloadButton()
 {
-	var lessonList = getLessonListDOM();
+	let lessonList = getLessonListDOM();
 		
 	if (lessonList){
-        for(var i = 0; i < lessonList.length; i++)
+        for(let i = 0; i < lessonList.length; i++)
         {
-			var li = lessonList[i];
-			var a = li.getElementsByTagName("a")[0];
+			let li = lessonList[i];
+			let a = li.getElementsByTagName("a")[0];
 
-			var btn = document.createElement("button");
+			let btn = document.createElement("button");
 			btn.className="btn btn-primary dwlbtn";
 			btn.id="directdwn_"+i;
 			btn.innerHTML = '<span class="fa fa-download"></span> Download';
 			btn.ass = a;
 			btn.addEventListener("click", function(e) {
 				console.log(e.target);
-				var xmlHttp = new XMLHttpRequest();
+				let xmlHttp = new XMLHttpRequest();
 				xmlHttp.onreadystatechange = function() 
 				{ 
 					if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
@@ -78,7 +82,7 @@ function populateDownloadButton()
 					}
                 }
                 
-				var preurl = "https://didattica.polito.it/portal/pls/portal/";
+				let preurl = "https://didattica.polito.it/portal/pls/portal/";
 
 				xmlHttp.open("GET", preurl+e.target.ass.getAttribute("href"), true);
 				xmlHttp.send(null);   
@@ -92,18 +96,18 @@ function populateDownloadButton()
 
 function callback(response, target) {
 
-	var parser = new DOMParser();
-	var doc = parser.parseFromString(response, "text/html");
+	let parser = new DOMParser();
+	let doc = parser.parseFromString(response, "text/html");
 
 	if (isConverted(doc)) {
 
-		var filename = target.ass.text;
+		let filename = target.ass.text;
 
 		filename = filename.replace(/\//g, "_");
 		filename = filename.replace(/ /g, "_");
 		filename = filename+".mp4";
 
-		var url = doc.getElementsByTagName("source")[0].src;
+		let url = doc.getElementsByTagName("source")[0].src;
 
 		console.log(url);
 
@@ -117,7 +121,7 @@ function callback(response, target) {
 		});
 
 	} else { 
-		var buttonId = 'two';
+		let buttonId = 'two';
  		$('#modal-container').removeAttr('class').addClass(buttonId); // Apro popup se è una BBB
  		$('body').addClass('modal-active');
 	}
@@ -125,8 +129,8 @@ function callback(response, target) {
 
 function newPlayer() {
 
-	var video = $("video")[0];
-	var mp4Video = video.querySelector("source").src;
+	let video = $("video")[0];
+	let mp4Video = video.querySelector("source").src;
 
 	video.outerHTML =	`<video id="videoMP4" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
 							controls preload="auto" width="768" height="432"
@@ -135,7 +139,7 @@ function newPlayer() {
 							<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
 						</video>`
 
-	var myVideo = videojs('videoMP4');
+	let myVideo = videojs('videoMP4');
 
 	myVideo.ready(function(){
 		this.hotkeys({
@@ -181,7 +185,8 @@ function newPlayer() {
 
 function hotkeysLabels() {
 
-	var labels = `<div><h3 style="font-size: 21px; margin-top: 21px;" class="cb-title">Hotkeys</h3>
+	let labels = `<div>
+					<h3 style="font-size: 21px; margin-top: 21px;" class="cb-title">Hotkeys</h3>
 					<p class="inline"><span class="keyboard-char">J</span> Slower</p>
 					<p class="inline"><span class="keyboard-char">K</span> Faster</p>
 					<p class="inline"><span class="keyboard-char">L</span> Reset</p>

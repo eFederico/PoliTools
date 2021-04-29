@@ -23,14 +23,13 @@ body{
 #cb-nav h3 {
 	color: #222;
 	font-size: 30px;
-	padding: 0;
-	padding-right: 20px;
-	
+    padding: 0 20px 0 0;
+
 }
 
 .row {
 	padding-bottom: 15px;
-	margin: 0px;
+	margin: 0;
 }
 	
 .pt-btn {
@@ -83,7 +82,7 @@ body{
 .col-xs-12,
 .col-xs-4,
 .col-xs-8 {
-	padding: 0px;
+	padding: 0;
 }
 
 .border-bottom {

@@ -1,19 +1,19 @@
-$(document).ready(function() { 
+$(function() {
 
     $("body").addClass("casa"); 
 
-    var groups = `<a id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx" href="https://t.me/PoliToGruppiBot" target="_blank" style="margin-top: 10px; content:url(chrome-extension://`+exID+`/immagini/groups-button.png)"></a>`;
+    let groups = `<a id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx" href="https://t.me/PoliToGruppiBot" target="_blank" style="margin-top: 10px; content:url(chrome-extension://`+exID+`/immagini/groups-button.png)"></a>`;
 
     $(".sidebar > div:nth-child(1)").after(groups); // Append telegram groups button
 
-    var matr = $("#div_anagrafica .nav li strong u").html(); // Recupero matricola
+    let matr = $("#div_anagrafica .nav li strong u").html(); // Recupero matricola
 
-    var links =`<div id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx">
+    let links =`<div id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx">
 					<div class="RegionBorderMao">
 						<div style="margin-bottom: 10px; position: relative; left: 0px; right: 2px; border: solid 0px #CCC; height: auto; min-height: 30px; z-index: 0;">
 							<div style="float:left;"><img src="/img/icone_portale/light/mobilita_q.png" width="30"></div>
 							<div class="idplaceholder" style="position: relative; left: 7px; right: 30px; font-family: open sans, Arial; font-weight: bold; font-size:16px; color: #000; ">LINKS</div>
-							<div style="position: relative; height: 1px; background-color:#666; margin-left:40px; margin-right:0px;"></div>
+							<div style="position: relative; height: 1px; background-color:#666; margin-left:40px; margin-right:0;"></div>
 						</div>
 						<div style="text-align:left;">
 							<div class="col-md-12" style="margin:5px;"><a href="http://didattica.polito.it/pls/portal30/sviluppo.vicar.link?p_username=S`+matr+`" class="btn btn-primary">Medie</a></div>
@@ -23,7 +23,7 @@ $(document).ready(function() {
 	
     $(".sidebar > div:nth-child(2)").after(links); // Append box links (medie)
     
-    var psico =`<div id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx">
+    let psico =`<div id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx">
 					<div class="RegionBorderMao">
 						<div style="margin-bottom: 10px; position: relative; left: 0px; right: 2px; border: solid 0px #CCC; height: auto; min-height: 30px; z-index: 0;">
 							<div style="float:left;"><img src="/img/icone_portale/light/collaborazionistudentesche2_q.png" width="30"></div>

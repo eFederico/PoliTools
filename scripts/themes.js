@@ -1,10 +1,10 @@
-var exID = chrome.runtime.id;
+let exID = chrome.runtime.id;
 
 async function getTheme() {
 
 	chrome.storage.local.get(['theme'], function(result) {
         
-        var cssFile;
+        let cssFile;
 
         switch(result.theme) {
 
@@ -22,17 +22,17 @@ async function getTheme() {
     });
 }
 
-var fonts = `<style>
-td,div,a,p,body {
-	font-family: %font% !important;
-}
-</style>`;
+let fonts = `<style>
+				td,div,a,p,body {
+				font-family: %font% !important;
+				}
+			</style>`;
 
 async function getFont() {
 	
 	chrome.storage.local.get(['font'], function(result) {
-		var font = result.font;
-		if (font != "Default" && font != null) {
+		let font = result.font;
+		if (font !== "Default" && font != null) {
 	   		console.log("Font:" + font);
 		   $("html").append(fonts.replace("%font%", font));
 		}
