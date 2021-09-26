@@ -1,4 +1,11 @@
+let urlList;
+let lessonlist;
+let preurl;
+
 $(function() {
+
+	urlList = "";
+	preurl = "https://didattica.polito.it/portal/pls/portal/";
 
 	if(isConverted(document)) {
 		newPlayer();
@@ -7,10 +14,10 @@ $(function() {
 
 	let HTMLbody = $("body");
 
-    HTMLbody.addClass("virtual-classroom");
+	HTMLbody.addClass("virtual-classroom");
 
-    //TODO Modal ancora utile?
-    let modal = `
+	//TODO Modal ancora utile?
+	let modal = `
 	<div id="modal-container">
 		<div class="modal-background">
 			<div class="modal">
@@ -23,32 +30,44 @@ $(function() {
 			</div>
 		</div>
     </div>`;
-    
-    HTMLbody.append(modal);
-    
-    $('#modal-container').on("click", function(){
+
+	HTMLbody.append(modal);
+
+	$('#modal-container').on("click", function(){
 		$(this).addClass('out');
 		$('body').removeClass('modal-active');
 	});
 
-    navbar = document.getElementById("navbar_left_menu");
+	navbar = document.getElementById("navbar_left_menu");
 
-    let downAll = document.createElement("button");
-	downAll.className="btn btn-primary download-all";
+	let jdown = document.createElement("button");
+	jdown.className = "btn btn-primary download-all";
+	jdown.innerHTML = "Export JDownloader List";
+
+	let downAll = document.createElement("button");
+	downAll.className= "btn btn-primary download-all";
 	downAll.innerHTML = "Download ALL";
 
 	downAll.addEventListener("click", function () {
 		if(confirm("Sei sicuro di voler scaricare tutte le virtual classroom già convertite?\nL'operazione può richiedere tempo e non può essere annullata.")) {
-			var lessonList = getLessonListDOM();
-			for (var i = 0; i < lessonList.length; i++) {
+			for (let i = 0; i < lessonlist.length; i++) {
 				document.getElementById("directdwn_" + i).click();
 			}
 		}
 	}, false);
 
-    navbar.insertBefore(downAll, navbar.firstChild);
+	jdown.addEventListener("click", function () {
+		populateList();
+		alert("Link copiati negli appunti! ATTENZIONE! Le lezioni non convertite non verranno aggiunte alla lista\r\nLinks copied to clipboard! Not converted lessons will not be added to the list");
+	}, false)
+
+	navbar.insertBefore(downAll, navbar.firstChild);
+	navbar.insertBefore(jdown, navbar.firstChild);
+
+	lessonlist = getLessonListDOM();
 
 	populateDownloadButton();
+	prevNextButtons();
 
 });
 
@@ -59,12 +78,11 @@ function getLessonListDOM()
 
 function populateDownloadButton()
 {
-	let lessonList = getLessonListDOM();
-		
-	if (lessonList){
-        for(let i = 0; i < lessonList.length; i++)
-        {
-			let li = lessonList[i];
+
+	if (lessonlist){
+		for(let i = 0; i < lessonlist.length; i++)
+		{
+			let li = lessonlist[i];
 			let a = li.getElementsByTagName("a")[0];
 
 			let btn = document.createElement("button");
@@ -73,24 +91,24 @@ function populateDownloadButton()
 			btn.innerHTML = '<span class="fa fa-download"></span> Download';
 			btn.ass = a;
 			btn.addEventListener("click", function(e) {
-				console.log(e.target);
+
 				let xmlHttp = new XMLHttpRequest();
-				xmlHttp.onreadystatechange = function() 
-				{ 
+				xmlHttp.onreadystatechange = function()
+				{
 					if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 						callback(xmlHttp.responseText, e.target);
 					}
-                }
-                
+				}
+
 				let preurl = "https://didattica.polito.it/portal/pls/portal/";
 
 				xmlHttp.open("GET", preurl+e.target.ass.getAttribute("href"), true);
-				xmlHttp.send(null);   
+				xmlHttp.send(null);
 
 			}, false);
 
 			li.insertBefore(btn, li.firstChild);
-        }
+		}
 	}
 }
 
@@ -109,7 +127,6 @@ function callback(response, target) {
 
 		let url = doc.getElementsByTagName("source")[0].src;
 
-		console.log(url);
 
 		chrome.runtime.sendMessage({
 			msg: "PLS_DOWNLOAD",
@@ -120,10 +137,10 @@ function callback(response, target) {
 			}
 		});
 
-	} else { 
+	} else {
 		let buttonId = 'two';
- 		$('#modal-container').removeAttr('class').addClass(buttonId); // Apro popup se è una BBB
- 		$('body').addClass('modal-active');
+		$('#modal-container').removeAttr('class').addClass(buttonId); // Apro popup se è una BBB
+		$('body').addClass('modal-active');
 	}
 }
 
@@ -149,7 +166,7 @@ function newPlayer() {
 			captureDocumentHotkeys: true,
 			enableHoverScroll: true,
 			documentHotkeysFocusElementFilter:  e => e.tagName.toLowerCase() === 'body' ,
-			customKeys: {
+			customKeys: { //TODO sostituire event.which con nuova implementazione
 				slower: {
 					key: function(event) {
 						return (event.which === 74); // J
@@ -185,11 +202,12 @@ function newPlayer() {
 
 function hotkeysLabels() {
 
-	let labels = `<div>
+	let labels = `<div class = labels>
 					<h3 style="font-size: 21px; margin-top: 21px;" class="cb-title">Hotkeys</h3>
 					<p class="inline"><span class="keyboard-char">J</span> Slower</p>
 					<p class="inline"><span class="keyboard-char">K</span> Faster</p>
 					<p class="inline"><span class="keyboard-char">L</span> Reset</p>
+					<br><br>
 				  </div>`;
 
 	$(".video-js-box").append(labels);
@@ -198,4 +216,130 @@ function hotkeysLabels() {
 function isConverted(doc) {
 
 	return doc.getElementById("videoPlayer") != null;
+}
+
+function prevNextButtons() {
+
+	let url = window.location.href;
+	let i;
+
+	for (i = 0; i < lessonlist.length; i++) {
+		let a = lessonlist[i].getElementsByTagName("a");
+
+		if (url === a[0].href) {
+			if (i !== 0) { //non è il primo
+				let prev = lessonlist[i-1].getElementsByTagName("a");
+				createButton(0, 1, prev[0].href);
+			} else {
+				createButton(0, 0, null);
+			}
+			if (i !== (lessonlist.length-1)) { //non è l'ultimo
+				let next = lessonlist[i+1].getElementsByTagName("a");
+				createButton(1, 1, next[0].href);
+			} else {
+				createButton(1, 0, null);
+			}
+			break;
+		}
+	}
+
+	if (i === lessonlist.length)
+		$(".labels").append("<u><b>Choose a lesson from the list on the left to enable prev/next buttons</b></u><br><br>");
+
+
+}
+
+function createButton(prevOrNext, isActive, url) { //Che bottone devo creare e se attivo o disattivo per gestione testa (no prev) e coda (no next)
+
+	let btn = document.createElement("button");
+	btn.className = "btn btn-primary dwlbtn";
+
+	if(prevOrNext) { // next
+		btn.id = "nextBtn";
+		btn.innerHTML = "Next lesson";
+		if (isActive) {
+			btn.addEventListener("click", function (e) {
+				window.location = url;
+			})
+		} else {
+			btn.addEventListener("click", function (e) {
+				alert("Sei all'ultima lezione!\r\nYou're at the last lesson!");
+			})
+		}
+
+	} else {
+		btn.id = "nextBtn";
+		btn.innerHTML = "Previous lesson";
+		if (isActive) {
+			btn.addEventListener("click", function (e) {
+				window.location = url;
+			})
+		} else {
+			btn.addEventListener("click", function (e) {
+				alert("Sei alla prima lezione!\r\nYou're at the first lesson!");
+			})
+		}
+	}
+
+	$(".labels").append(btn);
+
+}
+
+function populateList() {
+
+	if(lessonlist == null)
+		return;
+
+	let populate = 0;
+	let id;
+
+	if(urlList === "")
+		populate = 1;
+	id = "directdwn_";
+
+	if (populate) {
+		for (let i = 0; i <= lessonlist.length; i++) {
+			let btn = document.getElementById(id + i);
+			retrieveLink(btn);
+		}
+	}
+
+}
+
+function retrieveLink(target) {
+
+	if (target == null)
+		return;
+
+	let url = target.ass.getAttribute("href");
+
+	let xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
+			retrieveLinkCallback(xmlHttp.responseText);
+	}
+
+	xmlHttp.open("GET", preurl + url, true);
+	xmlHttp.send(null);
+
+}
+
+function retrieveLinkCallback(response) {
+
+	let parser = new DOMParser();
+	let doc = parser.parseFromString(response, "text/html");
+
+	if(isConverted(doc)) {
+		let url = doc.getElementsByTagName("source")[0].src;
+
+		urlList = urlList + "," + url;
+
+		copyToClipboard(urlList.replaceAll(",", "\n"));
+	}
+
+
+}
+
+function copyToClipboard(content) {
+	navigator.clipboard.writeText(content);
 }

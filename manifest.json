@@ -25,7 +25,8 @@
                 "*://mail.studenti.polito.it/*",
                 "*://*.polito.it/mail/faq.html",
                 "*://*.polito.it/",
-                "*://exercise.polito.it/*"
+                "*://exercise.polito.it/*",
+                "*://crownlabs.polito.it/*"
             ],
             "run_at": "document_start"
         },
@@ -97,6 +98,7 @@
             ],
             "matches": [
                 "*://*.polito.it/playback/*",
+                "*://*.polito.it/pls/portal30/sviluppo.pagina_corso.main?t=3&p_sottopagina=VC_*",
                 "*://*.polito.it/portal/pls/portal/sviluppo.virtual_classroom*",
                 "*://*.polito.it/portal/pls/portal/sviluppo.pagina_corso.main*p_sottopagina=VC*"
             ]
@@ -112,6 +114,15 @@
                 "*://*.polito.it/portal/pls/portal/sviluppo.pagina_corso.main*p_sottopagina=VC*"
             ],
             "all_frames": true
+        },
+        {
+            "js": [
+                "lib/jquery.min.js",
+                "scripts/email.js"
+            ],
+            "matches": [
+                "*://mail.studenti.polito.it/*"
+            ]
         }
     ],
     "description": "Improve your everyday life with this Chrome extension for the teaching portal.",
@@ -139,7 +150,7 @@
         "https://*.polito.it/",
         "http://*.polito.it/"
     ],
-    "version": "0.9.6",
+    "version": "1.0.0",
     "web_accessible_resources": [
         "immagini/*",
         "lib/*",

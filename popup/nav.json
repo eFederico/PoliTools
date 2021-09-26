@@ -126,7 +126,7 @@
                     },
                     "type": "text",
                     "img": "credits.png",
-                    "text": "<br>Proudly coded by Federico Lucido<br>Graphic design by Francesco Masullo<br>Version: 0.9.6"
+                    "text": "<br>Proudly coded by<br>Federico Lucido & Francesco Masullo<br>Version: 1.0.0"
                 }
             ]
         }, {
@@ -155,7 +155,7 @@
                         "en": "Instagram"
                     },
                     "type": "text",
-                    "text": "<br>Che ne dici di seguirci su <a href='https://www.instagram.com/_politools/' target='_blank'><b>Instagram</b></a><br><hr>"
+                    "text": "<br>Seguici anche su <a href='https://www.instagram.com/_politools/' target='_blank'><b>Instagram</b></a><br><hr>"
                 }
 
                 

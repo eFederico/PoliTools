@@ -19,6 +19,9 @@ chrome.runtime.onInstalled.addListener(function() {
             actions: [new chrome.declarativeContent.ShowPageAction()]
       }]);
     });
+
+
+
 });
 
 chrome.webRequest.onBeforeRequest.addListener(
@@ -91,34 +94,8 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-function forceDownload(blob, filename) {
 
-	let a = document.createElement('a');
-	a.download = filename;
-	a.href = blob;
-	document.body.appendChild(a);
-	a.click();
-	a.remove();
 
-	console.log("Downloading: " + filename);
-}
-
-function downloadResource(url, filename) {
-	if (!filename) filename = url.split('\\').pop().split('/').pop();
-
-	fetch(url, {
-		headers: new Headers({
-			'Origin': location.origin
-		}),
-		mode: 'cors'
-	})
-		.then(response => response.blob())
-		.then(blob => {
-			let blobUrl = window.URL.createObjectURL(blob);
-			forceDownload(blobUrl, filename);
-		})
-		.catch(e => console.error(e));
-}
 
 chrome.runtime.onMessageExternal.addListener(
 	function(request, sender, sendResponse) 
@@ -420,7 +397,7 @@ function countFileList(list)
 		}
 		else
 		{
-			var re = countFileList(el.list);
+			let re = countFileList(el.list);
 			count += re.count;
 			size += re.size;
 		}

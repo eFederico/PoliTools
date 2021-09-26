@@ -10,9 +10,9 @@ $(function() {
 
     let links =`<div id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx">
 					<div class="RegionBorderMao">
-						<div style="margin-bottom: 10px; position: relative; left: 0px; right: 2px; border: solid 0px #CCC; height: auto; min-height: 30px; z-index: 0;">
-							<div style="float:left;"><img src="/img/icone_portale/light/mobilita_q.png" width="30"></div>
-							<div class="idplaceholder" style="position: relative; left: 7px; right: 30px; font-family: open sans, Arial; font-weight: bold; font-size:16px; color: #000; ">LINKS</div>
+						<div style="margin-bottom: 10px; position: relative; left: 0; right: 2px; border: solid 0 #CCC; height: auto; min-height: 30px; z-index: 0;">
+							<div style="float:left;"><img src="/img/icone_portale/light/mobilita_q.png" width="30" alt="mobilità"></div>
+							<div class="idplaceholder" style="position: relative; left: 7px; right: 30px; font-family: open sans, Arial, serif; font-weight: bold; font-size:16px; color: #000; ">LINKS</div>
 							<div style="position: relative; height: 1px; background-color:#666; margin-left:40px; margin-right:0;"></div>
 						</div>
 						<div style="text-align:left;">
@@ -25,10 +25,10 @@ $(function() {
     
     let psico =`<div id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx">
 					<div class="RegionBorderMao">
-						<div style="margin-bottom: 10px; position: relative; left: 0px; right: 2px; border: solid 0px #CCC; height: auto; min-height: 30px; z-index: 0;">
-							<div style="float:left;"><img src="/img/icone_portale/light/collaborazionistudentesche2_q.png" width="30"></div>
-							<div class="idplaceholder" style="position: relative; left: 7px; right: 30px; font-family: open sans, Arial; font-weight: bold; font-size:16px; color: #000; ">Disagio?</div>
-							<div style="position: relative; height: 1px; background-color:#666; margin-left:40px; margin-right:0px;"></div>
+						<div style="margin-bottom: 10px; position: relative; left: 0; right: 2px; border: solid 0 #CCC; height: auto; min-height: 30px; z-index: 0;">
+							<div style="float:left;"><img src="/img/icone_portale/light/collaborazionistudentesche2_q.png" width="30" alt="collab_studentesche"></div>
+							<div class="idplaceholder" style="position: relative; left: 7px; right: 30px; font-family: open sans, Arial, serif; font-weight: bold; font-size:16px; color: #000; ">Disagio?</div>
+							<div style="position: relative; height: 1px; background-color:#666; margin-left:40px; margin-right:0;"></div>
 						</div>
 						<div style="text-align:left;">
 							<p>Se provi disagio psicologico nell’affrontare alcune situazioni legate alla tua esperienza universitaria, nell’organizzazione del proprio tempo, dello studio difficoltà di concentrazione, ansia, demotivazione, nonché disagio relazionale contatta lo <a href="http://www.mappaservizi.polito.it/#/l2/s877">sportello di ascolto</a></p>
@@ -41,6 +41,8 @@ $(function() {
 	$(".sidebar").append(psico); // Append box psicologo
 
 	$("#menu_pag_stud > li:last-child").attr("target","_self"); // Link posta sulla stessa tab
+
+
 
 
 });
