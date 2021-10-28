@@ -94,11 +94,12 @@
             "js": [
                 "lib/video.min.js",
                 "lib/videojs.hotkeys.min.js",
-                "scripts/virtualclassroom.js"  
+                "scripts/virtualclassroom.js"
             ],
             "matches": [
                 "*://*.polito.it/playback/*",
                 "*://*.polito.it/pls/portal30/sviluppo.pagina_corso.main?t=3&p_sottopagina=VC_*",
+                "*://*.polito.it/pls/portal30/sviluppo.pagina_corso.main*",
                 "*://*.polito.it/portal/pls/portal/sviluppo.virtual_classroom*",
                 "*://*.polito.it/portal/pls/portal/sviluppo.pagina_corso.main*p_sottopagina=VC*"
             ]
