@@ -117,7 +117,7 @@ async function newPlayer() {
     let video = $("video")[0];
     let source = video.src;
 
-    let videoId = "videoMP4_" + Math.floor(Math.random() * 100000);
+    let videoId = "videoMP4_" + Math.floor(Math.random() * 10000000);
 
     video.outerHTML = `<video id="` + videoId + `" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
 							controls preload="auto" width="768" height="432"
