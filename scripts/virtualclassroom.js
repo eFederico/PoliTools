@@ -112,7 +112,7 @@ function sleep(ms) {
 }
 
 async function newPlayer() {
-    await sleep(1000);
+    await sleep(300);
 
     let video = $("video")[0];
     let source = video.src;
