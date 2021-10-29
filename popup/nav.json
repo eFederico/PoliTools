@@ -1,0 +1,175 @@
+{ 
+    "home":  [
+        {
+            "file": "graphics",
+            "name": {
+                "it": "Aspetto",
+                "en": "Graphics"
+            },
+            "type": "dir",
+            "img": "apperance.png",
+            "contents": [
+                {
+                    "file": "themes",
+                    "name": {
+                        "it": "Temi",
+                        "en": "Themes"
+                    },
+                    "type": "dir",
+                    "img": "themes.png",
+                    "contents": [
+                        {
+                            "id": 0,
+                            "file": "default",
+                            "name": {
+                                "it": "Default",
+                                "en": "Default"
+                            },
+                            "img": "theme-default.png",
+                            "type": "theme"
+                        },
+                        {
+                            "id": 1,
+                            "file": "dark",
+                            "name": {
+                                "it": "Scuro",
+                                "en": "Dark"
+                            },
+                            "img": "theme-dark.png",
+                            "type": "theme"
+                        },
+                        {
+                            "id": 2,
+                            "file": "disclaimer",
+                            "text": "Temi diversi da quello di default potrebbero causare problemi di visualizzazione del portale.",
+                            "type": "text"
+                        }
+                    ]
+                },
+                {
+                    "file": "fonts",
+                    "name": {
+                        "it": "Font",
+                        "en": "Fonts"
+                    },
+                    "type": "dir",
+                    "img": "fonts.png",
+                    "contents": [
+                        {
+                            "id": 0,
+                            "file": "default",
+                            "name": {
+                                "it": "Default",
+                                "en": "Default"
+                            },
+                            "img": "theme-default.png",
+                            "text": "open sans, Arial, Helvetica, sans-serif",
+                            "type": "font"
+                        }, 
+                        {
+                            "id": 1,
+                            "file": "dos",
+                            "name": {
+                                "it": "Terminale",
+                                "en": "Terminal"
+                            },
+                            "img": "theme-default.png",
+                            "text": "Dos",
+                            "type": "font"
+                        },
+                        {
+                            "id": 3,
+                            "file": "comicsans",
+                            "name": {
+                                "it": "Comic Sans",
+                                "en": "Comic Sans"
+                            },
+                            "img": "theme-default.png",
+                            "text": "Comic Sans",
+                            "type": "font"
+                        }
+                    ]
+                }
+            ]
+        }, {
+            "file": "settings",
+            "name": {
+                "it": "Impostazioni",
+                "en": "Settings"
+            },
+            "type": "dir",
+            "img": "settings.png",
+            "contents": [ 
+                {
+                    "file": "profilephoto",
+                    "name": {
+                        "it": "",
+                        "en": "Hide profile picture"
+                    },
+                    "type": "option",
+                    "text": "Nascondi foto profilo"
+                },
+                {
+                    "file": "anothertabmail",
+                    "name": {
+                        "it": "",
+                        "en": "Open Email on new Tab"
+                    },
+                    "type": "option",
+                    "text": "Apri Posta su nuova Tab"
+                },
+                {
+                    "file": "credits",
+                    "name": {
+                        "it": "Crediti",
+                        "en": "Credits"
+                    },
+                    "type": "text",
+                    "img": "credits.png",
+                    "text": "<br>Proudly coded by<br>Federico Lucido & Francesco Masullo<br>Version: 1.0.0"
+                }
+            ]
+        }, {
+            "file": "feedback",
+            "name": {
+                "it": "Feedback",
+                "en": "Feedback"
+            },
+            "type": "dir",
+            "img": "feedback.png",
+            "contents": [
+                {
+                    "file": "telegram",
+                    "name": {
+                        "it": "<b>Gruppo telegram</b>",
+                        "en": "<b>Telegram group</b>"
+                    },
+                    "type": "link",
+                    "text": "Dacci un prezioso feedback sull'estensione:",
+                    "link": "https://t.me/joinchat/BXW0uRM5t-ZTpmMdstz_bA"
+                },
+                {
+                    "file": "instagram",
+                    "name": {
+                        "it": "Instagram",
+                        "en": "Instagram"
+                    },
+                    "type": "text",
+                    "text": "<br>Seguici anche su <a href='https://www.instagram.com/_politools/' target='_blank'><b>Instagram</b></a><br><hr>"
+                }
+
+                
+            ]
+        }, {
+            "file": "tutorial",
+            "name": {
+                "it": "Guida",
+                "en": "Guide"
+            },
+            "type": "button",
+            "img": "guide.png",
+            "link": "/docs/Politools-guida.pdf"
+        }
+
+    ]
+ }
