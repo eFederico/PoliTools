@@ -1,10 +1,12 @@
 let urlList;
 let lessonlist;
 let preurl;
+let seqVideoId;
 
 $(function () {
 
     urlList = "";
+    seqVideoId = 0;
     preurl = "https://didattica.polito.it/portal/pls/portal/";
 
 
@@ -59,7 +61,7 @@ $(function () {
     }, false);
 
     jdown.addEventListener("click", function () {
-        populateList();
+        copyToClipboard(urlList);
         alert("Link copiati negli appunti! ATTENZIONE! Le lezioni non convertite non verranno aggiunte alla lista\r\nLinks copied to clipboard! Not converted lessons will not be added to the list");
     }, false)
 
@@ -69,7 +71,6 @@ $(function () {
     lessonlist = navbar.getElementsByClassName("h5");
 
     populateDownloadButton();
-    prevNextButtons();
 
 });
 
@@ -81,7 +82,6 @@ function populateDownloadButton() {
             let a = li.getElementsByTagName("a")[0];
 
             a.addEventListener("click", function () {
-                console.log(i);
                 newPlayer(i);
             })
 
@@ -94,6 +94,8 @@ function populateDownloadButton() {
             const obj = JSON.parse(attribute);
             let url = obj.embed_url; // Url preso dal JSON all'interno dell'attributo data-obj
             let filename = obj.titolo_lez + ".mp4";
+
+            urlList += url + '\n';
 
             btn.addEventListener("click", function () {
 
@@ -117,7 +119,7 @@ async function newPlayer() {
     let video = $("video")[0];
     let source = video.src;
 
-    let videoId = "videoMP4_" + Math.floor(Math.random() * 10000000);
+    let videoId = "videoMP4_" + seqVideoId++;
 
     video.outerHTML = `<video id="` + videoId + `" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
 							controls preload="auto" width="768" height="432"
@@ -173,8 +175,6 @@ async function newPlayer() {
 
 function hotkeysLabels() {
 
-    console.log("HOTKEYS");
-
     let labels = `<div class = labels>
 					<h3 style="font-size: 21px; margin-top: 21px;" class="cb-title">Hotkeys</h3>
 					<p class="inline"><span class="keyboard-char">J</span> Slower</p>
@@ -192,79 +192,14 @@ function isConverted(doc) {
 
 }
 
-function prevNextButtons() {
-
-    let url = window.location.href;
-    let i;
-
-    for (i = 0; i < lessonlist.length; i++) {
-        let a = lessonlist[i].getElementsByTagName("a");
-
-        if (url === a[0].href) {
-            if (i !== 0) { //non è il primo
-                let prev = lessonlist[i - 1].getElementsByTagName("a");
-                createButton(0, 1, prev[0].href);
-            } else {
-                createButton(0, 0, null);
-            }
-            if (i !== (lessonlist.length - 1)) { //non è l'ultimo
-                let next = lessonlist[i + 1].getElementsByTagName("a");
-                createButton(1, 1, next[0].href);
-            } else {
-                createButton(1, 0, null);
-            }
-            break;
-        }
-    }
-
-    if (i === lessonlist.length)
-        $(".labels").append("<u><b>Choose a lesson from the list on the left to enable prev/next buttons</b></u><br><br>");
-
-
-}
-
-function createButton(prevOrNext, isActive, url) { //Che bottone devo creare e se attivo o disattivo per gestione testa (no prev) e coda (no next)
-
-    let btn = document.createElement("button");
-    btn.className = "btn btn-primary dwlbtn";
-
-    if (prevOrNext) { // next
-        btn.id = "nextBtn";
-        btn.innerHTML = "Next lesson";
-        if (isActive) {
-            btn.addEventListener("click", function () {
-                window.location = url;
-            })
-        } else {
-            btn.addEventListener("click", function () {
-                alert("Sei all'ultima lezione!\r\nYou're at the last lesson!");
-            })
-        }
-
-    } else {
-        btn.id = "nextBtn";
-        btn.innerHTML = "Previous lesson";
-        if (isActive) {
-            btn.addEventListener("click", function () {
-                window.location = url;
-            })
-        } else {
-            btn.addEventListener("click", function () {
-                alert("Sei alla prima lezione!\r\nYou're at the first lesson!");
-            })
-        }
-    }
-
-    $(".labels").append(btn);
-
-}
-
 function populateList() {
 
     if (lessonlist == null)
         return;
 
-    let populate = 0;
+    console.log(lessonlist);
+
+    /*let populate = 0;
     let id;
 
     if (urlList === "")
@@ -276,41 +211,7 @@ function populateList() {
             let btn = document.getElementById(id + i);
             retrieveLink(btn);
         }
-    }
-
-}
-
-function retrieveLink(target) {
-
-    if (target == null)
-        return;
-
-    let url = target.ass.getAttribute("href");
-
-    let xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
-            retrieveLinkCallback(xmlHttp.responseText);
-    }
-
-    xmlHttp.open("GET", preurl + url, true);
-    xmlHttp.send(null);
-
-}
-
-function retrieveLinkCallback(response) {
-
-    let parser = new DOMParser();
-    let doc = parser.parseFromString(response, "text/html");
-
-    if (isConverted(doc)) {
-        let url = doc.getElementsByTagName("source")[0].src;
-
-        urlList = urlList + "," + url;
-
-        copyToClipboard(urlList.replaceAll(",", "\n"));
-    }
-
+    }*/
 
 }
 

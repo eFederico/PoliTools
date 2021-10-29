@@ -41,6 +41,7 @@ body.virtual-classroom #portlet_corso_container .row .col-md-8 {
 .btn-primary {
 	background-color: #FF9800 !important;
 	color: #fff !important;
+	margin-top: 12px;
 }
 
 .cb-title {
