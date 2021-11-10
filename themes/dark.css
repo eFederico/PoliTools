@@ -1,0 +1,203 @@
+img[alt="Politecnico di Torino Logo"] {
+	content:url("chrome-extension://__MSG_@@extension_id__/immagini/logologin.png");
+}
+
+#imgOrari {
+	content:url("chrome-extension://__MSG_@@extension_id__/immagini/orologio.png");
+	width: 23px;
+	height: 23px;
+	margin: 0 10px;
+}
+
+body >table >tbody> tr> td> table> tbody >tr> td> div >img {
+	content:url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png");
+}
+
+#topnav,
+.c_logoPoli2 {
+	background: url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png") no-repeat !important;
+}
+
+html body {
+	background: #222 !important;
+}
+
+.link_img:hover,
+.btn.btn-default.dropdown-toggle,
+#nav_menu,
+.c_strisciaArancione,
+.navbar-default,
+#navbar_mainazi li > a,
+.navbar-default .navbar-nav>li>a {
+	background-color: #000 !important;
+}
+
+.minimal #taskbar a.button-selected,
+.minimal #taskbar a:hover,
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
+	color: #ffffff !important;
+	background-color: #DD8600 !important;
+}
+
+.message.unread td,
+.message.unread span,
+.policorpolink,
+table > tbody > tr > td > a,
+p > a,
+a[href^="mailto"] {
+	color: #DD8600 !important;
+}
+
+.records-table tr.selected td a, .records-table tr.selected td span,
+.selected td {
+    background-color: #DD8600 !important;
+}
+
+.webkit #messagelist tr td,
+.webkit #messagelist tr td a,
+.webkit #messagelist tr th,
+.webkit #messagelist tr th a,
+#messagelistfooter, #messagelistfooter span, #message.statusbar, .listbox .boxfooter, .listbox .boxfooter span,
+.content {
+	background-color: #333;
+	color: white !important;
+	text-shadow: none !important;
+}
+
+.nav-sidebar > .active > a,
+.breadcrumb {
+	background-color: #1c1c1c !important;
+}
+
+
+#materialeDiv > div,
+#directorylist li.addressbook.selected a,
+#settings-sections span.listitem a,
+.listing tbody td,
+.uibox,
+.panel-body,
+#main p a,
+.c_relative > div > span,
+.ui-tabs-anchor,
+#messagepreview,
+#mailboxcontainer,
+#mailboxlist li.mailbox a,
+.wrapper,
+.well,
+.panel.panel-primary,
+.nav.nav-sidebar.ng-scope,
+.row,
+.container-fluid,
+.container-fluid > div > div,
+.container-fluid > div > div:nth-child(2),
+#note_accordion > div,
+.RegionHeaderColor {
+	background-color: #222;
+	color: white !important;
+}
+
+form .bg-info,
+h4,
+h4 a,
+.sid_home_button,
+.paginate_button a,
+.form-control,
+.ui-accordion-header,
+.btn,
+#idSeaRes,
+.bg-info.polinota,
+.uibox .boxtitle,
+body > table > tbody > tr > td,
+.ui-tabs-panel,
+#topnav,
+.policorpo.bachecaStudHead,
+.c_titleBar,
+div.RegionBorderMao,
+.table,
+.table>tbody>tr, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th,
+table>tbody>tr, table>tbody>tr>td, table>tbody>tr>th, table>tfoot>tr>td, table>tfoot>tr>th, table>thead>tr>td, table>thead>tr>th {
+	background-color: #222 !important;
+	color: white !important;
+	border-color: #444 !important;
+}
+
+body > nav > .container-fluid,
+#navbar_videolez,
+.bg-info,
+.testo_img {
+	background-color: #000 !important;
+}
+
+.argoLink,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-nav > li:hover a,
+table>tbody>tr:hover>td>a,
+table>tbody>tr:hover>td>a>i,
+table>tbody>tr:hover>td>a>span,
+.btn-info,
+.list-help-item > a > span:last-child,
+.langs,
+.selected td .text-warning,
+.idplaceholder,
+.exlegend,
+.h6 a,
+.h5 a,
+p {
+	color: white !important;
+}
+
+.calendar_poli_event_inner,
+.calendar_poli_corner_inner,
+.calendar_poli_rowheader_inner,
+.calendar_poli_colheader_inner {
+	background-color: #ddd !important;
+	background-image: none;
+	color: #333;
+}
+
+.calendar_poli_cell_inner {
+	border-right: 1px solid #DD860054;
+    border-bottom: 1px solid #DD860054;
+    background: #222 !important;
+}
+.RegionBorderMao > div:nth-child(1) > div:nth-child(4),
+.RegionBorderMao > div:nth-child(5) > div:nth-child(4),
+#note_accordion p {
+	color: #000 !important;
+}
+
+.bg-warning  {
+	background-color: #880000 !important;
+}
+
+.container-fluid > div:nth-child(4) {
+	background-color: #444 !important;
+}
+
+div.RegionBorderMao {
+	border: 1px solid #444 !important;
+}
+
+#foto_colsx {
+	margin-top: 20px;
+	border-radius: 20px;
+}
+
+#portlet_container {
+	padding-top: 20px;
+}
+
+.table>tbody>tr>td {
+	padding: 5px !important;
+}
+
+#portlet_container>#container>div>.RegionBorderMao {
+	padding: 0 !important;
+}
+
+.toolbar a.button {
+	text-shadow: none;
+	color: white;
+}
