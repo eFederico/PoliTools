@@ -42,7 +42,18 @@ $(function() {
 
 	$("#menu_pag_stud > li:last-child").attr("target","_self"); // Link posta sulla stessa tab
 
+	Array.from(document.getElementsByTagName('span'))
+        .forEach( p => 
+            {
+                
+                if(p.style.backgroundColor != "undefined") 
+                    p.style.backgroundColor = "transparent";
 
+                if(p.style.color != "white"){
+                    //p.style.color = "white"; Da modificare con un flag sul tema
+                }
+
+            });
 
 
 });

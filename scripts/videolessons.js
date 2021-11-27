@@ -14,11 +14,11 @@ $(function () {
     lessonlist = navbar.getElementsByClassName("h5");
 
 
-    newPlayer();
-    hotkeysLabels();
-    downloadAllButtons();
-    prevNextButtons();
-    populateDownloadButton();
+    //newPlayer();
+    //hotkeysLabels();
+    //downloadAllButtons();
+    //prevNextButtons();
+    //populateDownloadButton();
 
 });
 
