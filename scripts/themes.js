@@ -1,24 +1,27 @@
 let exID = chrome.runtime.id;
+let themesApi = "chrome-extension://" + exID + "/themes/themes.json";
 
 async function getTheme() {
 
 	chrome.storage.local.get(['theme'], function(result) {
-        
-        let cssFile;
+		fetch(themesApi)
+			.then(response => response.json())
+  			.then(themes => { 
+				  theme = themes.themes[result.theme];
+				  
+				  //Add custom css files
+				  theme.css.forEach( cssFile => {
+					customCss = "<link rel='stylesheet' type='text/css' href='chrome-extension://"+exID+"/themes/"+ theme.name + "/" + cssFile + "'/>";
+					$('head').append(customCss);
+				  });
+				  
+				  //Add custom js scripts
+				  theme.js.forEach( jsFile => {
+					customJs = "<script type='text/javascript' src='chrome-extension://"+exID+"/themes/"+ theme.name + "/js/" + jsFile + "'/>";
+					$('head').append(customJs);
+				  });
 
-        switch(result.theme) {
-
-			case 0:
-            cssFile = "default"; 
-			break;
-
-			case 1: 
-			cssFile = "dark";
-			
-        }
-        
-        $('head').append(`<link rel="stylesheet" type="text/css" href="chrome-extension://`+exID+`/themes/`+cssFile+`.css">`);
-
+			  });
     });
 }
 

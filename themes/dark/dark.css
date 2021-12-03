@@ -245,7 +245,7 @@ div.RegionBorderMao {
 	border-top: 1px solid #DD8600 !important;
 }
 
-.modal-header {
+.modal-header, .modal-title {
     padding: 15px;
     border-bottom: 1px solid #DD8600 !important;
     background: #DD8600;
@@ -255,7 +255,19 @@ div.RegionBorderMao {
 	color: white !important;
 }
 
-.wc-time-header-cell {
+.wc-time-header-cell, .card-default, .card-header {
     color: #DD8600 !important;
     background-color: #222 !important;
+}
+
+.italia-it-button-size-m {
+    width: 240px !important;
+}
+
+#myModalLabel {
+    background-color: #DD8600 !important;
+}
+
+#chat-messages {
+    background: #222;
 }
