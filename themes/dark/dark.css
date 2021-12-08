@@ -98,7 +98,7 @@ a[href^="mailto"] {
 	color: white !important;
 }
 
-form .bg-info,
+form .bg-info:not(.label),
 h4,
 h4 a,
 .sid_home_button,
@@ -125,7 +125,7 @@ table>tbody>tr, table>tbody>tr>td, table>tbody>tr>th, table>tfoot>tr>td, table>t
 
 body > nav > .container-fluid,
 #navbar_videolez,
-.bg-info,
+.bg-info:not(.label),
 .testo_img {
 	background-color: #000 !important;
 }
@@ -168,7 +168,7 @@ p {
 	color: #000 !important;
 }
 
-.bg-warning  {
+.bg-warning:not(.label)  {
 	background-color: #880000 !important;
 }
 
@@ -202,7 +202,7 @@ div.RegionBorderMao {
 	color: white;
 }
 
-.bg-success {
+.bg-success:not(.label) {
     background-color: #DD8600 !important;
 }
 
@@ -271,3 +271,26 @@ div.RegionBorderMao {
 #chat-messages {
     background: #222;
 }
+
+#loading_poliTools {
+	position: fixed;
+	display: block;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-align: center;
+	background-color: #222;
+	z-index: 99;
+  }
+  
+#loading-image {
+	position: center;
+	top: 100px;
+	left: 240px;
+	z-index: 100;
+}
+.loader{
+	color: white;
+}
+
