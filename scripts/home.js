@@ -2,9 +2,9 @@ $(function() {
 
     $("body").addClass("casa"); 
 
-    let groups = `<a id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx" href="https://t.me/PoliToGruppiBot" target="_blank" style="margin-top: 10px; content:url(chrome-extension://`+exID+`/immagini/groups-button.png)"></a>`;
-
-    $(".sidebar > div:nth-child(1)").after(groups); // Append telegram groups button
+    // let groups = `<a id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx" href="https://t.me/PoliToGruppiBot" target="_blank" style="margin-top: 10px; content:url(chrome-extension://`+exID+`/immagini/groups-button.png)"></a>`;
+    let skeeep = `<a id="div_colsx" class="col-sm-12 col-md-12 portlet_colsx" href="https://weee.link/skeeep" target="_blank" style="margin-top: 10px; content:url(chrome-extension://`+exID+`/immagini/skeeep-button.png)"></a>`;
+    $(".sidebar > div:nth-child(1)").after(skeeep); // Append skeeep button
 
     let matr = $("#div_anagrafica .nav li strong u").html(); // Recupero matricola
 
