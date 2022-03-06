@@ -3,6 +3,7 @@ let lessonlist;
 let preurl;
 let seqVideoId;
 
+/*
 $(function () {
 
     urlList = "";
@@ -65,14 +66,17 @@ $(function () {
         alert("Link copiati negli appunti! ATTENZIONE! Le lezioni non convertite non verranno aggiunte alla lista\r\nLinks copied to clipboard! Not converted lessons will not be added to the list");
     }, false)
 
-    navbar.insertBefore(downAll, navbar.firstChild);
-    navbar.insertBefore(jdown, navbar.firstChild);
-
+    if(typeof navbar.firstChild != "undefined"){
+        navbar.insertBefore(downAll, navbar.firstChild);
+        navbar.insertBefore(jdown, navbar.firstChild);
+    }
+    
     lessonlist = navbar.getElementsByClassName("h5");
 
     populateDownloadButton();
 
 });
+*/
 
 function populateDownloadButton() {
 

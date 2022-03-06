@@ -98,7 +98,7 @@ a[href^="mailto"] {
 	color: white !important;
 }
 
-form .bg-info,
+form .bg-info:not(.label),
 h4,
 h4 a,
 .sid_home_button,
@@ -125,7 +125,7 @@ table>tbody>tr, table>tbody>tr>td, table>tbody>tr>th, table>tfoot>tr>td, table>t
 
 body > nav > .container-fluid,
 #navbar_videolez,
-.bg-info,
+.bg-info:not(.label),
 .testo_img {
 	background-color: #000 !important;
 }
@@ -168,7 +168,7 @@ p {
 	color: #000 !important;
 }
 
-.bg-warning  {
+.bg-warning:not(.label)  {
 	background-color: #880000 !important;
 }
 
@@ -201,3 +201,96 @@ div.RegionBorderMao {
 	text-shadow: none;
 	color: white;
 }
+
+.bg-success:not(.label) {
+    background-color: #DD8600 !important;
+}
+
+.clearfix{
+    background: #222 !important;
+}
+
+.alert {
+    color: #DD8600 !important;
+    background-color: #222 !important;
+    border-color: #DD8600 !important;
+}
+
+.panel-info>.panel-heading {
+    color: #DD8600 !important;
+    background-color: #222 !important;
+}
+
+.panel-info {
+    border-color: #DD8600 !important;
+}
+
+.panel {
+	background-color: #222 !important;
+}
+
+.policorpo {
+    font-size: 13px;
+    color: white;
+	font-family: open sans, Arial, Helvetica, sans-serif;
+}
+
+.modal-body {
+    background: #222;
+	border-top: 1px solid #DD8600 !important;
+}
+
+.modal-footer {
+    background: #DD8600 !important;
+	border-top: 1px solid #DD8600 !important;
+}
+
+.modal-header, .modal-title {
+    padding: 15px;
+    border-bottom: 1px solid #DD8600 !important;
+    background: #DD8600;
+}
+
+.movie-screen{
+	color: white !important;
+}
+
+.wc-time-header-cell, .card-default, .card-header {
+    color: #DD8600 !important;
+    background-color: #222 !important;
+}
+
+.italia-it-button-size-m {
+    width: 240px !important;
+}
+
+#myModalLabel {
+    background-color: #DD8600 !important;
+}
+
+#chat-messages {
+    background: #222;
+}
+
+#loading_poliTools {
+	position: fixed;
+	display: block;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-align: center;
+	background-color: #222;
+	z-index: 99;
+  }
+  
+#loading-image {
+	position: center;
+	top: 100px;
+	left: 240px;
+	z-index: 100;
+}
+.loader{
+	color: white;
+}
+

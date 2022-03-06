@@ -1,0 +1,22 @@
+{
+    "themes" : [
+        {
+            "name": "default",
+            "description": "Default Polito theme",
+            "css": [ "default.css"],
+            "js": [],
+            "author": "Polito",
+            "img": "theme-default.png",
+            "type": "theme"
+        },
+        {
+            "name": "dark",
+            "description": "Dark Polito theme",
+            "css": [ "dark.css" ],
+            "js": [ "dark.js" ],
+            "author": "PoliTools",
+            "img": "theme-dark.png",
+            "type": "theme"
+        }
+    ]
+}
