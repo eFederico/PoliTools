@@ -1,15 +1,14 @@
-let urlList;
-let lessonlist;
+let urlList = [];
+let lessonlist = [];
 let preurl;
 let seqVideoId;
+let navbarAll = [];
 
-/*
-$(function () {
+$(function() {
 
-    urlList = "";
+    urlList = [];
     seqVideoId = 0;
     preurl = "https://didattica.polito.it/portal/pls/portal/";
-
 
     if (isConverted(document)) {
         newPlayer();
@@ -38,83 +37,109 @@ $(function () {
 
     HTMLbody.append(modal);
 
-    $('#modal-container').on("click", function () {
+    $('#modal-container').on("click", function() {
         $(this).addClass('out');
         $('body').removeClass('modal-active');
     });
 
-    navbar = document.querySelector('[id^="lessonList_"]');
+    navbarAll = document.querySelectorAll('[id^="lessonList_"]');
+    // questo server per le diverse sezioni di VirtualClassroom
 
-    let jdown = document.createElement("button");
-    jdown.className = "btn btn-primary download-all";
-    jdown.innerHTML = "Export JDownloader List";
+    for (let i = 0; i < navbarAll.length; i++) {
+        navbar = navbarAll[i]
+        let jdown = document.createElement("button");
+        jdown.className = "btn btn-primary download-all";
+        jdown.innerHTML = "Export JDownloader List";
 
-    let downAll = document.createElement("button");
-    downAll.className = "btn btn-primary download-all";
-    downAll.innerHTML = "Download ALL";
+        let downAll = document.createElement("button");
+        downAll.className = "btn btn-primary download-all";
+        downAll.innerHTML = "Download ALL";
 
-    downAll.addEventListener("click", function () {
-        if (confirm("Sei sicuro di voler scaricare tutte le virtual classroom già convertite?\nL'operazione può richiedere tempo e non può essere annullata.")) {
-            for (let i = 0; i < lessonlist.length; i++) {
-                document.getElementById("directdwn_" + i).click();
+        downAll.addEventListener("click", function() {
+            if (confirm("Sei sicuro di voler scaricare tutte (" + lessonlist[i].length + ") le virtual classroom già convertite?\nL'operazione può richiedere tempo e non può essere annullata.")) {
+                for (let j = 0; j < lessonlist[i].length; j++) {
+                    let d = document.getElementById("directdwn_" + i + "_" + j)
+					console.log(j+ " downloaded")
+					d.click();
+                }
             }
-        }
-    }, false);
+        }, false);
 
-    jdown.addEventListener("click", function () {
-        copyToClipboard(urlList);
-        alert("Link copiati negli appunti! ATTENZIONE! Le lezioni non convertite non verranno aggiunte alla lista\r\nLinks copied to clipboard! Not converted lessons will not be added to the list");
-    }, false)
+        jdown.addEventListener("click", function() {
+            let list = urlList[i].join("\n");
+            copyToClipboard(list);
+            alert("Link copiati negli appunti! ATTENZIONE! Le lezioni non convertite non verranno aggiunte alla lista\r\nLinks copied to clipboard! Not converted lessons will not be added to the list");
+        }, false)
 
-    if(typeof navbar.firstChild != "undefined"){
         navbar.insertBefore(downAll, navbar.firstChild);
         navbar.insertBefore(jdown, navbar.firstChild);
-    }
-    
-    lessonlist = navbar.getElementsByClassName("h5");
 
-    populateDownloadButton();
+        lessonlist.push(navbar.getElementsByClassName("h5"));
+		urlList.push([]);
+
+        populateDownloadButton(i);
+    }
 
 });
-*/
 
-function populateDownloadButton() {
-
-    if (lessonlist) {
-        for (let i = 0; i < lessonlist.length; i++) {
-            let li = lessonlist[i];
+function populateDownloadButton(index) {
+	j = index;
+    if (lessonlist[j]) {
+        for (let i = 0; i < lessonlist[j].length; i++) {
+            let li = lessonlist[j][i];
             let a = li.getElementsByTagName("a")[0];
 
-            a.addEventListener("click", function () {
+            $(li).on("click", "a", function() {
+                console.log("clicked!");
                 newPlayer(i);
-            })
+            });
 
             let btn = document.createElement("button");
             btn.className = "btn btn-primary dwlbtn";
-            btn.id = "directdwn_" + i;
+            btn.id = "directdwn_" + j + "_" + i;
             btn.innerHTML = '<span class="fa fa-download"></span> Download';
             btn.ass = a;
-            let attribute = a.getAttribute("data-obj");
-            const obj = JSON.parse(attribute);
-            let url = obj.embed_url; // Url preso dal JSON all'interno dell'attributo data-obj
-            let filename = obj.titolo_lez + ".mp4";
+            bbbid = a.getAttribute("data-bbb-id");
+            p_id_inc = a.getAttribute("data-id_inc");
+            p_id_inc_prov = a.getAttribute("data-id_inc-prov");
 
-            urlList += url + '\n';
+            $.ajax({
+                data: {
+                    "p_bbbid": bbbid,
+                    "p_id_inc": p_id_inc,
+                    "p_id_inc_prov": p_id_inc_prov,
+                },
+                type: "POST",
+                url: "https://didattica.polito.it/pls/portal30/sviluppo.virtual_classroom_dev.getVCTpl",
+				index: j,
+                success: function(r) {
+                    el = document.createElement('html');
+                    el.innerHTML = r;
 
-            btn.addEventListener("click", function () {
+                    let url = el.querySelector("source").src;
+                    // get url with ajax
+                    let filename = el.querySelector("h3").innerHTML + ".mp4";
 
-                downloadFile(url, filename);
+                    urlList[this.index].push(url);
 
-            }, false);
+                    btn.addEventListener("click", function() {
 
-            li.insertBefore(btn, li.firstChild);
+                        downloadFile(url, filename);
+
+                    }, false);
+
+                    li.insertBefore(btn, li.firstChild);
+                    var res = r
+                    //$("#videoPlayerDiv_245793").html(r);
+                }
+            });
         }
     }
 
 }
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve=>setTimeout(resolve, ms));
 }
 
 async function newPlayer() {
@@ -122,6 +147,10 @@ async function newPlayer() {
 
     let video = $("video")[0];
     let source = video.src;
+    if (source == null || source == "") {
+        let src = video.children[0];
+        source = src.src;
+    }
 
     let videoId = "videoMP4_" + seqVideoId++;
 
@@ -134,7 +163,7 @@ async function newPlayer() {
 
     let myVideo = videojs(videoId);
 
-    myVideo.ready(function () {
+    myVideo.ready(function() {
 
         this.hotkeys({
             volumeStep: 0.1,
@@ -142,33 +171,37 @@ async function newPlayer() {
             enableModifiersForNumbers: false,
             captureDocumentHotkeys: true,
             enableHoverScroll: true,
-            documentHotkeysFocusElementFilter: e => e.tagName.toLowerCase() === 'body',
-            customKeys: { //TODO sostituire event.which con nuova implementazione
+            documentHotkeysFocusElementFilter: e=>e.tagName.toLowerCase() === 'body',
+            customKeys: {
+                //TODO sostituire event.which con nuova implementazione
                 slower: {
-                    key: function (event) {
-                        return (event.which === 74); // J
+                    key: function(event) {
+                        return (event.which === 74);
+                        // J
                     },
-                    handler: function () {
+                    handler: function() {
                         let curr = myVideo.playbackRate();
                         if (curr > 1)
                             myVideo.playbackRate((curr - 0.1).toFixed(1));
                     }
                 },
                 faster: {
-                    key: function (event) {
-                        return (event.which === 75); // K
+                    key: function(event) {
+                        return (event.which === 75);
+                        // K
                     },
-                    handler: function () {
+                    handler: function() {
                         let curr = myVideo.playbackRate();
                         if (curr < 3)
                             myVideo.playbackRate((curr + 0.1).toFixed(1));
                     }
                 },
                 reset: {
-                    key: function (event) {
-                        return (event.which === 76); // L
+                    key: function(event) {
+                        return (event.which === 76);
+                        // L
                     },
-                    handler: function () {
+                    handler: function() {
                         myVideo.playbackRate(1);
                     }
                 }
@@ -220,7 +253,6 @@ function populateList() {
 }
 
 function downloadFile(url, filename) {
-
     chrome.runtime.sendMessage({
         msg: "PLS_DOWNLOAD",
         data: {
@@ -231,9 +263,6 @@ function downloadFile(url, filename) {
     });
 }
 
-
 function copyToClipboard(content) {
     navigator.clipboard.writeText(content);
 }
-
-
