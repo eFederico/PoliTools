@@ -9,7 +9,8 @@ chrome.runtime.onInstalled.addListener(function() {
     });
 
     //aggiungo listener per controllare cambiamenti su didattica.polito.it
-
+    // TODO: Deprecato e non più supportato da Chrome 97. Neanche ShowAction sembra avere alcun effetto
+    // TODO: Vedi https://stackoverflow.com/questions/61236534/chrome-extension-with-declarativecontent-not-working#comment108333721_61236534
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
         chrome.declarativeContent.onPageChanged.addRules([{
             conditions: [new chrome.declarativeContent.PageStateMatcher({
