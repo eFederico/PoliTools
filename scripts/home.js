@@ -1,5 +1,3 @@
-let extensionBase = chrome.runtime.getURL("/");
-
 $(function() {
 
     $("body").addClass("casa"); 

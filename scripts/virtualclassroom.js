@@ -4,8 +4,6 @@ let preurl;
 let seqVideoId;
 let navbarAll = [];
 
-let extensionBase = chrome.runtime.getURL("/");
-
 $(function() {
 
     urlList = [];
