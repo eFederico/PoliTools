@@ -18,6 +18,28 @@ body >table >tbody> tr> td> table> tbody >tr> td> div >img {
 	background: url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png") no-repeat !important;
 }
 
+@supports (-moz-appearance:none) {
+	img[alt="Politecnico di Torino Logo"] {
+		content:url("/immagini/logologin.png");
+	}
+
+	#imgOrari {
+		content:url("/immagini/orologio.png");
+		width: 23px;
+		height: 23px;
+		margin: 0 10px;
+	}
+
+	body >table >tbody> tr> td> table> tbody >tr> td> div >img {
+		content:url("/immagini/header-grey.png");
+	}
+
+	#topnav,
+	.c_logoPoli2 {
+		background: url("/immagini/header-grey.png") no-repeat !important;
+	}
+}
+
 html body {
 	background: #222 !important;
 }

@@ -170,4 +170,22 @@ input[type="checkbox"]:checked ~ div label::after{
 @font-face {
 	font-family: 'Comic Sans';
 	src: url('chrome-extension://__MSG_@@extension_id__/fonts/comicsans.ttf') format('truetype');
-}  
+}
+
+@supports(-moz-appearance:none) {
+    @font-face {
+        font-family: 'Dos';
+        src: url('/fonts/dos.woff') format('woff'),
+        url('/fonts/dos.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Natale';
+        src: url('/fonts/natale.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Comic Sans';
+        src: url('/fonts/comicsans.ttf') format('truetype');
+    }
+}
