@@ -126,13 +126,23 @@
             ]
         }
     ],
-    "description": "Improve your everyday life with this Firefox extension for the teaching portal.",
+    "description": "Improve your everyday life with this extension for the teaching portal.",
+    "externally_connectable": {
+        "ids": [
+            "*"
+        ],
+        "matches": [
+            "*://*.polito.it/*",
+            "*://fbbjhoaakfhbggkegckmjafkffaofnkd/*"
+        ]
+    },
     "icons": {
         "128": "/immagini/icon128.png"
     },
     "manifest_version": 2,
     "name": "PoliTools",
     "permissions": [
+        "declarativeContent",
         "activeTab",
         "downloads",
         "storage",
