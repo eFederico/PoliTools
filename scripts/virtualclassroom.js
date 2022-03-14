@@ -4,6 +4,8 @@ let preurl;
 let seqVideoId;
 let navbarAll = [];
 
+let extensionBase = chrome.runtime.getURL("/");
+
 $(function() {
 
     urlList = [];
@@ -25,7 +27,7 @@ $(function() {
 	<div id="modal-container">
 		<div class="modal-background">
 			<div class="modal">
-				<img style="width: 60px; height: 60px;" src="chrome-extension://` + exID + `/immagini/triangolo.png" alt="triangolo">
+				<img style="width: 60px; height: 60px;" src="` + extensionBase + `immagini/triangolo.png" alt="triangolo">
 				<br><br><br>
 				<p>Questa virtual classroom è in fase di conversione e non può essere scaricata.</p>
 				<svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
