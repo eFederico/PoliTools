@@ -25,19 +25,26 @@ chrome.runtime.onInstalled.addListener(function() {
 
 });
 
+async function handleDownloadAllZip(tree) {
+    console.log(tree);
+}
+
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         if( details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.main_js" ){
-            return  {redirectUrl: chrome.extension.getURL("./lib/test.js") };
+            return  {redirectUrl: chrome.runtime.getURL("./lib/test.js") };
         }
         else if(details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.filenavigator_js")
         {
-            return {redirectUrl: chrome.extension.getURL("./lib/sviluppo.filemgr.filenavigator_js") };
+            return {redirectUrl: chrome.runtime.getURL("./lib/sviluppo.filemgr.filenavigator_js") };
+        } else if(details.url === "https://didattica.polito.it/zip.html") {
+            handleDownloadAllZip(details.requestBody.raw);
+            return {cancel: true};
         }
 
     },
     {urls: ["*://*.polito.it/*.*"]},
-    ["blocking"]
+    ["blocking", "requestBody"]
 );
 
 chrome.runtime.onMessageExternal.addListener(
