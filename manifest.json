@@ -10,12 +10,10 @@
     "content_scripts": [
         {
             "css": [
-                "style.css",
-                "lib/bootstrap.min.css"
+                "style.css"
             ],
             "js": [
                 "lib/jquery.min.js",
-                "lib/bootstrap.min.js",
                 "scripts/themes.js"
             ],
             "matches": [
