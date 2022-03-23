@@ -25,8 +25,28 @@ chrome.runtime.onInstalled.addListener(function() {
 
 });
 
-async function handleDownloadAllZip(tree) {
-    console.log(tree);
+function prepareDownloadSession(tree) {
+    let el = findFirstFile(tree);
+    if(el == null) {
+        updateDownloadStatus(0);
+        return;
+    }
+
+    manageSession(
+        {code: el.code},
+        function(statusok) {
+            if(statusok === "ok") {
+                zipAndDownloadAll(tree);
+            } else {
+                updateDownloadStatus(0);
+            }
+        }
+    );
+}
+
+async function handleDownloadRequest(tree) {
+    const data = JSON.parse(String.fromCharCode(...Array.from(new Uint8Array(tree[0].bytes))));
+    prepareDownloadSession(data);
 }
 
 chrome.webRequest.onBeforeRequest.addListener(
@@ -38,7 +58,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         {
             return {redirectUrl: chrome.runtime.getURL("./lib/sviluppo.filemgr.filenavigator_js") };
         } else if(details.url === "https://didattica.polito.it/zip.html") {
-            handleDownloadAllZip(details.requestBody.raw);
+            handleDownloadRequest(details.requestBody.raw);
             return {cancel: true};
         }
 
@@ -125,31 +145,7 @@ chrome.runtime.onMessageExternal.addListener(
     function(request, sender, sendResponse)
     {
         if (request.msg === "zipAndDownloadAll") {
-
-            let tree = request.tree;
-            let el = findFirstFile(tree);
-
-            if(el == null)
-            {
-                updateDownloadStatus(0);
-                return;
-            }
-
-            manageSession(
-                {
-                    code: el.code},
-
-                function(statusok) {
-                    if(statusok === "ok")
-                    {
-                        zipAndDownloadAll(tree);
-                    }
-                    else
-                    {
-                        updateDownloadStatus(0);
-                    }
-                }
-            );
+            prepareDownloadSession(request.tree);
         }
     }
 );
@@ -363,14 +359,22 @@ let theended = 0;
 
 function updateDownloadStatus(ds)
 {
-    let msg = {type: "downloadstatus", val: ds};
-    theport.postMessage(msg);
+    if(theport != null) {
+        let msg = {type: "downloadstatus", val: ds};
+        theport.postMessage(msg);
+    } else {
+        // TODO: What to do with firefox??
+    }
 }
 
 function updateProgressBar(current_progress, string, type = 0)
 {
-    let msg = {type: "updateProgressBar", cs: current_progress, string: string, tt: type};
-    theport.postMessage(msg);
+    if(theport != null) {
+        let msg = {type: "updateProgressBar", cs: current_progress, string: string, tt: type};
+        theport.postMessage(msg);
+    } else {
+        // TODO: What to do with firefox??
+    }
 }
 
 function zipAndDownloadAll(tree)
