@@ -163,6 +163,15 @@ chrome.runtime.onConnectExternal.addListener(function(port) {
 
 });
 
+chrome.runtime.onConnect.addListener(function(port) {
+   if(port.name === "firefoxland") {
+       theport = port;
+       port.onDisconnect.addListener(function(event) {
+           theport=null;
+       });
+   }
+});
+
 chrome.runtime.onMessageExternal.addListener(
     function(request, sender, sendResponse)
     {
@@ -362,8 +371,6 @@ function updateDownloadStatus(ds)
     if(theport != null) {
         let msg = {type: "downloadstatus", val: ds};
         theport.postMessage(msg);
-    } else {
-        // TODO: What to do with firefox??
     }
 }
 
@@ -372,8 +379,6 @@ function updateProgressBar(current_progress, string, type = 0)
     if(theport != null) {
         let msg = {type: "updateProgressBar", cs: current_progress, string: string, tt: type};
         theport.postMessage(msg);
-    } else {
-        // TODO: What to do with firefox??
     }
 }
 
