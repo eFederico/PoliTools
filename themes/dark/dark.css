@@ -1,37 +1,37 @@
 img[alt="Politecnico di Torino Logo"] {
-	content:url("chrome-extension://__MSG_@@extension_id__/immagini/logologin.png");
+    content: url("chrome-extension://__MSG_@@extension_id__/immagini/logologin.png");
 }
 
 #imgOrari {
-	content:url("chrome-extension://__MSG_@@extension_id__/immagini/orologio.png");
-	width: 23px;
-	height: 23px;
-	margin: 0 10px;
+    content: url("chrome-extension://__MSG_@@extension_id__/immagini/orologio.png");
+    width: 23px;
+    height: 23px;
+    margin: 0 10px;
 }
 
-body >table >tbody> tr> td> table> tbody >tr> td> div >img {
-	content:url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png");
+body > table > tbody > tr > td > table > tbody > tr > td > div > img {
+    content: url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png");
 }
 
 #topnav,
 .c_logoPoli2 {
-	background: url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png") no-repeat !important;
+    background: url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png") no-repeat !important;
 }
 
 @supports (-moz-appearance:none) {
 	img[alt="Politecnico di Torino Logo"] {
-		content:url("/immagini/logologin.png");
+		content: url("/immagini/logologin.png");
 	}
 
 	#imgOrari {
-		content:url("/immagini/orologio.png");
+		content: url("/immagini/orologio.png");
 		width: 23px;
 		height: 23px;
 		margin: 0 10px;
 	}
 
 	body >table >tbody> tr> td> table> tbody >tr> td> div >img {
-		content:url("/immagini/header-grey.png");
+		content: url("/immagini/header-grey.png");
 	}
 
 	#topnav,
@@ -41,7 +41,7 @@ body >table >tbody> tr> td> table> tbody >tr> td> div >img {
 }
 
 html body {
-	background: #222 !important;
+    background: #222 !important;
 }
 
 .link_img:hover,
@@ -50,17 +50,17 @@ html body {
 .c_strisciaArancione,
 .navbar-default,
 #navbar_mainazi li > a,
-.navbar-default .navbar-nav>li>a {
-	background-color: #000 !important;
+.navbar-default .navbar-nav > li > a {
+    background-color: #000 !important;
 }
 
 .minimal #taskbar a.button-selected,
 .minimal #taskbar a:hover,
-.navbar-default .navbar-nav>.active>a,
-.navbar-default .navbar-nav>.active>a:focus,
-.navbar-default .navbar-nav>.active>a:hover {
-	color: #ffffff !important;
-	background-color: #DD8600 !important;
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .active > a:hover {
+    color: #ffffff !important;
+    background-color: #DD8600 !important;
 }
 
 .message.unread td,
@@ -69,7 +69,7 @@ html body {
 table > tbody > tr > td > a,
 p > a,
 a[href^="mailto"] {
-	color: #DD8600 !important;
+    color: #DD8600 !important;
 }
 
 .records-table tr.selected td a, .records-table tr.selected td span,
@@ -83,14 +83,14 @@ a[href^="mailto"] {
 .webkit #messagelist tr th a,
 #messagelistfooter, #messagelistfooter span, #message.statusbar, .listbox .boxfooter, .listbox .boxfooter span,
 .content {
-	background-color: #333;
-	color: white !important;
-	text-shadow: none !important;
+    background-color: #333;
+    color: white !important;
+    text-shadow: none !important;
 }
 
 .nav-sidebar > .active > a,
 .breadcrumb {
-	background-color: #1c1c1c !important;
+    background-color: #1c1c1c !important;
 }
 
 
@@ -108,6 +108,7 @@ a[href^="mailto"] {
 #mailboxlist li.mailbox a,
 .wrapper,
 .well,
+.badge,
 .panel.panel-primary,
 .nav.nav-sidebar.ng-scope,
 .row,
@@ -116,8 +117,8 @@ a[href^="mailto"] {
 .container-fluid > div > div:nth-child(2),
 #note_accordion > div,
 .RegionHeaderColor {
-	background-color: #222;
-	color: white !important;
+    background-color: #222;
+    color: white !important;
 }
 
 form .bg-info:not(.label),
@@ -134,30 +135,33 @@ h4 a,
 body > table > tbody > tr > td,
 .ui-tabs-panel,
 #topnav,
+.card-pf,
 .policorpo.bachecaStudHead,
 .c_titleBar,
 div.RegionBorderMao,
+#portlet_container div.RegionBorderMao div,
 .table,
-.table>tbody>tr, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th,
-table>tbody>tr, table>tbody>tr>td, table>tbody>tr>th, table>tfoot>tr>td, table>tfoot>tr>th, table>thead>tr>td, table>thead>tr>th {
-	background-color: #222 !important;
-	color: white !important;
-	border-color: #444 !important;
+input,
+.table > tbody > tr, .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th,
+table > tbody > tr, table > tbody > tr > td, table > tbody > tr > th, table > tfoot > tr > td, table > tfoot > tr > th, table > thead > tr > td, table > thead > tr > th {
+    background-color: #1a1c1d !important;
+    color: white !important;
+    border-color: #444 !important;
 }
 
 body > nav > .container-fluid,
 #navbar_videolez,
 .bg-info:not(.label),
 .testo_img {
-	background-color: #000 !important;
+    background-color: #000 !important;
 }
 
 .argoLink,
-.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav > li > a:hover,
 .navbar-nav > li:hover a,
-table>tbody>tr:hover>td>a,
-table>tbody>tr:hover>td>a>i,
-table>tbody>tr:hover>td>a>span,
+table > tbody > tr:hover > td > a,
+table > tbody > tr:hover > td > a > i,
+table > tbody > tr:hover > td > a > span,
 .btn-info,
 .list-help-item > a > span:last-child,
 .langs,
@@ -167,78 +171,80 @@ table>tbody>tr:hover>td>a>span,
 .h6 a,
 .h5 a,
 p {
-	color: white !important;
+    color: white !important;
 }
 
-.calendar_poli_event_inner,
-.calendar_poli_corner_inner,
-.calendar_poli_rowheader_inner,
-.calendar_poli_colheader_inner {
-	background-color: #ddd !important;
-	background-image: none;
-	color: #333;
-}
-
-.calendar_poli_cell_inner {
-	border-right: 1px solid #DD860054;
-    border-bottom: 1px solid #DD860054;
-    background: #222 !important;
-}
-.RegionBorderMao > div:nth-child(1) > div:nth-child(4),
-.RegionBorderMao > div:nth-child(5) > div:nth-child(4),
-#note_accordion p {
-	color: #000 !important;
-}
-
-.bg-warning:not(.label)  {
-	background-color: #880000 !important;
-}
-
-.container-fluid > div:nth-child(4) {
-	background-color: #444 !important;
-}
-
-div.RegionBorderMao {
-	border: 1px solid #444 !important;
-}
-
-#foto_colsx {
-	margin-top: 20px;
-	border-radius: 20px;
-}
-
-#portlet_container {
-	padding-top: 20px;
-}
-
-.table>tbody>tr>td {
-	padding: 5px !important;
-}
-
-#portlet_container>#container>div>.RegionBorderMao {
-	padding: 0 !important;
-}
-
-.toolbar a.button {
-	text-shadow: none;
-	color: white;
-}
-
-.bg-success:not(.label) {
-    background-color: #DD8600 !important;
-}
-
-.clearfix{
-    background: #222 !important;
-}
-
+.badge,
 .alert {
     color: #DD8600 !important;
     background-color: #222 !important;
     border-color: #DD8600 !important;
 }
 
-.panel-info>.panel-heading {
+.calendar_poli_event_inner,
+.calendar_poli_corner_inner,
+.calendar_poli_rowheader_inner,
+.calendar_poli_colheader_inner {
+    background-color: #ddd !important;
+    background-image: none;
+    color: #333;
+}
+
+.calendar_poli_cell_inner {
+    border-right: 1px solid #DD860054;
+    border-bottom: 1px solid #DD860054;
+    background: #222 !important;
+}
+
+.RegionBorderMao > div:nth-child(1) > div:nth-child(4),
+.RegionBorderMao > div:nth-child(5) > div:nth-child(4),
+#note_accordion p {
+    color: #fff !important;
+}
+
+.bg-warning:not(.label) {
+    background-color: #880000 !important;
+}
+
+.container-fluid > div:nth-child(4) {
+    background-color: #444 !important;
+}
+
+div.RegionBorderMao {
+    border: 1px solid #444 !important;
+}
+
+#foto_colsx {
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+#portlet_container {
+    padding-top: 20px;
+}
+
+.table > tbody > tr > td {
+    padding: 5px !important;
+}
+
+#portlet_container > #container > div > .RegionBorderMao {
+    padding: 0 !important;
+}
+
+.toolbar a.button {
+    text-shadow: none;
+    color: white;
+}
+
+.bg-success:not(.label) {
+    background-color: #DD8600 !important;
+}
+
+.clearfix {
+    background: #222 !important;
+}
+
+.panel-info > .panel-heading {
     color: #DD8600 !important;
     background-color: #222 !important;
 }
@@ -248,23 +254,23 @@ div.RegionBorderMao {
 }
 
 .panel {
-	background-color: #222 !important;
+    background-color: #222 !important;
 }
 
 .policorpo {
     font-size: 13px;
     color: white;
-	font-family: open sans, Arial, Helvetica, sans-serif;
+    font-family: open sans, Arial, Helvetica, sans-serif;
 }
 
 .modal-body {
     background: #222;
-	border-top: 1px solid #DD8600 !important;
+    border-top: 1px solid #DD8600 !important;
 }
 
 .modal-footer {
     background: #DD8600 !important;
-	border-top: 1px solid #DD8600 !important;
+    border-top: 1px solid #DD8600 !important;
 }
 
 .modal-header, .modal-title {
@@ -273,8 +279,8 @@ div.RegionBorderMao {
     background: #DD8600;
 }
 
-.movie-screen{
-	color: white !important;
+.movie-screen {
+    color: white !important;
 }
 
 .wc-time-header-cell, .card-default, .card-header {
@@ -295,24 +301,25 @@ div.RegionBorderMao {
 }
 
 #loading_poliTools {
-	position: fixed;
-	display: block;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	text-align: center;
-	background-color: #222;
-	z-index: 99;
-  }
-  
-#loading-image {
-	position: center;
-	top: 100px;
-	left: 240px;
-	z-index: 100;
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-color: #222;
+    z-index: 99;
 }
-.loader{
-	color: white;
+
+#loading-image {
+    position: center;
+    top: 100px;
+    left: 240px;
+    z-index: 100;
+}
+
+.loader {
+    color: white;
 }
 

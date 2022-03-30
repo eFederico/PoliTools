@@ -1,5 +1,5 @@
 body >table >tbody> tr> td> table> tbody >tr> td> div >img {
-	content:url("chrome-extension://__MSG_@@extension_id__/immagini/header-white.png");
+	content: url("chrome-extension://__MSG_@@extension_id__/immagini/header-white.png");
 }
 
 #topnav,
@@ -9,7 +9,7 @@ body >table >tbody> tr> td> table> tbody >tr> td> div >img {
 
 @supports (-moz-appearance:none) {
 	body >table >tbody> tr> td> table> tbody >tr> td> div >img {
-		content:url("/immagini/header-white.png");
+		content: url("/immagini/header-white.png");
 	}
 
 	#topnav,
