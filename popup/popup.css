@@ -1,12 +1,10 @@
 body{
    width: 300px;
-   height: 301px;
    max-height: 800px;
    background-color: #fefefe;
 }
 
 .contenuto {
-	height: 301px;
 	padding: 25px 15px 15px 15px;
 	overflow-y: auto;
 	overflow-x: hidden;
