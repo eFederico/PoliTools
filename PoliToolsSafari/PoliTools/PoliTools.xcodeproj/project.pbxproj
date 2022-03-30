@@ -1,0 +1,993 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		83E35BB927F4F8B4003CA9B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E35BB827F4F8B4003CA9B8 /* AppDelegate.swift */; };
+		83E35BBB27F4F8B4003CA9B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E35BBA27F4F8B4003CA9B8 /* SceneDelegate.swift */; };
+		83E35BBE27F4F8B4003CA9B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BBC27F4F8B4003CA9B8 /* LaunchScreen.storyboard */; };
+		83E35BC127F4F8B4003CA9B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BBF27F4F8B4003CA9B8 /* Main.storyboard */; };
+		83E35BCA27F4F8B4003CA9B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E35BC927F4F8B4003CA9B8 /* AppDelegate.swift */; };
+		83E35BCD27F4F8B4003CA9B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BCB27F4F8B4003CA9B8 /* Main.storyboard */; };
+		83E35BD527F4F8B4003CA9B8 /* PoliTools Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 83E35BD427F4F8B4003CA9B8 /* PoliTools Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		83E35BDF27F4F8B4003CA9B8 /* PoliTools Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 83E35BDE27F4F8B4003CA9B8 /* PoliTools Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		83E35BE527F4F8B4003CA9B8 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BA827F4F8B3003CA9B8 /* Main.html */; };
+		83E35BE627F4F8B4003CA9B8 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BA827F4F8B3003CA9B8 /* Main.html */; };
+		83E35BE727F4F8B4003CA9B8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BAA27F4F8B3003CA9B8 /* Icon.png */; };
+		83E35BE827F4F8B4003CA9B8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BAA27F4F8B3003CA9B8 /* Icon.png */; };
+		83E35BE927F4F8B4003CA9B8 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BAB27F4F8B3003CA9B8 /* Style.css */; };
+		83E35BEA27F4F8B4003CA9B8 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BAB27F4F8B3003CA9B8 /* Style.css */; };
+		83E35BEB27F4F8B4003CA9B8 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BAC27F4F8B3003CA9B8 /* Script.js */; };
+		83E35BEC27F4F8B4003CA9B8 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BAC27F4F8B3003CA9B8 /* Script.js */; };
+		83E35BED27F4F8B4003CA9B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E35BAD27F4F8B3003CA9B8 /* ViewController.swift */; };
+		83E35BEE27F4F8B4003CA9B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E35BAD27F4F8B3003CA9B8 /* ViewController.swift */; };
+		83E35BEF27F4F8B4003CA9B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BAE27F4F8B4003CA9B8 /* Assets.xcassets */; };
+		83E35BF027F4F8B4003CA9B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E35BAE27F4F8B4003CA9B8 /* Assets.xcassets */; };
+		83E35BF127F4F8B4003CA9B8 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E35BB027F4F8B4003CA9B8 /* SafariWebExtensionHandler.swift */; };
+		83E35BF227F4F8B4003CA9B8 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E35BB027F4F8B4003CA9B8 /* SafariWebExtensionHandler.swift */; };
+		83E35C1127F4F8B4003CA9B8 /* popup in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0427F4F8B4003CA9B8 /* popup */; };
+		83E35C1227F4F8B4003CA9B8 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0527F4F8B4003CA9B8 /* background.js */; };
+		83E35C1327F4F8B4003CA9B8 /* docs in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0627F4F8B4003CA9B8 /* docs */; };
+		83E35C1427F4F8B4003CA9B8 /* PoliToolsSafari in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0727F4F8B4003CA9B8 /* PoliToolsSafari */; };
+		83E35C1527F4F8B4003CA9B8 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0827F4F8B4003CA9B8 /* scripts */; };
+		83E35C1627F4F8B4003CA9B8 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0927F4F8B4003CA9B8 /* style.css */; };
+		83E35C1727F4F8B4003CA9B8 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0A27F4F8B4003CA9B8 /* manifest.json */; };
+		83E35C1827F4F8B4003CA9B8 /* lib in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0B27F4F8B4003CA9B8 /* lib */; };
+		83E35C1927F4F8B4003CA9B8 /* background.html in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0C27F4F8B4003CA9B8 /* background.html */; };
+		83E35C1A27F4F8B4003CA9B8 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0D27F4F8B4003CA9B8 /* fonts */; };
+		83E35C1B27F4F8B4003CA9B8 /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0E27F4F8B4003CA9B8 /* themes */; };
+		83E35C1C27F4F8B4003CA9B8 /* updated in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0F27F4F8B4003CA9B8 /* updated */; };
+		83E35C1D27F4F8B4003CA9B8 /* immagini in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C1027F4F8B4003CA9B8 /* immagini */; };
+		83E35C1E27F4F8B4003CA9B8 /* popup in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0427F4F8B4003CA9B8 /* popup */; };
+		83E35C1F27F4F8B4003CA9B8 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0527F4F8B4003CA9B8 /* background.js */; };
+		83E35C2027F4F8B4003CA9B8 /* docs in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0627F4F8B4003CA9B8 /* docs */; };
+		83E35C2127F4F8B4003CA9B8 /* PoliToolsSafari in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0727F4F8B4003CA9B8 /* PoliToolsSafari */; };
+		83E35C2227F4F8B4003CA9B8 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0827F4F8B4003CA9B8 /* scripts */; };
+		83E35C2327F4F8B4003CA9B8 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0927F4F8B4003CA9B8 /* style.css */; };
+		83E35C2427F4F8B4003CA9B8 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0A27F4F8B4003CA9B8 /* manifest.json */; };
+		83E35C2527F4F8B4003CA9B8 /* lib in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0B27F4F8B4003CA9B8 /* lib */; };
+		83E35C2627F4F8B4003CA9B8 /* background.html in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0C27F4F8B4003CA9B8 /* background.html */; };
+		83E35C2727F4F8B4003CA9B8 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0D27F4F8B4003CA9B8 /* fonts */; };
+		83E35C2827F4F8B4003CA9B8 /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0E27F4F8B4003CA9B8 /* themes */; };
+		83E35C2927F4F8B4003CA9B8 /* updated in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0F27F4F8B4003CA9B8 /* updated */; };
+		83E35C2A27F4F8B4003CA9B8 /* immagini in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C1027F4F8B4003CA9B8 /* immagini */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		83E35BD627F4F8B4003CA9B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83E35BA227F4F8B2003CA9B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83E35BD327F4F8B4003CA9B8;
+			remoteInfo = "PoliTools Extension (iOS)";
+		};
+		83E35BE027F4F8B4003CA9B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83E35BA227F4F8B2003CA9B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83E35BDD27F4F8B4003CA9B8;
+			remoteInfo = "PoliTools Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		83E35BF827F4F8B4003CA9B8 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				83E35BD527F4F8B4003CA9B8 /* PoliTools Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E35BFF27F4F8B4003CA9B8 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				83E35BDF27F4F8B4003CA9B8 /* PoliTools Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		83E35BA927F4F8B3003CA9B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
+		83E35BAA27F4F8B3003CA9B8 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		83E35BAB27F4F8B3003CA9B8 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		83E35BAC27F4F8B3003CA9B8 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		83E35BAD27F4F8B3003CA9B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		83E35BAE27F4F8B4003CA9B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		83E35BB027F4F8B4003CA9B8 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		83E35BB527F4F8B4003CA9B8 /* PoliTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoliTools.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83E35BB827F4F8B4003CA9B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		83E35BBA27F4F8B4003CA9B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		83E35BBD27F4F8B4003CA9B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		83E35BC027F4F8B4003CA9B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		83E35BC227F4F8B4003CA9B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83E35BC727F4F8B4003CA9B8 /* PoliTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoliTools.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83E35BC927F4F8B4003CA9B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		83E35BCC27F4F8B4003CA9B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		83E35BCE27F4F8B4003CA9B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83E35BCF27F4F8B4003CA9B8 /* PoliTools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PoliTools.entitlements; sourceTree = "<group>"; };
+		83E35BD427F4F8B4003CA9B8 /* PoliTools Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PoliTools Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		83E35BD927F4F8B4003CA9B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83E35BDE27F4F8B4003CA9B8 /* PoliTools Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PoliTools Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		83E35BE327F4F8B4003CA9B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83E35BE427F4F8B4003CA9B8 /* PoliTools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PoliTools.entitlements; sourceTree = "<group>"; };
+		83E35C0427F4F8B4003CA9B8 /* popup */ = {isa = PBXFileReference; lastKnownFileType = folder; name = popup; path = ../../../popup; sourceTree = "<group>"; };
+		83E35C0527F4F8B4003CA9B8 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../../background.js; sourceTree = "<group>"; };
+		83E35C0627F4F8B4003CA9B8 /* docs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = docs; path = ../../../docs; sourceTree = "<group>"; };
+		83E35C0727F4F8B4003CA9B8 /* PoliToolsSafari */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PoliToolsSafari; path = ../..; sourceTree = "<group>"; };
+		83E35C0827F4F8B4003CA9B8 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = scripts; path = ../../../scripts; sourceTree = "<group>"; };
+		83E35C0927F4F8B4003CA9B8 /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; name = style.css; path = ../../../style.css; sourceTree = "<group>"; };
+		83E35C0A27F4F8B4003CA9B8 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../../manifest.json; sourceTree = "<group>"; };
+		83E35C0B27F4F8B4003CA9B8 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = ../../../lib; sourceTree = "<group>"; };
+		83E35C0C27F4F8B4003CA9B8 /* background.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = background.html; path = ../../../background.html; sourceTree = "<group>"; };
+		83E35C0D27F4F8B4003CA9B8 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../../../fonts; sourceTree = "<group>"; };
+		83E35C0E27F4F8B4003CA9B8 /* themes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = themes; path = ../../../themes; sourceTree = "<group>"; };
+		83E35C0F27F4F8B4003CA9B8 /* updated */ = {isa = PBXFileReference; lastKnownFileType = folder; name = updated; path = ../../../updated; sourceTree = "<group>"; };
+		83E35C1027F4F8B4003CA9B8 /* immagini */ = {isa = PBXFileReference; lastKnownFileType = folder; name = immagini; path = ../../../immagini; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		83E35BB227F4F8B4003CA9B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E35BC427F4F8B4003CA9B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E35BD127F4F8B4003CA9B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E35BDB27F4F8B4003CA9B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		83E35BA127F4F8B2003CA9B8 = {
+			isa = PBXGroup;
+			children = (
+				83E35BA627F4F8B2003CA9B8 /* Shared (App) */,
+				83E35BAF27F4F8B4003CA9B8 /* Shared (Extension) */,
+				83E35BB727F4F8B4003CA9B8 /* iOS (App) */,
+				83E35BC827F4F8B4003CA9B8 /* macOS (App) */,
+				83E35BD827F4F8B4003CA9B8 /* iOS (Extension) */,
+				83E35BE227F4F8B4003CA9B8 /* macOS (Extension) */,
+				83E35BB627F4F8B4003CA9B8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		83E35BA627F4F8B2003CA9B8 /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				83E35BAD27F4F8B3003CA9B8 /* ViewController.swift */,
+				83E35BAE27F4F8B4003CA9B8 /* Assets.xcassets */,
+				83E35BA727F4F8B3003CA9B8 /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		83E35BA727F4F8B3003CA9B8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				83E35BA827F4F8B3003CA9B8 /* Main.html */,
+				83E35BAA27F4F8B3003CA9B8 /* Icon.png */,
+				83E35BAB27F4F8B3003CA9B8 /* Style.css */,
+				83E35BAC27F4F8B3003CA9B8 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		83E35BAF27F4F8B4003CA9B8 /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				83E35C0327F4F8B4003CA9B8 /* Resources */,
+				83E35BB027F4F8B4003CA9B8 /* SafariWebExtensionHandler.swift */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		83E35BB627F4F8B4003CA9B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83E35BB527F4F8B4003CA9B8 /* PoliTools.app */,
+				83E35BC727F4F8B4003CA9B8 /* PoliTools.app */,
+				83E35BD427F4F8B4003CA9B8 /* PoliTools Extension.appex */,
+				83E35BDE27F4F8B4003CA9B8 /* PoliTools Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83E35BB727F4F8B4003CA9B8 /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				83E35BB827F4F8B4003CA9B8 /* AppDelegate.swift */,
+				83E35BBA27F4F8B4003CA9B8 /* SceneDelegate.swift */,
+				83E35BBC27F4F8B4003CA9B8 /* LaunchScreen.storyboard */,
+				83E35BBF27F4F8B4003CA9B8 /* Main.storyboard */,
+				83E35BC227F4F8B4003CA9B8 /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		83E35BC827F4F8B4003CA9B8 /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				83E35BC927F4F8B4003CA9B8 /* AppDelegate.swift */,
+				83E35BCB27F4F8B4003CA9B8 /* Main.storyboard */,
+				83E35BCE27F4F8B4003CA9B8 /* Info.plist */,
+				83E35BCF27F4F8B4003CA9B8 /* PoliTools.entitlements */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		83E35BD827F4F8B4003CA9B8 /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				83E35BD927F4F8B4003CA9B8 /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		83E35BE227F4F8B4003CA9B8 /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				83E35BE327F4F8B4003CA9B8 /* Info.plist */,
+				83E35BE427F4F8B4003CA9B8 /* PoliTools.entitlements */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+		83E35C0327F4F8B4003CA9B8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				83E35C0427F4F8B4003CA9B8 /* popup */,
+				83E35C0527F4F8B4003CA9B8 /* background.js */,
+				83E35C0627F4F8B4003CA9B8 /* docs */,
+				83E35C0727F4F8B4003CA9B8 /* PoliToolsSafari */,
+				83E35C0827F4F8B4003CA9B8 /* scripts */,
+				83E35C0927F4F8B4003CA9B8 /* style.css */,
+				83E35C0A27F4F8B4003CA9B8 /* manifest.json */,
+				83E35C0B27F4F8B4003CA9B8 /* lib */,
+				83E35C0C27F4F8B4003CA9B8 /* background.html */,
+				83E35C0D27F4F8B4003CA9B8 /* fonts */,
+				83E35C0E27F4F8B4003CA9B8 /* themes */,
+				83E35C0F27F4F8B4003CA9B8 /* updated */,
+				83E35C1027F4F8B4003CA9B8 /* immagini */,
+			);
+			name = Resources;
+			path = "Shared (Extension)";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		83E35BB427F4F8B4003CA9B8 /* PoliTools (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83E35BF927F4F8B4003CA9B8 /* Build configuration list for PBXNativeTarget "PoliTools (iOS)" */;
+			buildPhases = (
+				83E35BB127F4F8B4003CA9B8 /* Sources */,
+				83E35BB227F4F8B4003CA9B8 /* Frameworks */,
+				83E35BB327F4F8B4003CA9B8 /* Resources */,
+				83E35BF827F4F8B4003CA9B8 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				83E35BD727F4F8B4003CA9B8 /* PBXTargetDependency */,
+			);
+			name = "PoliTools (iOS)";
+			productName = "PoliTools (iOS)";
+			productReference = 83E35BB527F4F8B4003CA9B8 /* PoliTools.app */;
+			productType = "com.apple.product-type.application";
+		};
+		83E35BC627F4F8B4003CA9B8 /* PoliTools (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83E35C0027F4F8B4003CA9B8 /* Build configuration list for PBXNativeTarget "PoliTools (macOS)" */;
+			buildPhases = (
+				83E35BC327F4F8B4003CA9B8 /* Sources */,
+				83E35BC427F4F8B4003CA9B8 /* Frameworks */,
+				83E35BC527F4F8B4003CA9B8 /* Resources */,
+				83E35BFF27F4F8B4003CA9B8 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				83E35BE127F4F8B4003CA9B8 /* PBXTargetDependency */,
+			);
+			name = "PoliTools (macOS)";
+			productName = "PoliTools (macOS)";
+			productReference = 83E35BC727F4F8B4003CA9B8 /* PoliTools.app */;
+			productType = "com.apple.product-type.application";
+		};
+		83E35BD327F4F8B4003CA9B8 /* PoliTools Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83E35BF527F4F8B4003CA9B8 /* Build configuration list for PBXNativeTarget "PoliTools Extension (iOS)" */;
+			buildPhases = (
+				83E35BD027F4F8B4003CA9B8 /* Sources */,
+				83E35BD127F4F8B4003CA9B8 /* Frameworks */,
+				83E35BD227F4F8B4003CA9B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PoliTools Extension (iOS)";
+			productName = "PoliTools Extension (iOS)";
+			productReference = 83E35BD427F4F8B4003CA9B8 /* PoliTools Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		83E35BDD27F4F8B4003CA9B8 /* PoliTools Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83E35BFC27F4F8B4003CA9B8 /* Build configuration list for PBXNativeTarget "PoliTools Extension (macOS)" */;
+			buildPhases = (
+				83E35BDA27F4F8B4003CA9B8 /* Sources */,
+				83E35BDB27F4F8B4003CA9B8 /* Frameworks */,
+				83E35BDC27F4F8B4003CA9B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PoliTools Extension (macOS)";
+			productName = "PoliTools Extension (macOS)";
+			productReference = 83E35BDE27F4F8B4003CA9B8 /* PoliTools Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83E35BA227F4F8B2003CA9B8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					83E35BB427F4F8B4003CA9B8 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					83E35BC627F4F8B4003CA9B8 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					83E35BD327F4F8B4003CA9B8 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					83E35BDD27F4F8B4003CA9B8 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+				};
+			};
+			buildConfigurationList = 83E35BA527F4F8B2003CA9B8 /* Build configuration list for PBXProject "PoliTools" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83E35BA127F4F8B2003CA9B8;
+			productRefGroup = 83E35BB627F4F8B4003CA9B8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				83E35BB427F4F8B4003CA9B8 /* PoliTools (iOS) */,
+				83E35BC627F4F8B4003CA9B8 /* PoliTools (macOS) */,
+				83E35BD327F4F8B4003CA9B8 /* PoliTools Extension (iOS) */,
+				83E35BDD27F4F8B4003CA9B8 /* PoliTools Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83E35BB327F4F8B4003CA9B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E35BE727F4F8B4003CA9B8 /* Icon.png in Resources */,
+				83E35BBE27F4F8B4003CA9B8 /* LaunchScreen.storyboard in Resources */,
+				83E35BE527F4F8B4003CA9B8 /* Main.html in Resources */,
+				83E35BEB27F4F8B4003CA9B8 /* Script.js in Resources */,
+				83E35BEF27F4F8B4003CA9B8 /* Assets.xcassets in Resources */,
+				83E35BC127F4F8B4003CA9B8 /* Main.storyboard in Resources */,
+				83E35BE927F4F8B4003CA9B8 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E35BC527F4F8B4003CA9B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E35BE827F4F8B4003CA9B8 /* Icon.png in Resources */,
+				83E35BEA27F4F8B4003CA9B8 /* Style.css in Resources */,
+				83E35BCD27F4F8B4003CA9B8 /* Main.storyboard in Resources */,
+				83E35BEC27F4F8B4003CA9B8 /* Script.js in Resources */,
+				83E35BF027F4F8B4003CA9B8 /* Assets.xcassets in Resources */,
+				83E35BE627F4F8B4003CA9B8 /* Main.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E35BD227F4F8B4003CA9B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E35C2027F4F8B4003CA9B8 /* docs in Resources */,
+				83E35C2727F4F8B4003CA9B8 /* fonts in Resources */,
+				83E35C2A27F4F8B4003CA9B8 /* immagini in Resources */,
+				83E35C2627F4F8B4003CA9B8 /* background.html in Resources */,
+				83E35C2427F4F8B4003CA9B8 /* manifest.json in Resources */,
+				83E35C2527F4F8B4003CA9B8 /* lib in Resources */,
+				83E35C2827F4F8B4003CA9B8 /* themes in Resources */,
+				83E35C2927F4F8B4003CA9B8 /* updated in Resources */,
+				83E35C2327F4F8B4003CA9B8 /* style.css in Resources */,
+				83E35C1F27F4F8B4003CA9B8 /* background.js in Resources */,
+				83E35C2127F4F8B4003CA9B8 /* PoliToolsSafari in Resources */,
+				83E35C2227F4F8B4003CA9B8 /* scripts in Resources */,
+				83E35C1E27F4F8B4003CA9B8 /* popup in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E35BDC27F4F8B4003CA9B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E35C1327F4F8B4003CA9B8 /* docs in Resources */,
+				83E35C1A27F4F8B4003CA9B8 /* fonts in Resources */,
+				83E35C1D27F4F8B4003CA9B8 /* immagini in Resources */,
+				83E35C1927F4F8B4003CA9B8 /* background.html in Resources */,
+				83E35C1727F4F8B4003CA9B8 /* manifest.json in Resources */,
+				83E35C1827F4F8B4003CA9B8 /* lib in Resources */,
+				83E35C1B27F4F8B4003CA9B8 /* themes in Resources */,
+				83E35C1C27F4F8B4003CA9B8 /* updated in Resources */,
+				83E35C1627F4F8B4003CA9B8 /* style.css in Resources */,
+				83E35C1227F4F8B4003CA9B8 /* background.js in Resources */,
+				83E35C1427F4F8B4003CA9B8 /* PoliToolsSafari in Resources */,
+				83E35C1527F4F8B4003CA9B8 /* scripts in Resources */,
+				83E35C1127F4F8B4003CA9B8 /* popup in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		83E35BB127F4F8B4003CA9B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E35BED27F4F8B4003CA9B8 /* ViewController.swift in Sources */,
+				83E35BB927F4F8B4003CA9B8 /* AppDelegate.swift in Sources */,
+				83E35BBB27F4F8B4003CA9B8 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E35BC327F4F8B4003CA9B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E35BEE27F4F8B4003CA9B8 /* ViewController.swift in Sources */,
+				83E35BCA27F4F8B4003CA9B8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E35BD027F4F8B4003CA9B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E35BF127F4F8B4003CA9B8 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E35BDA27F4F8B4003CA9B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E35BF227F4F8B4003CA9B8 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		83E35BD727F4F8B4003CA9B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83E35BD327F4F8B4003CA9B8 /* PoliTools Extension (iOS) */;
+			targetProxy = 83E35BD627F4F8B4003CA9B8 /* PBXContainerItemProxy */;
+		};
+		83E35BE127F4F8B4003CA9B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83E35BDD27F4F8B4003CA9B8 /* PoliTools Extension (macOS) */;
+			targetProxy = 83E35BE027F4F8B4003CA9B8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		83E35BA827F4F8B3003CA9B8 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83E35BA927F4F8B3003CA9B8 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		83E35BBC27F4F8B4003CA9B8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83E35BBD27F4F8B4003CA9B8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		83E35BBF27F4F8B4003CA9B8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83E35BC027F4F8B4003CA9B8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		83E35BCB27F4F8B4003CA9B8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83E35BCC27F4F8B4003CA9B8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		83E35BF327F4F8B4003CA9B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		83E35BF427F4F8B4003CA9B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		83E35BF627F4F8B4003CA9B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "PoliTools Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = it.whoknows.PoliTools.Extension;
+				PRODUCT_NAME = "PoliTools Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		83E35BF727F4F8B4003CA9B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "PoliTools Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = it.whoknows.PoliTools.Extension;
+				PRODUCT_NAME = "PoliTools Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		83E35BFA27F4F8B4003CA9B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PoliTools;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = it.whoknows.PoliTools;
+				PRODUCT_NAME = PoliTools;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		83E35BFB27F4F8B4003CA9B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PoliTools;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = it.whoknows.PoliTools;
+				PRODUCT_NAME = PoliTools;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		83E35BFD27F4F8B4003CA9B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/PoliTools.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "PoliTools Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = it.whoknows.PoliTools.Extension;
+				PRODUCT_NAME = "PoliTools Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		83E35BFE27F4F8B4003CA9B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/PoliTools.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "PoliTools Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = it.whoknows.PoliTools.Extension;
+				PRODUCT_NAME = "PoliTools Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		83E35C0127F4F8B4003CA9B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/PoliTools.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PoliTools;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = it.whoknows.PoliTools;
+				PRODUCT_NAME = PoliTools;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		83E35C0227F4F8B4003CA9B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/PoliTools.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PoliTools;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = it.whoknows.PoliTools;
+				PRODUCT_NAME = PoliTools;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		83E35BA527F4F8B2003CA9B8 /* Build configuration list for PBXProject "PoliTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83E35BF327F4F8B4003CA9B8 /* Debug */,
+				83E35BF427F4F8B4003CA9B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83E35BF527F4F8B4003CA9B8 /* Build configuration list for PBXNativeTarget "PoliTools Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83E35BF627F4F8B4003CA9B8 /* Debug */,
+				83E35BF727F4F8B4003CA9B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83E35BF927F4F8B4003CA9B8 /* Build configuration list for PBXNativeTarget "PoliTools (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83E35BFA27F4F8B4003CA9B8 /* Debug */,
+				83E35BFB27F4F8B4003CA9B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83E35BFC27F4F8B4003CA9B8 /* Build configuration list for PBXNativeTarget "PoliTools Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83E35BFD27F4F8B4003CA9B8 /* Debug */,
+				83E35BFE27F4F8B4003CA9B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83E35C0027F4F8B4003CA9B8 /* Build configuration list for PBXNativeTarget "PoliTools (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83E35C0127F4F8B4003CA9B8 /* Debug */,
+				83E35C0227F4F8B4003CA9B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83E35BA227F4F8B2003CA9B8 /* Project object */;
+}
