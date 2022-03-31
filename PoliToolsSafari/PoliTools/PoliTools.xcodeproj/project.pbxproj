@@ -40,7 +40,6 @@
 		83E35C1927F4F8B4003CA9B8 /* background.html in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0C27F4F8B4003CA9B8 /* background.html */; };
 		83E35C1A27F4F8B4003CA9B8 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0D27F4F8B4003CA9B8 /* fonts */; };
 		83E35C1B27F4F8B4003CA9B8 /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0E27F4F8B4003CA9B8 /* themes */; };
-		83E35C1C27F4F8B4003CA9B8 /* updated in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0F27F4F8B4003CA9B8 /* updated */; };
 		83E35C1D27F4F8B4003CA9B8 /* immagini in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C1027F4F8B4003CA9B8 /* immagini */; };
 		83E35C1E27F4F8B4003CA9B8 /* popup in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0427F4F8B4003CA9B8 /* popup */; };
 		83E35C1F27F4F8B4003CA9B8 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0527F4F8B4003CA9B8 /* background.js */; };
@@ -53,7 +52,6 @@
 		83E35C2627F4F8B4003CA9B8 /* background.html in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0C27F4F8B4003CA9B8 /* background.html */; };
 		83E35C2727F4F8B4003CA9B8 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0D27F4F8B4003CA9B8 /* fonts */; };
 		83E35C2827F4F8B4003CA9B8 /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0E27F4F8B4003CA9B8 /* themes */; };
-		83E35C2927F4F8B4003CA9B8 /* updated in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C0F27F4F8B4003CA9B8 /* updated */; };
 		83E35C2A27F4F8B4003CA9B8 /* immagini in Resources */ = {isa = PBXBuildFile; fileRef = 83E35C1027F4F8B4003CA9B8 /* immagini */; };
 /* End PBXBuildFile section */
 
@@ -134,7 +132,6 @@
 		83E35C0C27F4F8B4003CA9B8 /* background.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = background.html; path = ../../../background.html; sourceTree = "<group>"; };
 		83E35C0D27F4F8B4003CA9B8 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../../../fonts; sourceTree = "<group>"; };
 		83E35C0E27F4F8B4003CA9B8 /* themes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = themes; path = ../../../themes; sourceTree = "<group>"; };
-		83E35C0F27F4F8B4003CA9B8 /* updated */ = {isa = PBXFileReference; lastKnownFileType = folder; name = updated; path = ../../../updated; sourceTree = "<group>"; };
 		83E35C1027F4F8B4003CA9B8 /* immagini */ = {isa = PBXFileReference; lastKnownFileType = folder; name = immagini; path = ../../../immagini; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -278,7 +275,6 @@
 				83E35C0C27F4F8B4003CA9B8 /* background.html */,
 				83E35C0D27F4F8B4003CA9B8 /* fonts */,
 				83E35C0E27F4F8B4003CA9B8 /* themes */,
-				83E35C0F27F4F8B4003CA9B8 /* updated */,
 				83E35C1027F4F8B4003CA9B8 /* immagini */,
 			);
 			name = Resources;
@@ -444,7 +440,6 @@
 				83E35C2427F4F8B4003CA9B8 /* manifest.json in Resources */,
 				83E35C2527F4F8B4003CA9B8 /* lib in Resources */,
 				83E35C2827F4F8B4003CA9B8 /* themes in Resources */,
-				83E35C2927F4F8B4003CA9B8 /* updated in Resources */,
 				83E35C2327F4F8B4003CA9B8 /* style.css in Resources */,
 				83E35C1F27F4F8B4003CA9B8 /* background.js in Resources */,
 				83E35C2127F4F8B4003CA9B8 /* PoliToolsSafari in Resources */,
@@ -464,7 +459,6 @@
 				83E35C1727F4F8B4003CA9B8 /* manifest.json in Resources */,
 				83E35C1827F4F8B4003CA9B8 /* lib in Resources */,
 				83E35C1B27F4F8B4003CA9B8 /* themes in Resources */,
-				83E35C1C27F4F8B4003CA9B8 /* updated in Resources */,
 				83E35C1627F4F8B4003CA9B8 /* style.css in Resources */,
 				83E35C1227F4F8B4003CA9B8 /* background.js in Resources */,
 				83E35C1427F4F8B4003CA9B8 /* PoliToolsSafari in Resources */,

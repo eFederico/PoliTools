@@ -43,7 +43,7 @@ $(function() {
     });
 
     navbarAll = document.querySelectorAll('[id^="lessonList_"]');
-    // questo server per le diverse sezioni di VirtualClassroom
+    // questo server per le diverse sezioni di VirtualClassroom -- al momento ce n'è solo una, quindi il for seguente cicla una sola volta
 
     for (let i = 0; i < navbarAll.length; i++) {
         navbar = navbarAll[i]
@@ -56,11 +56,12 @@ $(function() {
         downAll.innerHTML = "Download ALL";
 
         downAll.addEventListener("click", function() {
+            // lessonlist è creata qualche riga più in basso
             if (confirm("Sei sicuro di voler scaricare tutte (" + lessonlist[i].length + ") le virtual classroom già convertite?\nL'operazione può richiedere tempo e non può essere annullata.")) {
                 for (let j = 0; j < lessonlist[i].length; j++) {
-                    let d = document.getElementById("directdwn_" + i + "_" + j)
+                    let d = document.getElementById("directdwn_" + i + "_" + j)  // id aggiunto da populateDownloadButton
 					console.log(j+ " downloaded")
-					d.click();
+					d.click();  // clicca automaticamente tutti i tasti di download
                 }
             }
         }, false);
@@ -74,7 +75,7 @@ $(function() {
         navbar.insertBefore(downAll, navbar.firstChild);
         navbar.insertBefore(jdown, navbar.firstChild);
 
-        lessonlist.push(navbar.getElementsByClassName("h5"));
+        lessonlist.push(navbar.getElementsByClassName("h5"));  // è un Array di HTMLCollection che è una lista di <li /> -- ha senso l'Array esterno?
 		urlList.push([]);
 
         populateDownloadButton(i);
@@ -91,7 +92,7 @@ function populateDownloadButton(index) {
 
             $(li).on("click", "a", function() {
                 console.log("clicked!");
-                newPlayer(i);
+//                newPlayer(i);
             });
 
             let btn = document.createElement("button");
@@ -142,7 +143,7 @@ function sleep(ms) {
     return new Promise(resolve=>setTimeout(resolve, ms));
 }
 
-async function newPlayer() {
+async function newPlayer() {  // TODO: check
     await sleep(300);
 
     let video = $("video")[0];
@@ -252,7 +253,7 @@ function populateList() {
 
 }
 
-function downloadFile(url, filename) {
+function downloadFile(url, filename) {  // TODO: check
     chrome.runtime.sendMessage({
         msg: "PLS_DOWNLOAD",
         data: {
@@ -264,5 +265,5 @@ function downloadFile(url, filename) {
 }
 
 function copyToClipboard(content) {
-    navigator.clipboard.writeText(content);
+    navigator.clipboard.writeText(content);  // TODO: Unhandled Promise Rejection: NotAllowedError: The request is not allowed by the user agent or the platform in the current context, possibly because the user denied permission.
 }
