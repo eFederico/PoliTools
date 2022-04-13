@@ -101,8 +101,7 @@ chrome.runtime.onMessage.addListener(
             let filename = request.data.filename;
             filename = filename.replaceAll("/", ".").replaceAll("\\", ".");
             filename = filename.replace(/[/\\?%*:|"<>]/g, '-');
-            console.log(url);
-            console.log(filename);
+
             chrome.downloads.download({
                 url: url,
                 filename: filename,

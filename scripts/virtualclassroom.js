@@ -99,8 +99,6 @@ $(async function() {
             lessonDownload.innerHTML = '<span class="fa fa-download"></span> Download';
 
             lessonDownload.addEventListener("click", function() {
-                console.log("Porco dio: " + lessonList[list][index].bbbid);
-                console.log("Downloading lesson (" + index + "," + i + ")");
                 downloadLesson(index, i);
             }, false);
 
@@ -145,15 +143,15 @@ function downloadLesson(list, index) {
         url: "https://didattica.polito.it/pls/portal30/sviluppo.virtual_classroom_dev.getVCTpl",
         index: list,
         success: function(response) {
-            let url   = response.match(/http(s)?:\/\/video.polito.it\/dl\/[^"]+/)[0];
-            let title = response.match(/<h3>.+<\/h3>/)[0].replace("<h3>", "").replace("</h3>", "");
+            const parser  = new DOMParser();
+            const content = parser.parseFromString(response, "text/html");
+            const url     = content.querySelector('[id^="videoPlayer_"]').children[0].getAttribute("src");
+            const title   = content.getElementsByTagName("h3")[0].innerHTML;
 
-            console.log("Downloading lesson \"" + title + "\" from " + url);
             downloadFile(url, title);
         },
         error: function(xhr, status, error) {
             alert("Error downloading media.");
-            console.log("[ERROR] Failed to download VL. Status code: " + xhr.status + " (" + xhr.statusText + ")");
         }
     });
 }
@@ -214,11 +212,13 @@ function newPlayer(video) {
 }
 
 function displayHotkeysLabels() {
-    $(".video-js-box").append(`<div class = labels>
-					<h3 style="font-size: 21px; margin-top: 21px;" class="cb-title">Hotkeys</h3>
-					<p class="inline"><span class="keyboard-char">J</span> Slower</p>
-					<p class="inline"><span class="keyboard-char">K</span> Faster</p>
-					<p class="inline"><span class="keyboard-char">L</span> Reset</p>
-					<br><br>
-				  </div>`);
+    $(".video-js-box").append(
+       `<div class = labels>
+			<h3 style="font-size: 21px; margin-top: 21px;" class="cb-title">Hotkeys</h3>
+			<p class="inline"><span class="keyboard-char">J</span> Slower</p>
+			<p class="inline"><span class="keyboard-char">K</span> Faster</p>
+			<p class="inline"><span class="keyboard-char">L</span> Reset</p>
+			<br><br>
+		</div>`
+    );
 }
