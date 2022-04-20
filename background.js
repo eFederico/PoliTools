@@ -1,5 +1,19 @@
-chrome.runtime.onInstalled.addListener(function() {
+let messagePort = null;
+let thetotal = 0;
+let theended = 0;
 
+chrome.runtime.onConnect.addListener(function(port) {
+    if(port.name === "politools") {
+        console.log("Connection received from content script.");
+        messagePort = port;
+
+        // Register global events to handle port messages and delete the port on disconnection.
+        messagePort.onMessage.addListener(dispatchMessages);
+        messagePort.onDisconnect.addListener(function(event) {messagePort=null;});
+    }
+});
+
+chrome.runtime.onInstalled.addListener(function() {
     chrome.storage.local.get(['theme'], function(result) {
         if (result.theme === null) {
             chrome.storage.local.set({'theme': 0}, function() {
@@ -7,27 +21,24 @@ chrome.runtime.onInstalled.addListener(function() {
             });
         }
     });
-
-    //aggiungo listener per controllare cambiamenti su didattica.polito.it
-    // TODO: Deprecato e non più supportato da Chrome 97. Neanche ShowAction sembra avere alcun effetto
-    // TODO: Vedi https://stackoverflow.com/questions/61236534/chrome-extension-with-declarativecontent-not-working#comment108333721_61236534
-    chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-        chrome.declarativeContent.onPageChanged.addRules([{
-            conditions: [new chrome.declarativeContent.PageStateMatcher({
-                pageUrl: {hostEquals: 'didattica.polito.it'},
-            })
-            ],
-            actions: [new chrome.declarativeContent.ShowPageAction()]
-        }]);
-    });
-
-
-
 });
+
+// Send messages to the correct destination.
+function dispatchMessages(msg) {
+    switch(msg.msg) {
+        case "DEBUG_LOG":
+            console.log("[CONTENT SCRIPT] " + msg.data);
+            break;
+        default:
+            console.log("ERROR: Received message of unknown type '" + msg.msg + "'");
+            break;
+    }
+}
 
 function prepareDownloadSession(tree) {
     let el = findFirstFile(tree);
     if(el == null) {
+        console.error("Failed to ZIP and Download selected files: no files present in selection!");
         updateDownloadStatus(0);
         return;
     }
@@ -38,6 +49,7 @@ function prepareDownloadSession(tree) {
             if(statusok === "ok") {
                 zipAndDownloadAll(tree);
             } else {
+                console.error("Failed to ZIP and Download selected files: test download failed!");
                 updateDownloadStatus(0);
             }
         }
@@ -51,11 +63,9 @@ async function handleDownloadRequest(tree) {
 
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
-        if( details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.main_js" ){
+        if (details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.main_js" ) {
             return  {redirectUrl: chrome.runtime.getURL("./lib/test.js") };
-        }
-        else if(details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.filenavigator_js")
-        {
+        } else if(details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.filenavigator_js") {
             return {redirectUrl: chrome.runtime.getURL("./lib/sviluppo.filemgr.filenavigator_js") };
         } else if(details.url === "https://didattica.polito.it/zip.html") {
             handleDownloadRequest(details.requestBody.raw);
@@ -83,16 +93,6 @@ chrome.runtime.onMessageExternal.addListener(
 );
 
 chrome.runtime.onMessage.addListener(
-    /* ORIGINAL function(request) {
-        if (request.msg === "PLS_DOWNLOAD") {
-			let url = request.data.content;
-			let filename = request.data.filename;
-			chrome.downloads.download({
-			  url: url,
-			  filename: filename
-			});
-        }
-    }*/
     function(request) {
         if (request.msg === "PLS_DOWNLOAD") {
             // console.log("PLS_DOWNLOAD");
@@ -140,91 +140,6 @@ chrome.runtime.onMessage.addListener(
 
 
 
-chrome.runtime.onMessageExternal.addListener(
-    function(request, sender, sendResponse)
-    {
-        if (request.msg === "zipAndDownloadAll") {
-            prepareDownloadSession(request.tree);
-        }
-    }
-);
-
-chrome.runtime.onConnectExternal.addListener(function(port) {
-
-    if(port.name === "lalaland")
-    {
-        theport = port;
-        port.onDisconnect.addListener(
-            function(event) {
-                theport=null;
-            });
-    }
-
-});
-
-chrome.runtime.onConnect.addListener(function(port) {
-   if(port.name === "firefoxland") {
-       theport = port;
-       port.onDisconnect.addListener(function(event) {
-           theport=null;
-       });
-   }
-});
-
-chrome.runtime.onMessageExternal.addListener(
-    function(request, sender, sendResponse)
-    {
-        if (request.msg === "getBinaryContent") {
-            let url = request.url;
-
-            let blob = null;
-            let xhr = new XMLHttpRequest();
-            xhr.open("GET", url);
-            xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
-            xhr.onload = function()
-            {
-                blob = xhr.response;
-                console.log(blob);
-
-                let reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onload =  function(e){
-                    console.log('DataURL:', e.target.result);
-                };
-
-                let bloburl =  (window.URL ? URL : webkitURL).createObjectURL(blob);
-                console.log(bloburl);
-
-                let response = {err: false, data:bloburl};
-                console.log(response);
-                sendResponse(response);
-            }
-            xhr.send();
-
-            /*JSZipUtils.getBinaryContent(url, function (err, data) {
-                console.log("rispondo: ");
-                console.log(data);
-
-                var binaryData = [];
-                binaryData.push(data);
-
-                var blob = new Blob(binaryData);
-                console.log(blob);
-                var bloburl =  (window.URL ? URL : webkitURL).createObjectURL(blob);
-
-
-
-
-                var response = {err: err, data:datares};
-                console.log(response);
-                sendResponse(response);
-            });*/
-            return true;
-        }
-    }
-);
-
-
 
 function manageSession(testEl, callback)
 {
@@ -241,7 +156,6 @@ function manageSession(testEl, callback)
 
     client.onreadystatechange = function() {
         if(this.readyState === this.HEADERS_RECEIVED ) {
-
             let resurl = client.responseURL;
             /*
             https://file.didattica.polito.it/download/MATDID/32837182
@@ -254,30 +168,23 @@ function manageSession(testEl, callback)
                 callback("ok");
                 return;
             }
-            else if(resurl.includes("://idp.polito.it/idp/profile")) //Sessione didattica Ok (?), Sessione File no
-            {
+            else if(resurl.includes("://idp.polito.it/idp/profile")) { //Sessione didattica Ok (?), Sessione File no
                 mode = 1;
-            }
-            else
-            {
+            } else {
                 client.abort();
                 chrome.tabs.create({ url: url });
 
+                console.error("ERROR: Unknown resource URL received: '" + resurl + "'")
                 callback("ko");
                 return;
             }
-
-            console.log("res url:",client.responseURL);
         }
 
-        if (mode === 1 && client.readyState === client.DONE && client.status === 200) {
-
+        if(mode === 1 && client.readyState === client.DONE && client.status === 200) {
             let xxml = client.responseXML;
-            if(client.responseXML != null)
-            {
+            if(client.responseXML != null) {
                 let lform = xxml.getElementsByTagName("form")[0]; //action page method post/get
-                if(lform)
-                {
+                if(lform) {
                     let hiddens = lform.getElementsByTagName("input");
                     let req = "";
                     console.log(hiddens);
@@ -288,9 +195,7 @@ function manageSession(testEl, callback)
 
 
                     for (let entry of hiddens) {
-
-                        if(entry.type === "hidden")
-                        {
+                        if(entry.type === "hidden") {
                             if(i !== 0)
                                 req+="&";
 
@@ -299,7 +204,6 @@ function manageSession(testEl, callback)
                             datapost.append(entry.name, entry.value);
                             i++;
                         }
-
                     }
 
                     let http = new XMLHttpRequest();
@@ -312,14 +216,10 @@ function manageSession(testEl, callback)
                     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
                     http.onreadystatechange = function() {
-                        if(http.readyState === http.HEADERS_RECEIVED)
-                        {
-                            if(http.status === 200)
-                            {
+                        if(http.readyState === http.HEADERS_RECEIVED) {
+                            if(http.status === 200) {
                                 callback("ok");
-                            }
-                            else
-                            {
+                            } else {
                                 callback("ko");
                                 chrome.tabs.create({ url: url });
                             }
@@ -330,8 +230,7 @@ function manageSession(testEl, callback)
                     }
                     http.send(req);
                 }
-            }
-            else{
+            } else {
                 chrome.tabs.create({ url: url });
                 callback("ko");
             }
@@ -361,28 +260,21 @@ function findFirstFile(list)
     return null;
 }
 
-let theport = null;
-let thetotal = 0;
-let theended = 0;
-
-function updateDownloadStatus(ds)
-{
-    if(theport != null) {
+function updateDownloadStatus(ds) {
+    if(messagePort != null) {
         let msg = {type: "downloadstatus", val: ds};
-        theport.postMessage(msg);
+        messagePort.postMessage(msg);
     }
 }
 
-function updateProgressBar(current_progress, string, type = 0)
-{
-    if(theport != null) {
+function updateProgressBar(current_progress, string, type = 0) {
+    if(messagePort != null) {
         let msg = {type: "updateProgressBar", cs: current_progress, string: string, tt: type};
-        theport.postMessage(msg);
+        messagePort.postMessage(msg);
     }
 }
 
-function zipAndDownloadAll(tree)
-{
+function zipAndDownloadAll(tree) {
 
     let zip = new JSZip();
     thetotal = 0;

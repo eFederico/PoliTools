@@ -22,28 +22,26 @@ function isVideo() {
     return $("#nav_menu li:nth-child(8).active").length
 }
 
-// If we are running Firefox and we are on the Materials page...
-if(typeof chrome != "undefined" && typeof browser != "undefined" && isMaterial()) {
-    // Connect to the browser.
-    let port = browser.runtime.connect({name: "firefoxland"});
+// Handle download status messages.
+PoliToolsPort.onMessage.addListener(function(msg)
+{
+    let container = document.getElementById("dynamic-container");
+    let button    = document.getElementById("button_download_selected");
 
-    // Handle download status messages.
-    port.onMessage.addListener(function(msg)
-    {
-        let container = document.getElementById("dynamic-container");
-        let button    = document.getElementById("button_download_selected");
+    if(msg.type === "downloadstatus") {
+        extensionLog("Download status: " + msg.val + "")
+
+        container.style.display = (msg.val != 0 && msg.val != 4) ? 'block' : 'none';
+        button.style.display    = (msg.val != 0 && msg.val != 4) ? 'none'  : 'inline-block';
+    } else if(msg.type === "updateProgressBar") {
+        extensionLog("Progress status: [" + msg.cs + "% - " + statuses[msg.type] + ".")
         
-        if(msg.type === "downloadstatus") {
-            container.style.display = (msg.val != 0 && msg.val != 4) ? 'block' : 'none';
-            button.style.display    = (msg.val != 0 && msg.val != 4) ? 'none'  : 'inline-block';
-        } else if(msg.type === "updateProgressBar") {
-            let dynamic = document.getElementById("dynamic");
-            let statuses = ['success', 'info', 'danger', 'warning'];
+        let dynamic = document.getElementById("dynamic");
+        let statuses = ['success', 'info', 'danger', 'warning'];
 
-            dynamic.setAttribute('aria-valuenow', msg.cs);
-            dynamic.style.width = msg.cs + '%';
-            dynamic.innerText   = msg.string;
-            dynamic.className.replace("progress-bar-[a-z]+", "progress-bar-" + statuses[type]);
-        }
-    });
-}
+        dynamic.setAttribute('aria-valuenow', msg.cs);
+        dynamic.style.width = msg.cs + '%';
+        dynamic.innerText   = msg.string;
+        dynamic.className.replace("progress-bar-[a-z]+", "progress-bar-" + statuses[msg.type]);
+    }
+});

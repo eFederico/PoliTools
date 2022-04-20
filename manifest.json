@@ -14,7 +14,8 @@
             ],
             "js": [
                 "lib/jquery.min.js",
-                "scripts/themes.js"
+                "scripts/themes.js",
+                "scripts/common.js"
             ],
             "matches": [
                 "*://*.polito.it/*"
