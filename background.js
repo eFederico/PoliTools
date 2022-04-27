@@ -26,8 +26,11 @@ chrome.runtime.onInstalled.addListener(function() {
 // Send messages to the correct destination.
 function dispatchMessages(msg) {
     switch(msg.msg) {
-        case "DEBUG_LOG":
-            console.log("[CONTENT SCRIPT] " + msg.data);
+        case "background-log":
+            console.log("[CONTENT SCRIPT] " + msg.str);
+            break;
+        case "zip-download-all":
+            prepareDownloadSession(JSON.parse(msg.lst));
             break;
         default:
             console.log("ERROR: Received message of unknown type '" + msg.msg + "'");
@@ -56,40 +59,16 @@ function prepareDownloadSession(tree) {
     );
 }
 
-async function handleDownloadRequest(tree) {
-    const data = JSON.parse(String.fromCharCode(...Array.from(new Uint8Array(tree[0].bytes))));
-    prepareDownloadSession(data);
-}
-
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         if (details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.main_js" ) {
             return  {redirectUrl: chrome.runtime.getURL("./lib/test.js") };
         } else if(details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.filenavigator_js") {
             return {redirectUrl: chrome.runtime.getURL("./lib/sviluppo.filemgr.filenavigator_js") };
-        } else if(details.url === "https://didattica.polito.it/zip.html") {
-            handleDownloadRequest(details.requestBody.raw);
-            return {cancel: true};
         }
-
     },
     {urls: ["*://*.polito.it/*.*"]},
     ["blocking", "requestBody"]
-);
-
-chrome.runtime.onMessageExternal.addListener(
-    function(request)
-    {
-        if (request.msg === "download_single_file") {
-            let url = request.data;
-            let name = request.name;
-
-            chrome.downloads.download({
-                url: url,
-                filename: name
-            });
-        }
-    }
 );
 
 chrome.runtime.onMessage.addListener(
@@ -118,9 +97,7 @@ chrome.runtime.onMessage.addListener(
             let filename = request.data.filename;
 
             let xmlHttp = new XMLHttpRequest();
-            xmlHttp.onreadystatechange = function()
-            {
-
+            xmlHttp.onreadystatechange = function() {
                 if (xmlHttp.readyState === 3) { // Attendo pagina pronta
                     chrome.downloads.download({
                         url: xmlHttp.responseURL,
@@ -137,12 +114,7 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-
-
-
-
-function manageSession(testEl, callback)
-{
+function manageSession(testEl, callback) {
     let size = testEl.size;
     let url = "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.handler?action=download&code="+testEl.code;
 
@@ -225,7 +197,6 @@ function manageSession(testEl, callback)
                             }
 
                             http.abort();
-
                         }
                     }
                     http.send(req);
@@ -239,17 +210,13 @@ function manageSession(testEl, callback)
     }
 }
 
-function findFirstFile(list)
-{
+function findFirstFile(list) {
     for (let i = 0, len = list.length; i < len; i++) {
         let el = list[i];
 
-        if(el.type !== "dir")
-        {
+        if(el.type !== "dir") {
             return el;
-        }
-        else
-        {
+        } else {
             let ret = findFirstFile(el.list);
 
             if(ret !== null)
@@ -260,22 +227,17 @@ function findFirstFile(list)
     return null;
 }
 
-function updateDownloadStatus(ds) {
-    if(messagePort != null) {
-        let msg = {type: "downloadstatus", val: ds};
-        messagePort.postMessage(msg);
-    }
+function updateDownloadStatus(value) {
+    if(messagePort)
+        messagePort.postMessage({dst: "window", dat:{msg: "download-progress", value}});
 }
 
-function updateProgressBar(current_progress, string, type = 0) {
-    if(messagePort != null) {
-        let msg = {type: "updateProgressBar", cs: current_progress, string: string, tt: type};
-        messagePort.postMessage(msg);
-    }
+function updateProgressBar(progress, string, type = 0) {
+    if(messagePort)
+        messagePort.postMessage({dst: "window", dat:{msg: "download-status", progress, string, type}});
 }
 
 function zipAndDownloadAll(tree) {
-
     let zip = new JSZip();
     thetotal = 0;
     theended = 0;
@@ -304,23 +266,19 @@ function zipAndDownloadAll(tree) {
         });
     }
 
-    tree.forEach(function(el){
+    tree.forEach(function(el) {
         recursive_download(zip,el,callb);
     });
 }
 
-function countFileList(list)
-{
+function countFileList(list) {
     let count = 0;
     let size = 0;
     list.forEach(function(el){
-        if(el.type !== "dir")
-        {
+        if(el.type !== "dir") {
             count++;
             size += el.size;
-        }
-        else
-        {
+        } else {
             let re = countFileList(el.list);
             count += re.count;
             size += re.size;
@@ -349,13 +307,10 @@ function recursive_download(dirzip, elem, callback)
 
             let perc = (theended/thetotal)*100;
 
-            if(thetotal === theended)
-            {
+            if(thetotal === theended) {
                 callback();
                 //updateProgressBar(101,"Wait for Zipping...");
-            }
-            else
-            {
+            } else {
                 updateProgressBar(perc,"Downloading: "+(parseInt(theended)+1)+" of "+thetotal,0);
             }
 
