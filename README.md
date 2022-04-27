@@ -17,15 +17,16 @@
 ### How to Develop
 
 First build:
-1. Run the app with the button in the top left corner of Xcode
-2. Quit the app
-3. Open Safari
-4. Open Preferences with <kbd>⌘</kbd>+<kbd>,</kbd>
-5. Advanced -> Show Develop menu in menu bar
-6. Develop -> Allow Unsigned Extensions
-7. In Preferences -> Extensions -> enable PoliTools
-8. Navigate to https://didattica.polito.it
-9. Click on the PoliTools extension button in the top bar -> Always Allow on this domain
+1. Open the Xcode project with `open PoliToolsSafari/PoliTools/PoliTools.xcodeproj`
+2. Run the app with the button in the top left corner of Xcode
+3. Quit the app
+4. Open Safari
+5. Open Preferences with <kbd>⌘</kbd>+<kbd>,</kbd>
+6. Advanced -> Show Develop menu in menu bar
+7. Develop -> Allow Unsigned Extensions
+8. In Preferences -> Extensions -> enable PoliTools
+9. Navigate to https://didattica.polito.it
+10. Click on the PoliTools extension button in the top bar -> Always Allow on this domain
 
 Next builds:
 1. Rebuild with <kbd>⌘</kbd>+<kbd>B</kbd>
