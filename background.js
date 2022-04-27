@@ -64,7 +64,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         if (details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.main_js" ) {
             return  {redirectUrl: chrome.runtime.getURL("./lib/test.js") };
         } else if(details.url === "https://didattica.polito.it/pls/portal30/sviluppo.filemgr.filenavigator_js") {
-            return {redirectUrl: chrome.runtime.getURL("./lib/sviluppo.filemgr.filenavigator_js") };
+            return {redirectUrl: chrome.runtime.getURL("./lib/sviluppo.filemgr.filenavigator.js") };
         }
     },
     {urls: ["*://*.polito.it/*.*"]},
