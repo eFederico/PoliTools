@@ -1,43 +1,21 @@
 img[alt="Politecnico di Torino Logo"] {
-    content: url("chrome-extension://__MSG_@@extension_id__/immagini/logologin.png");
+    content: url("/immagini/logologin.png");
 }
 
 #imgOrari {
-    content: url("chrome-extension://__MSG_@@extension_id__/immagini/orologio.png");
+    content: url("/immagini/orologio.png");
     width: 23px;
     height: 23px;
     margin: 0 10px;
 }
 
-body > table > tbody > tr > td > table > tbody > tr > td > div > img {
-    content: url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png");
+body >table >tbody> tr> td> table> tbody >tr> td> div >img {
+    content: url("/immagini/header-grey.png");
 }
 
 #topnav,
 .c_logoPoli2 {
-    background: url("chrome-extension://__MSG_@@extension_id__/immagini/header-grey.png") no-repeat !important;
-}
-
-@supports (-moz-appearance:none) {
-	img[alt="Politecnico di Torino Logo"] {
-		content: url("/immagini/logologin.png");
-	}
-
-	#imgOrari {
-		content: url("/immagini/orologio.png");
-		width: 23px;
-		height: 23px;
-		margin: 0 10px;
-	}
-
-	body >table >tbody> tr> td> table> tbody >tr> td> div >img {
-		content: url("/immagini/header-grey.png");
-	}
-
-	#topnav,
-	.c_logoPoli2 {
-		background: url("/immagini/header-grey.png") no-repeat !important;
-	}
+    background: url("/immagini/header-grey.png") no-repeat !important;
 }
 
 html body {
@@ -323,3 +301,12 @@ div.RegionBorderMao {
     color: white;
 }
 
+/* Make file selection visible in the material section */
+table.table-files > tbody > tr.selected > td {
+    background-color: #DD8600 !important;
+    color: white !important;
+}
+
+table.table-files > tbody > tr.selected > td > a > i,span {
+    color: white !important;
+}
