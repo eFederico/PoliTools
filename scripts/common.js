@@ -1,5 +1,5 @@
 let PoliToolsPort  = chrome.runtime.connect({name: "politools"});
-let PoliToolsDebug = true;
+let PoliToolsDebug = false;
 
 // Allow content scripts to console.log to the extension's console.
 function extensionLog(msg) {
