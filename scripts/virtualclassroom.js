@@ -11,8 +11,9 @@ function isConverted(doc) {
 //   IN CASE OF AN ERROR IN AJAX: throws an {xhr, status, error} object.
 async function getDownloadURL(vc) {
     if(vc.url && vc.title) {
-        extensionLog("Using cached URL/Title for VC '" + title + "'.");
+        extensionLog.log("Using cache for VC (id=" + vc.incarico + "/" + vc.bbbid + ", p=" + vc.provvisorio + ").");
     } else {
+        extensionLog.log("Making AJAX for VC (id=" + vc.incarico + "/" + vc.bbbid + ", p=" + vc.provvisorio + ").");
         // Define post parameters for the VC request
         const endpoint  = "https://didattica.polito.it/pls/portal30/sviluppo.virtual_classroom_dev.getVCTpl";
         const data = {
@@ -31,7 +32,7 @@ async function getDownloadURL(vc) {
 
             // Check that a player is present. If not the VC has not been converted yet.
             if(!player) {
-                extensionLog("Requested download for not converted VC.");
+                extensionLog.err("Requested VC (id=" + vc.incarico + "/" + vc.bbbid + "). is not converted!");
                 throw new NotConvertedError(vc);
             }
 
@@ -41,8 +42,8 @@ async function getDownloadURL(vc) {
             vc.url   = url;
             vc.title = title;
 
-            extensionLog("Obtained URL for VC '" + title + "'.");
         } catch(error) {
+            extensionLog.err("Failed to obtain data for VC (id=" + vc.incarico + "/" + vc.bbbid + ").");
             throw error;
         }
     }
@@ -55,15 +56,18 @@ function downloadLesson(vc, single) {
     getDownloadURL(vc)
         .then(data => downloadFile(data.url, data.title + ".mp4"))
         .catch(error => {
+            // Inform the user of the error (could help with bug reports).
             console.error("An error occurred while downloading a VC:");
             console.error(error);
+
             if(error instanceof NotConvertedError && single)
                 alert("Questa videolezione non può essere scaricata in quanto non ancora convertita!\n\nThis VC cannot be downloaded as it has not been converted yet!");
             else if(single)
                 alert("Download della videolezione non riuscito!\n\nVC download failed!");
-            else if(!errorOccurred)
+            else if(!errorOccurred && !(error instanceof NotConvertedError)) {
                 alert("Download di una o più videolezioni fallito!\n\nOne or more VCs failed to download!");
-            errorOccurred = true;
+                errorOccurred = true;
+            }
         });
 }
 
@@ -137,22 +141,17 @@ $(async function() {
             let promises = [];
 
             errorOccurred = false;
-            for (let i = 0; i < lessonList[index].length; ++i) {
-                extensionLog("JDownloader: Requesting download URL for VC " + index + "/" + i + ".");
+            for (let i = 0; i < lessonList[index].length; ++i)
                 promises.push(getDownloadURL(lessonList[index][i]));
-            }
 
             Promise.allSettled(promises).then(results => {
                 results.forEach(result => {
-                    // Just ignore any error. Most likely classroom not converted yet.
-                    extensionLog("JDownloader: Response received from URL fetcher:");
-                    extensionLog(result);
                     if(result.status == "fulfilled")
                         urls += result.value.url + "\n";
                     else {
                         // Ignore errors that occurred because the VC has not been converted yet.
                         if(!result.reason instanceof NotConvertedError) {
-                            console.error("An error occurred while trying to obtain URL of a VC.");
+                            console.error("An error occurred while obtaining URL to a VC.");
                             console.error(result.reason)
 
                             if(!errorOccurred)
@@ -194,7 +193,7 @@ $(async function() {
             lessonDownload.innerHTML = '<span class="fa fa-download"></span> Download';
 
             lessonDownload.addEventListener("click", function() {
-                extensionLog("Started download of VC " + index + "/" + i + ".");
+                extensionLog.log("Started download of VC " + index + "/" + i + ".");
                 downloadLesson(lessonList[index][i], true);
             }, false);
 

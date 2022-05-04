@@ -1,6 +1,6 @@
 let extensionBase = chrome.runtime.getURL("/");
 
-async function getTheme() {
+(async function getTheme() {
 	chrome.storage.local.get(['theme'], function(result) {
 		fetch(extensionBase + "themes/themes.json")
 			.then(response => response.json())
@@ -21,7 +21,7 @@ async function getTheme() {
 
 			  });
     });
-}
+})();
 
 let fonts = `<style>
 				td,div,a,p,body {
@@ -29,16 +29,13 @@ let fonts = `<style>
 				}
 			</style>`;
 
-async function getFont() {
+(async function getFont() {
 	
 	chrome.storage.local.get(['font'], function(result) {
 		let font = result.font;
 		if (font !== "Default" && font != null) {
-	   		console.log("Font:" + font);
+	   		extensionLog.log("Font:" + font);
 		   $("html").append(fonts.replace("%font%", font));
 		}
 	});
-}
-
-getTheme();
-getFont();
+})();
