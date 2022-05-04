@@ -2,6 +2,16 @@ let messagePort = null;
 let thetotal = 0;
 let theended = 0;
 
+chrome.runtime.onInstalled.addListener(function() {
+    chrome.storage.local.get(['theme'], function(result) {
+        if (result.theme === null) {
+            chrome.storage.local.set({'theme': 0}, function() {
+                console.log("New selected theme: " + 0);
+            });
+        }
+    });
+});
+
 chrome.runtime.onConnect.addListener(function(port) {
     if(port.name === "politools") {
         console.log("Connection received from content script.");
@@ -13,24 +23,20 @@ chrome.runtime.onConnect.addListener(function(port) {
     }
 });
 
-chrome.runtime.onInstalled.addListener(function() {
-    chrome.storage.local.get(['theme'], function(result) {
-        if (result.theme === null) {
-            chrome.storage.local.set({'theme': 0}, function() {
-                console.log("New selected theme: " + 0);
-            });
-        }
-    });
-});
-
 // Send messages to the correct destination.
 function dispatchMessages(msg) {
     switch(msg.msg) {
         case "background-log":
-            console.log("[CONTENT SCRIPT] " + msg.str);
+            console.log("[CONTENT SCRIPT] ", msg.data);
             break;
         case "zip-download-all":
             prepareDownloadSession(JSON.parse(msg.lst));
+            break;
+        case "download-file":
+            chrome.downloads.download({
+                url:      msg.data.content,
+                filename: msg.data.filename.replaceAll("/", ".").replaceAll("\\", ".").replace(/[/\\?%*:|"<>]/g, '-'),
+            });
             break;
         default:
             console.log("ERROR: Received message of unknown type '" + msg.msg + "'");
@@ -69,24 +75,6 @@ chrome.webRequest.onBeforeRequest.addListener(
     },
     {urls: ["*://*.polito.it/*.*"]},
     ["blocking", "requestBody"]
-);
-
-chrome.runtime.onMessage.addListener(
-    function(request) {
-        if (request.msg === "PLS_DOWNLOAD") {
-            // console.log("PLS_DOWNLOAD");
-            //let url = "data:video/mp4,"+request.data.content;
-            let url = request.data.content;
-            let filename = request.data.filename;
-            filename = filename.replaceAll("/", ".").replaceAll("\\", ".");
-            filename = filename.replace(/[/\\?%*:|"<>]/g, '-');
-
-            chrome.downloads.download({
-                url: url,
-                filename: filename,
-            });
-        }
-    }
 );
 
 chrome.runtime.onMessage.addListener(
