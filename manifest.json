@@ -19,14 +19,9 @@
                 "scripts/errors.js"
             ],
             "matches": [
-                "*://*.polito.it/*"
-            ],
-            "exclude_matches": [
-                "*://mail.studenti.polito.it/*",
-                "*://*.polito.it/mail/faq.html",
-                "*://*.polito.it/",
-                "*://exercise.polito.it/*",
-                "*://crownlabs.polito.it/*"
+                "*://didattica.polito.it/*",
+                "*://idp.polito.it/*",
+                "*://elearning.polito.it/*"
             ],
             "run_at": "document_start"
         },
@@ -34,7 +29,8 @@
             "js": [
                 "lib/jquery.min.js",
                 "lib/bootstrap.min.js",
-                "scripts/themes.js"
+                "scripts/themes.js",
+                "scripts/email.js"
             ],
             "matches": [
                 "*://mail.studenti.polito.it/*"
@@ -115,15 +111,6 @@
                 "*://*.polito.it/portal/pls/portal/sviluppo.pagina_corso.main*p_sottopagina=VC*"
             ],
             "all_frames": true
-        },
-        {
-            "js": [
-                "lib/jquery.min.js",
-                "scripts/email.js"
-            ],
-            "matches": [
-                "*://mail.studenti.polito.it/*"
-            ]
         }
     ],
     "description": "Improve your everyday life with this extension for the teaching portal.",
@@ -138,6 +125,7 @@
         "storage",
         "webRequest",
         "webRequestBlocking",
+
         "https://*.polito.it/",
         "http://*.polito.it/"
     ],
