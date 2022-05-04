@@ -1,21 +1,10 @@
 body >table >tbody> tr> td> table> tbody >tr> td> div >img {
-	content: url("chrome-extension://__MSG_@@extension_id__/immagini/header-white.png");
+	content: url("/immagini/header-white.png");
 }
 
 #topnav,
 .c_logoPoli2 {
-	background: url("chrome-extension://__MSG_@@extension_id__/immagini/header-white.png") no-repeat #003576 !important;
-}
-
-@supports (-moz-appearance:none) {
-	body >table >tbody> tr> td> table> tbody >tr> td> div >img {
-		content: url("/immagini/header-white.png");
-	}
-
-	#topnav,
-	.c_logoPoli2 {
-		background: url("/immagini/header-white.png") no-repeat #003576 !important;
-	}
+	background: url("/immagini/header-white.png") no-repeat #003576 !important;
 }
 
 .cb-title {
