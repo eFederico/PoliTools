@@ -1,5 +1,6 @@
-let lessonList = [];        // List of lessons divided by section.
+let lessonList    = [];     // List of lessons divided by section.
 let errorOccurred = false;  // Global error notification flag.
+let videoPlayer   = null;   // Custom video player.
 
 // Check if the video has already been converted (not a WIP BBB recording).
 function isConverted(doc) {
@@ -71,21 +72,92 @@ function downloadLesson(vc, single) {
         });
 }
 
-$(async function() {
-    var videos;
+async function replacePlayer() {
+    let video = null;
+    let count = 0;
 
-    while (true) {
-        videos = document.querySelectorAll('[id^="videoPlayer_"]');
-        if (videos.length > 0)
-            break;
-        else
-            await sleep(500);
-    }
+    do {
+        await sleep(500);
+        video = document.querySelector(".active.in video");
+    } while(!video && ++count < 10);
 
-    for (let index = 0; index < videos.length; ++index)
-        newPlayer(videos[index]);
+    // No point in continuing if finding the video failed.
+    if(!video) return;
 
-    displayHotkeysLabels();
+    let source  = (video.src == null || video.src == "") ? video.children[0].src : video.src;
+
+    // Replace vanilla video player with our custom one
+    video.outerHTML =  `<video id="videoMP4" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
+                            controls preload="auto" width="768" height="432"
+                            data-setup='{"controls": true, "autoplay": false, "preload": "auto", "playbackRates": [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3]}'>
+                            <source src= ` + source + ` + type="video/mp4" />
+                            <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                        </video>`;
+
+    // Dispose of old video players to not hog resources.
+    if(videoPlayer) {
+        videojs("videoMP4").dispose();
+        videoPlayer = null;
+    } 
+
+    // Create the new video player.
+    videoPlayer = videojs("videoMP4");
+    videoPlayer.ready(function() {
+        this.hotkeys({
+            volumeStep: 0.1,
+            seekStep: 10,
+            enableModifiersForNumbers: false,
+            captureDocumentHotkeys: true,
+            enableHoverScroll: true,
+            documentHotkeysFocusElementFilter: e=>e.tagName.toLowerCase() === 'body',
+            customKeys: {
+                //TODO sostituire event.which con nuova implementazione
+                slower: {
+                    key: function(event) {
+                        return (event.which === 74); // J
+                    },
+                    handler: function() {
+                        let curr = myVideo.playbackRate();
+                        if (curr > 1)
+                            myVideo.playbackRate((curr - 0.1).toFixed(1));
+                    }
+                },
+                faster: {
+                    key: function(event) {
+                        return (event.which === 75); // K
+                    },
+                    handler: function() {
+                        let curr = myVideo.playbackRate();
+                        if (curr < 3)
+                            myVideo.playbackRate((curr + 0.1).toFixed(1));
+                    }
+                },
+                reset: {
+                    key: function(event) {
+                        return (event.which === 76); // L
+                    },
+                    handler: function() {
+                        myVideo.playbackRate(1);
+                    }
+                }
+            }
+        });
+    });
+
+    // Display video hotkeys.
+    $(".in .video-js-box").append(
+        `<div class = labels>
+            <h3 style="font-size: 21px; margin-top: 21px;" class="cb-title">Hotkeys</h3>
+            <p class="inline"><span class="keyboard-char">J</span> Slower</p>
+            <p class="inline"><span class="keyboard-char">K</span> Faster</p>
+            <p class="inline"><span class="keyboard-char">L</span> Reset</p>
+            <br><br>
+        </div>`
+    );
+}
+
+$(function() {
+    replacePlayer();
 
     // Mark this as a virtual classroom page.
     let HTMLbody = $("body");
@@ -192,6 +264,8 @@ $(async function() {
             lessonDownload.id        = "directdwn_" + index + "_" + i;
             lessonDownload.innerHTML = '<span class="fa fa-download"></span> Download';
 
+            link.addEventListener("click", () => replacePlayer());
+
             lessonDownload.addEventListener("click", function() {
                 extensionLog.log("Started download of VC " + index + "/" + i + ".");
                 downloadLesson(lessonList[index][i], true);
@@ -200,72 +274,4 @@ $(async function() {
             lessons[i].insertBefore(lessonDownload, lessons[i].firstChild);
         }
     }
-
 });
-
-function newPlayer(video) {
-    let source  = (video.src == null || video.src == "") ? video.children[0].src : video.src;
-    let videoId = video.id;
-
-    video.outerHTML =  `<video id="` + videoId + `" class="video-js vjs-theme-forest vjs-big-play-centered vjs-playback-rate"
-							controls preload="auto" width="768" height="432"
-							data-setup='{"controls": true, "autoplay": false, "preload": "auto", "playbackRates": [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3]}'>
-							<source src= ` + source + ` + type="video/mp4" />
-							<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-					    </video>`
-
-    let myVideo = videojs(videoId);
-    myVideo.ready(function() {
-        this.hotkeys({
-            volumeStep: 0.1,
-            seekStep: 10,
-            enableModifiersForNumbers: false,
-            captureDocumentHotkeys: true,
-            enableHoverScroll: true,
-            documentHotkeysFocusElementFilter: e=>e.tagName.toLowerCase() === 'body',
-            customKeys: {
-                //TODO sostituire event.which con nuova implementazione
-                slower: {
-                    key: function(event) {
-                        return (event.which === 74); // J
-                    },
-                    handler: function() {
-                        let curr = myVideo.playbackRate();
-                        if (curr > 1)
-                            myVideo.playbackRate((curr - 0.1).toFixed(1));
-                    }
-                },
-                faster: {
-                    key: function(event) {
-                        return (event.which === 75); // K
-                    },
-                    handler: function() {
-                        let curr = myVideo.playbackRate();
-                        if (curr < 3)
-                            myVideo.playbackRate((curr + 0.1).toFixed(1));
-                    }
-                },
-                reset: {
-                    key: function(event) {
-                        return (event.which === 76); // L
-                    },
-                    handler: function() {
-                        myVideo.playbackRate(1);
-                    }
-                }
-            }
-        });
-    });
-}
-
-function displayHotkeysLabels() {
-    $(".video-js-box").append(
-       `<div class = labels>
-			<h3 style="font-size: 21px; margin-top: 21px;" class="cb-title">Hotkeys</h3>
-			<p class="inline"><span class="keyboard-char">J</span> Slower</p>
-			<p class="inline"><span class="keyboard-char">K</span> Faster</p>
-			<p class="inline"><span class="keyboard-char">L</span> Reset</p>
-			<br><br>
-		</div>`
-    );
-}
