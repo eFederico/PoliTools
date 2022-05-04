@@ -1,21 +1,85 @@
-// List of lessons divided by section.
-let lessonList = [];
+let lessonList = [];        // List of lessons divided by section.
+let errorOccurred = false;  // Global error notification flag.
+
+// Check if the video has already been converted (not a WIP BBB recording).
+function isConverted(doc) {
+    return doc.querySelectorAll('[id^="videoPlayer_"]');
+}
+
+// Get the URL of a Virtual Classroom.
+//   IN CASE OF A NOT CONVERTED VC: throws a "not-converted" string.
+//   IN CASE OF AN ERROR IN AJAX: throws an {xhr, status, error} object.
+async function getDownloadURL(vc) {
+    if(vc.url && vc.title) {
+        extensionLog("Using cached URL/Title for VC '" + title + "'.");
+    } else {
+        // Define post parameters for the VC request
+        const endpoint  = "https://didattica.polito.it/pls/portal30/sviluppo.virtual_classroom_dev.getVCTpl";
+        const data = {
+            "p_bbbid"      : vc.bbbid,
+            "p_id_inc"     : vc.incarico,
+            "p_id_inc_prov": vc.provvisorio
+        };
+
+        try {
+            const response = await performRequest(data, "POST", endpoint)
+                .catch((xhr, status, error) => {throw new RequestError(xhr, status, error)});
+
+            const parser  = new DOMParser();
+            const content = parser.parseFromString(response, "text/html");
+            const player  = content.querySelector('[id^="videoPlayer_"]');
+
+            // Check that a player is present. If not the VC has not been converted yet.
+            if(!player) {
+                extensionLog("Requested download for not converted VC.");
+                throw new NotConvertedError(vc);
+            }
+
+            const url     = player.children[0].getAttribute("src");
+            const title   = content.getElementsByTagName("h3")[0].innerHTML;
+
+            vc.url   = url;
+            vc.title = title;
+
+            extensionLog("Obtained URL for VC '" + title + "'.");
+        } catch(error) {
+            throw error;
+        }
+    }
+    
+    return {url: vc.url, title: vc.title};
+}
+
+// Download the video file of a Virtual Classroom.
+function downloadLesson(vc, single) {
+    getDownloadURL(vc)
+        .then(data => downloadFile(data.url, data.title + ".mp4"))
+        .catch(error => {
+            console.error("An error occurred while downloading a VC:");
+            console.error(error);
+            if(error instanceof NotConvertedError && single)
+                alert("Questa videolezione non può essere scaricata in quanto non ancora convertita!\n\nThis VC cannot be downloaded as it has not been converted yet!");
+            else if(single)
+                alert("Download della videolezione non riuscito!\n\nVC download failed!");
+            else if(!errorOccurred)
+                alert("Download di una o più videolezioni fallito!\n\nOne or more VCs failed to download!");
+            errorOccurred = true;
+        });
+}
 
 $(async function() {
     var videos;
 
-    while(true) {
+    while (true) {
         videos = document.querySelectorAll('[id^="videoPlayer_"]');
-        if(videos.length > 0) {
+        if (videos.length > 0)
             break;
-        } else {
-            await sleep(100);
-        }
+        else
+            await sleep(500);
     }
 
-    for(let index = 0; index < videos.length; ++index) {
+    for (let index = 0; index < videos.length; ++index)
         newPlayer(videos[index]);
-    }
 
     displayHotkeysLabels();
 
@@ -62,15 +126,46 @@ $(async function() {
 
         downloadAll.addEventListener("click", function() {
             if (confirm("Sei sicuro di voler scaricare tutte (" + lessonList[index].length + ") le virtual classroom già convertite?\nL'operazione può richiedere tempo e non può essere annullata.")) {
-                for (let i = 0; i < lessonList[index].length; ++i) {
-                    downloadLesson(index, i);
-                }
+                errorOccurred = false;
+                for (let i = 0; i < lessonList[index].length; ++i)
+                    downloadLesson(lessonList[index][i], false);
             }
         }, false);
 
         jDownloader.addEventListener("click", function() {
-            copyToClipboard(lessons[index].map(lesson => lesson.url).join("\n"));
-            alert("Link copiati negli appunti! ATTENZIONE! Le lezioni non convertite non verranno aggiunte alla lista\r\nLinks copied to clipboard! Not converted lessons will not be added to the list");
+            let urls     = "";
+            let promises = [];
+
+            errorOccurred = false;
+            for (let i = 0; i < lessonList[index].length; ++i) {
+                extensionLog("JDownloader: Requesting download URL for VC " + index + "/" + i + ".");
+                promises.push(getDownloadURL(lessonList[index][i]));
+            }
+
+            Promise.allSettled(promises).then(results => {
+                results.forEach(result => {
+                    // Just ignore any error. Most likely classroom not converted yet.
+                    extensionLog("JDownloader: Response received from URL fetcher:");
+                    extensionLog(result);
+                    if(result.status == "fulfilled")
+                        urls += result.value.url + "\n";
+                    else {
+                        // Ignore errors that occurred because the VC has not been converted yet.
+                        if(!result.reason instanceof NotConvertedError) {
+                            console.error("An error occurred while trying to obtain URL of a VC.");
+                            console.error(result.reason)
+
+                            if(!errorOccurred)
+                                alert("E' avvenuto un errore durante il download di una o più videolezioni.\n\nAn error occured while downloading one or more VCs.");
+                            errorOccurred = true;
+                        }
+                    }
+                });
+
+                navigator.clipboard.writeText(urls);
+                alert("Link copiati negli appunti! ATTENZIONE! Le lezioni non convertite non verranno aggiunte alla lista\r\nLinks copied to clipboard! Not converted lessons will not be added to the list");
+            });
+
         }, false);
 
         sections[index].insertBefore(downloadAll, sections[index].firstChild);
@@ -78,7 +173,7 @@ $(async function() {
         lessonList[index] = [];
 
         let lessons = sections[index].getElementsByClassName("h5");
-        for(let i = 0; i < lessons.length; ++i) {
+        for (let i = 0; i < lessons.length; ++i) {
             // Obtain VC data to later perform the download
             let link        = lessons[i].getElementsByTagName("a")[0];
             let bbbid       = link.getAttribute("data-bbb-id");
@@ -93,13 +188,14 @@ $(async function() {
             });
 
             // Create the download button
-            let lessonDownload = document.createElement("button");
+            let lessonDownload       = document.createElement("button");
             lessonDownload.className = "btn btn-primary dwlbtn";
-            lessonDownload.id = "directdwn_" + index + "_" + i;
+            lessonDownload.id        = "directdwn_" + index + "_" + i;
             lessonDownload.innerHTML = '<span class="fa fa-download"></span> Download';
 
             lessonDownload.addEventListener("click", function() {
-                downloadLesson(index, i);
+                extensionLog("Started download of VC " + index + "/" + i + ".");
+                downloadLesson(lessonList[index][i], true);
             }, false);
 
             lessons[i].insertBefore(lessonDownload, lessons[i].firstChild);
@@ -107,54 +203,6 @@ $(async function() {
     }
 
 });
-
-function sleep(ms) {
-    return new Promise(resolve=>setTimeout(resolve, ms));
-}
-
-// Check if the video has already been converted (not a WIP BBB recording).
-function isConverted(doc) {
-    return doc.querySelectorAll('[id^="videoPlayer_"]');
-}
-
-function downloadFile(url, filename) {
-    chrome.runtime.sendMessage({
-        msg: "PLS_DOWNLOAD",
-        data: {
-            subject: "URL",
-            content: url,
-            filename: filename
-        }
-    });
-}
-
-function copyToClipboard(content) {
-    navigator.clipboard.writeText(content);
-}
-
-function downloadLesson(list, index) {
-    $.ajax({
-        data: {
-            "p_bbbid"      : lessonList[list][index].bbbid,
-            "p_id_inc"     : lessonList[list][index].incarico,
-            "p_id_inc_prov": lessonList[list][index].provvisorio
-        },
-        type: "POST",
-        url: "https://didattica.polito.it/pls/portal30/sviluppo.virtual_classroom_dev.getVCTpl",
-        index: list,
-        success: function(response) {
-            const parser  = new DOMParser();
-            const content = parser.parseFromString(response, "text/html");
-            const url     = content.querySelector('[id^="videoPlayer_"]').children[0].getAttribute("src");
-            const title   = content.getElementsByTagName("h3")[0].innerHTML;
-
-            downloadFile(url, title);
-        },
-        error: function(xhr, status, error) {
-            alert("Error downloading media.");
-        }
-    });
-}
 
 function newPlayer(video) {
     let source  = (video.src == null || video.src == "") ? video.children[0].src : video.src;
