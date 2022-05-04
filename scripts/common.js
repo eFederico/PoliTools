@@ -1,11 +1,12 @@
 let PoliToolsPort  = chrome.runtime.connect({name: "politools"});
-let PoliToolsDebug = true;
+let PoliToolsDebug = false;
 
 // Listen and dispatch messages coming from external (not part of the extension) scripts.
 window.addEventListener("message", function(event) {
     // Only allow messages if they are from the same window and contain both destination and data fields.
-    if(event.source != window || !event.data.dst || !event.data.dat)
+    if(event.source != window || !event.data.dst || !event.data.data) {
         return;
+    }
 
     switch(event.data.dst) {
         case "background-script":
@@ -13,19 +14,25 @@ window.addEventListener("message", function(event) {
             break;
         case "background-log":
             if(event.data.data)
-                extensionLog(event.data.data);
+                extensionLog.log(event.data.data);
             else
-                extensionLog("Received malformed message from page.");
+                extensionLog.log("Received malformed message from page.");
             break;
+            case "background-err":
+                if(event.data.data)
+                    extensionLog.err(event.data.data);
+                else
+                    extensionLog.log("Received malformed message from page.");
+                break;
         default:
-            extensionLog("Received malformed message from page.");
+            extensionLog.log("Received malformed message from page.");
     }
 });
 
 // Listen and dispatch messages coming from the extension's background script.
 PoliToolsPort.onMessage.addListener(function(msg) {
     if(!msg.dst) {
-        extensionLog("Received message from background script but no destination was specified.");
+        extensionLog.log("Received message from background script but no destination was specified.");
         return;
     }
 
@@ -34,7 +41,7 @@ PoliToolsPort.onMessage.addListener(function(msg) {
             window.postMessage(msg.dat);
             break;
         default:
-            extensionLog("Received message from background script but no destination matches '" + msg.dst + "'.");
+            extensionLog.log("Received message from background script but no destination matches '" + msg.dst + "'.");
     }
 });
 
@@ -47,14 +54,25 @@ function sleep(ms) {
 }
 
 // Log a message to the extension's log console
-function extensionLog(msg) {
-    if(PoliToolsDebug) {
-        PoliToolsPort.postMessage({
-            msg: "background-log",
-            data: msg
-        });
+let extensionLog = {
+    log: function(msg) {
+        if(PoliToolsDebug) {
+            PoliToolsPort.postMessage({
+                msg: "background-log",
+                data: msg
+            });
+        }
+    },
+    err:function(msg) {
+        if(PoliToolsDebug) {
+            PoliToolsPort.postMessage({
+                msg: "background-err",
+                data: msg
+            });
+        }
     }
 }
+
 
 
 
@@ -71,8 +89,7 @@ function performRequest(data, type, url) {
 
 // Download an arbitrary file with the given filename.
 function downloadFile(url, filename) {
-    extensionLog("Downloading of the following file has been requested and is being dispathed:");
-    extensionLog({url, filename});
+    extensionLog.log("Downloading file: " + JSON.stringify({url, filename}));
     PoliToolsPort.postMessage({
         msg: "download-file",
         data: {

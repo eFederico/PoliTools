@@ -29,6 +29,9 @@ function dispatchMessages(msg) {
         case "background-log":
             console.log("[CONTENT SCRIPT] ", msg.data);
             break;
+        case "background-err":
+            console.error("[CONTENT SCRIPT] ", msg.data);
+            break;
         case "zip-download-all":
             prepareDownloadSession(JSON.parse(msg.lst));
             break;
