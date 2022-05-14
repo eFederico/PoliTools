@@ -1,0 +1,49 @@
+{
+    "version": "2.0.0",
+    "tasks" : [
+        {
+            "label": "Install web-ext environment",
+            "command": "ls node_modules bin || make setup",
+            "type": "shell",
+            "isBackground": false,
+            "runOptions":
+            {
+                "instanceLimit": 1
+            },
+            "options":
+            {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Run extension in FireFox (Local)",
+            "command": "node_modules/web-ext/bin/web-ext",
+            "args" :
+            [
+                "run",
+                "--source-dir",
+                "${workspaceFolder}/src",
+                "--artifacts-dir",
+                "${workspaceFolder}/bin",
+                "--url",
+                "https://didattica.polito.it/pls/portal30/sviluppo.pagina_studente_2016.main",
+                "--verbose"
+            ],
+            "type": "shell",
+            "isBackground": true,
+            "runOptions":
+            {
+                "runOn": "folderOpen",
+                "instanceLimit": 1
+            },
+            "options":
+            {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn":
+            [
+                "Install web-ext environment"
+            ]
+        }
+    ]
+}
