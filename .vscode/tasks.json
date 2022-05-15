@@ -2,48 +2,111 @@
     "version": "2.0.0",
     "tasks" : [
         {
-            "label": "Install web-ext environment",
-            "command": "ls node_modules bin || make setup",
+            "label": "Run extension in FireFox",
+            "command": "make run",
+            "type": "shell",
+            "isBackground": true,
+            "runOptions": {
+                "runOn": "folderOpen",
+                "instanceLimit": 1
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "promptOnClose": true,
+            "detail": "Runs the extension in a dedicated temporary FireFox profile",
+            "presentation": {
+                "echo": false,
+                "focus": false,
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true,
+                "panel": "dedicated",
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "Build extension package",
+            "command": "make package",
+            "type": "shell",
+            "isBackground": true,
+            "runOptions": {
+                "runOn": "default",
+                "instanceLimit": 1
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": false,
+                "focus": false,
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true,
+                "panel": "dedicated",
+                "reveal": "silent"
+            },
+            "promptOnClose": true,
+            "detail": "Build the extension XPI package from sources",
+            "dependsOn":
+            [
+                "Lint extension using WebExt"
+            ]
+        },
+        {
+            "label": "Lint extension using WebExt",
+            "command": "make lint",
             "type": "shell",
             "isBackground": false,
             "runOptions":
             {
-                "instanceLimit": 1
+                "runOn": "default",
+                "instanceLimit": 1,
             },
-            "options":
-            {
+            "options": {
                 "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": false,
+                "focus": false,
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true,
+                "panel": "dedicated",
+                "reveal": "never",              // Never show the task running.
+                "revealProblems": "onProblem"   // Always show the problems panel.
+            },
+            "promptOnClose": true,
+            "detail": "Lint the extension code using WebExt",
+            "problemMatcher":
+            {
+                "source": "WebExtension",
+                "applyTo": "allDocuments",
+                "fileLocation":
+                [
+                    "relative",
+                    "${workspaceFolder}/src"
+                ],
+                "pattern": [
+                    {
+                        "regexp": "^([^ ]+)\\s+([^ ]+)\\s+([0-9]+)\\s+([0-9]+)\\s+([^ ]+)\\s+\"([^\"]+)\"$",
+                        "severity": 1,
+                        "file": 2,
+                        "line": 3,
+                        "column": 4,
+                        "code": 5,
+                        "message": 6
+                    }
+                ]
             }
-        },
-        {
-            "label": "Run extension in FireFox (Local)",
-            "command": "node_modules/web-ext/bin/web-ext",
-            "args" :
-            [
-                "run",
-                "--source-dir",
-                "${workspaceFolder}/src",
-                "--artifacts-dir",
-                "${workspaceFolder}/bin",
-                "--url",
-                "https://didattica.polito.it/pls/portal30/sviluppo.pagina_studente_2016.main",
-                "--verbose"
-            ],
-            "type": "shell",
-            "isBackground": true,
-            "runOptions":
-            {
-                "runOn": "folderOpen",
-                "instanceLimit": 1
-            },
-            "options":
-            {
-                "cwd": "${workspaceFolder}"
-            },
-            "dependsOn":
-            [
-                "Install web-ext environment"
-            ]
         }
     ]
 }
