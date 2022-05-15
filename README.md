@@ -9,6 +9,7 @@ The required tools in order to exploit this development environment are:
 - Any version of **Python 3**
 - **VS Code** or one of the open source forks
 - A **UNIX-Like** operating system or development environment (WSL *should* work, not tested)
+- A **Node.JS** installation to use the `web-ext` environment
 
 Of course it is possible to develop the extension even without these tools, just the provided amenities will not work.
 
@@ -26,6 +27,8 @@ Of course it is possible to develop the extension even without these tools, just
 | `clean`   | Removes all build artifacts                                |
 
 ## VS Code integration
+
+> NOTE: For some reason lint messages from previous runs of the task don't get cleared up when the task is run again. I have no idea on how to fix this, VS Code does not seem to provide anything to handle this...
 
 Users running VS Code will be able to automatically package the extension using the `CTRL+SHIFT+B` inside the editor and running the linter by executing the `Lint extension using WebExt` task. Notice said task is the default *Test Task* of the editor. The user can assign a keyboard shortcut to run the default *Test Task* from within the editor's config. Furthermore, the editor will run the linting task before running the packaging task therefore using the `CTRL+SHIFT+B` shortcut implicitly lints the extension.
 
